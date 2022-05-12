@@ -1,0 +1,44 @@
+/* Outfit */
+@font-face {
+	font-family: "Outfit-L";
+	src: url("Outfit-Light.ttf") format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Outfit-B";
+	src: url("Outfit-Medium.ttf") format('truetype');
+	font-weight: medium;
+	font-style: normal;
+}
+
+/* Gilroy */
+@font-face {
+	font-family: "Gilroy-L";
+	src: url("Gilroy-Light.otf") format('opentype');
+	font-weight: light;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gilroy-B";
+	src: url("Gilroy-ExtraBold.otf") format('opentype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+/* Raleway */
+@font-face {
+	font-family: "Raleway-L";
+	src: url("Raleway-Light.ttf") format('truetype');
+	font-weight: light;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Raleway-B";
+	src: url("Raleway-ExtraBold.ttf") format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
