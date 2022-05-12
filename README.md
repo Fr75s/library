@@ -59,3 +59,15 @@ Home Page
 <img src="assets/SAFELY_REMOVABLE/screenshot_8.png" title="modification 1"/>
 <br>Plain Background + Wide Games + Button Prompts
 <img src="assets/SAFELY_REMOVABLE/screenshot_9.png" title="modification 2"/>
+
+***
+
+## Installation
+
+Installing this theme is simple:
+
+First, download this theme's contents. The most easy way to do this is by clicking the Code button at the top of the page and downloading the code as a ZIP file.
+
+Next, extract the contents of the .zip file to your themes folder: [refer to here for more information.](https://pegasus-frontend.org/docs/user-guide/installing-themes/)
+
+Finally, you may remove the SAFELY_REMOVABLE folder that's in the assets folder, as it only provides screenshots and other useless resources that may take up space.

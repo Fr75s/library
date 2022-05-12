@@ -131,7 +131,7 @@ FocusScope {
     Text {
         id: settingsCredits
 
-        text: "UI By Fr75s"
+        text: "https://github.com/Fr75s/library"
         color: light ? "black" : "white"
 
         width: parent.width * 0.95
