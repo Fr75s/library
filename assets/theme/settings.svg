@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="svg"
+   width="512"
+   height="512"
+   version="1.1"
+   viewBox="0 0 512 512"
+   sodipodi:docname="settings.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.444346"
+     inkscape:cx="243.01656"
+     inkscape:cy="245.78598"
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg" />
+  <defs
+     id="defs81">
+    <style
+       id="current-color-scheme"
+       type="text/css">
+   .ColorScheme-Text { color:#d3dae3; } .ColorScheme-Highlight { color:#5294e2; } .ColorScheme-ButtonBackground { color:#d3dae3; }
+  </style>
+  </defs>
+  <rect
+     id="rect2985"
+     width="512"
+     height="512"
+     x="0"
+     y="0"
+     style="opacity:0.00100002;fill:#000000;fill-opacity:0;stroke-width:1" />
+  <path
+     id="path4141"
+     class="ColorScheme-Text"
+     d="m 224.97969,132.99999 -2.73267,32.40161 a 97.513604,96.642828 0 0 0 -28.49784,16.33594 l -29.72904,-13.87354 -31.0203,53.27198 26.96634,18.55811 A 97.513604,96.642828 0 0 0 158.49474,256 a 97.513604,96.642828 0 0 0 1.41138,16.36596 l -26.90628,18.49805 31.0203,53.27199 29.63895,-13.84352 a 97.513604,96.642828 0 0 0 28.58793,16.24586 l 2.73267,32.46167 h 62.04061 l 2.73266,-32.40161 a 97.513604,96.642828 0 0 0 28.49785,-16.33595 l 29.72905,13.87355 31.0203,-53.27199 -26.96634,-18.5581 A 97.513604,96.642828 0 0 0 353.50526,256 97.513604,96.642828 0 0 0 352.09388,239.63403 l 26.90628,-18.49805 -31.0203,-53.27198 -29.63895,13.8435 A 97.513604,96.642828 0 0 0 289.75296,165.46165 L 287.0203,132.99999 Z M 256,209.87499 A 46.125068,46.125004 0 0 1 302.12506,256 46.125068,46.125004 0 0 1 256,302.125 46.125068,46.125004 0 0 1 209.87494,256 46.125068,46.125004 0 0 1 256,209.87499 Z"
+     style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:9.99997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+</svg>
