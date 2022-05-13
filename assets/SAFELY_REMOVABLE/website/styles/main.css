@@ -3,6 +3,7 @@
 html {
 	font-size: 18px;
 	font-family: "Outfit";
+	color: #CCCCCC;
 	font-weight: 300;
 
 	background-color: #16171A;
@@ -50,10 +51,14 @@ p, a {
 	text-decoration: none;
 }
 
-button {
+.button {
 	cursor: pointer;
 	border: none;
 	background-color: #212326;
+
+	width: 50%;
+	text-align: center;
+	text-decoration: none;
 
 	border-radius: 16px;
 

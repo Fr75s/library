@@ -3,37 +3,23 @@
 
 ## A Clean, Modern, Bigscreen Interface for Pegasus Frontend
 
+If you are looking to use this theme, [Check out the website for this theme here.](https://fr75s.github.io/library/assets/SAFELY_REMOVABLE/website/main.html)
+
 Library is a clean, modern interface for [Pegasus Frontend](http://pegasus-frontend.org) that aims to provide a theme which doesn't emphasize text. Inspired partly by the Steam Deck's UI, this interface focuses more on providing the box art in organized categories, with little textual metadata.
 
-Library aims to be easy to use (at least once Pegasus Frontend has been fully set up, [but there are tools for that](https://github.com/muldjord/skyscraper)), but allow for customization. You will find yourself at home with this theme and its comfortable interface.
-
-Library has a website: [Check it out here.](https://fr75s.github.io/library/assets/SAFELY_REMOVABLE/website/main.html)
-
 ***
 
-## Features
+## Installation
 
-### Customizable
+[Full installation instructions are available here.](https://fr75s.github.io/library/assets/SAFELY_REMOVABLE/website/install.html)
 
-Library has several toggleable options which allow you to easily modify parts of the theme. Options include a light mode, expanding the game width and more. Of course, you can always customize the QML files with help [from our guide](MODIFICATIONS.md).
-
-### Little Hassle
-
-Library is a theme that is quite simple to use, making it easy to search through your game library. It also uses little metadata: only the title, box art and another art/screenshot is needed for games to show like normal.
-
-### Advanced Features
-
-Library has several advanced features which other themes don't have, such as mouse-based navigation and a virtual keyboard for searching. These advanced features help to improve your experience.
+To install this theme, first download this repository (either through `git clone https://github.com/Fr75s/library.git` or through downloading this zip), then move (and extract if you downloaded the zip) to [your themes folder.](https://pegasus-frontend.org/docs/user-guide/installing-themes/) Finally, remove the SAFELY_REMOVABLE folder located within this theme's folder under assets.
 
 ***
-
-## Other Things to Note
-
-Library is still in beta, and changes are made often. The theme in its current state, however, is perfectly usable.
-
-Library was made as a personal project for my needs, created so that I could have a decent interface for the Pegasus frontend. For the more advanced techniques used in this theme, I referred to other Pegasus themes and QML documentation (requiring lots of searching). A list of these themes are below.
 
 ## Special Thanks
+
+I used other themes as references while building Library. These themes are listed below.
 
 - https://github.com/valsou/neoretro: The framework I built this theme off of, used for the separate page file system and Colcon.qml.
 - https://github.com/TigraTT-Driver/shinretro: A theme which provided the functionality for portrait-style steam game box art and more. I didn't find out about this theme until Library was mostly complete.
@@ -41,35 +27,7 @@ Library was made as a personal project for my needs, created so that I could hav
 
 ***
 
-## Gallery
+## Issues?
 
-Home Page
-<img src="assets/SAFELY_REMOVABLE/screenshot_1.png" title="home page"/>
-<br>Favorites
-<img src="assets/SAFELY_REMOVABLE/screenshot_2.png" title="favorites"/>
-<br>Collections
-<img src="assets/SAFELY_REMOVABLE/screenshot_3.png" title="collections"/>
-<br>All Games
-<img src="assets/SAFELY_REMOVABLE/screenshot_4.png" title="all games"/>
-<br>Searching
-<img src="assets/SAFELY_REMOVABLE/screenshot_5.png" title="searching"/>
-<br>Inside A Collection
-<img src="assets/SAFELY_REMOVABLE/screenshot_6.png" title="in a collection"/>
-<br>Settings
-<img src="assets/SAFELY_REMOVABLE/screenshot_7.png" title="settings"/>
-<br>Light Mode + Top Bar
-<img src="assets/SAFELY_REMOVABLE/screenshot_8.png" title="modification 1"/>
-<br>Plain Background + Wide Games + Button Prompts
-<img src="assets/SAFELY_REMOVABLE/screenshot_9.png" title="modification 2"/>
+If you find any issues or want to let me know of anything, feel free to open up an issue in this project. You may also want to check out the [Modifications Guide](https://github.com/Fr75s/library/blob/main/MODIFICATIONS.md) and see if I have placed a fix there. If not, then, once again, feel free to open up an issue, and I will fix it.
 
-***
-
-## Installation
-
-Installing this theme is simple:
-
-First, download this theme's contents. The most easy way to do this is by clicking the Code button at the top of the page and downloading the code as a ZIP file.
-
-Next, extract the contents of the .zip file to your themes folder: [refer to here for more information.](https://pegasus-frontend.org/docs/user-guide/installing-themes/)
-
-Finally, you may remove the SAFELY_REMOVABLE folder that's in the assets folder, as it only provides screenshots and other useless resources that may take up space.
