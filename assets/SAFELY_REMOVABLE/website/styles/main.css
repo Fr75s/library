@@ -1,0 +1,97 @@
+@import "fonts.css";
+
+html {
+	font-size: 18px;
+	font-family: "Outfit";
+	font-weight: 300;
+
+	background-color: #16171A;
+}
+
+header {
+	margin: -8px;
+	margin-bottom: 20px;
+	background-color: #26282D;
+}
+
+/*
+footer {
+	background-color: #16171A;
+
+	margin: -8px;
+	margin-top: 120px;
+
+	border-style: solid;
+	border-width: 2px 0px 0px 0px;
+}
+*/
+
+main {
+	margin: 0 auto;
+	width: 800px;
+}
+
+
+h1, h2, h3 {
+	color: #FFFFFF;
+	font-family: "Outfit";
+	font-weight: 500;
+}
+
+h1 { font-size: 36px; padding-top: 20px; }
+h2 { font-size: 24px; padding-top: 10px; }
+h3 { font-size: 18px; padding-top: 5px; }
+
+p, a {
+	color: #CCCCCC;
+}
+
+.hlink {
+	text-decoration: none;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	background-color: #212326;
+
+	border-radius: 16px;
+
+	font-family: "Outfit";
+	font-size: 36px;
+	font-weight: 200;
+
+	padding: 20px 40px 20px 40px;
+	margin: 40px 0px 40px 0px;
+	color: white;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ci {
+	cursor: pointer;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.edgerow {
+	justify-content: space-between;
+}
+
+.rowitem {
+	margin: 10px 30px 10px 0px;
+}
+
+.endblock {
+	margin: 80px;
+}
