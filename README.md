@@ -7,6 +7,8 @@ Library is a clean, modern interface for [Pegasus Frontend](http://pegasus-front
 
 Library aims to be easy to use (at least once Pegasus Frontend has been fully set up, [but there are tools for that](https://github.com/muldjord/skyscraper)), but allow for customization. You will find yourself at home with this theme and its comfortable interface.
 
+Library has a website: [Check it out here.](https://fr75s.github.io/library/assets/SAFELY_REMOVABLE/website/main.html)
+
 ***
 
 ## Features
