@@ -48,6 +48,7 @@ Item {
                 height: parent.height * .8
 
                 src: "../assets/buttons/A.svg"
+                srcp: "../assets/buttons/A.png"
 
                 // Label for Home, Search, Collections & Settings respectively.
                 // Same pattern for each IconPair.
@@ -61,6 +62,7 @@ Item {
                 height: parent.height * .8
 
                 src: "../assets/buttons/B.svg"
+                srcp: "../assets/buttons/B.png"
 
                 label: ["", "Exit Search", "Exit Collection", ""]
 
@@ -72,6 +74,7 @@ Item {
                 height: parent.height * .8
 
                 src: "../assets/buttons/Y.svg"
+                srcp: "../assets/buttons/Y.png"
 
                 label: ["Favorite", "Favorite / Space", "Favorite", "Show Extra Info"]
 
@@ -108,6 +111,8 @@ Item {
                 height: parent.height * .8
 
                 src: "../assets/buttons/L1.svg"
+                srcp: "../assets/buttons/L1.png"
+
 
                 label: [" ", " ", " ", " "]
 
@@ -119,6 +124,7 @@ Item {
                 height: parent.height * .8
 
                 src: "../assets/buttons/R1.svg"
+                srcp: "../assets/buttons/R1.png"
 
                 label: ["Change Page", "Change Page", "Change Page", "Change Page"]
 
@@ -130,6 +136,7 @@ Item {
                 height: parent.height * .8
 
                 src: "../assets/buttons/X.svg"
+                srcp: "../assets/buttons/X.png"
 
                 label: ["", "Show Keyboard / Backspace", "", ""]
 

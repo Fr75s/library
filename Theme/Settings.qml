@@ -65,6 +65,12 @@ FocusScope {
                     is: false
                 },
                 {
+                    name: "Use SVG Icons",
+                    setting: useSVG,
+                    info: "Allows you to use higher quality SVG icons rather than PNG icons. Higher quality on very large screens, but may break images on some devices.",
+                    is: false
+                },
+                {
                     name: "Quiet Sound Effects",
                     setting: quiet
                 },
@@ -364,14 +370,19 @@ FocusScope {
                 set.setProperty(8, "setting", enlargeBar);
                 break;
             case 9:
-                quiet = !quiet
-                api.memory.set("quiet", quiet);
-                set.setProperty(9, "setting", quiet);
+                useSVG = !useSVG
+                api.memory.set("useSVG", useSVG);
+                set.setProperty(9, "setting", useSVG);
                 break;
             case 10:
+                quiet = !quiet
+                api.memory.set("quiet", quiet);
+                set.setProperty(10, "setting", quiet);
+                break;
+            case 11:
                 nosfx = !nosfx
                 api.memory.set("nosfx", nosfx);
-                set.setProperty(10, "setting", nosfx);
+                set.setProperty(11, "setting", nosfx);
                 break;
         }
     }

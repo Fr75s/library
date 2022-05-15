@@ -12,6 +12,14 @@ Item {
 	signal sendKey(string text)
 	signal done()
 
+
+
+	// Character Properties
+	property string backChar: "bksp"
+	property string enterChar: "enter"
+	property string shiftChar: "shft"
+
+
 	// Some properties that modify the characters
 	property bool shift: false
 	property bool alts: false
@@ -146,7 +154,7 @@ Item {
 		}
 		// Backspace Shortcut
 		if (api.keys.isDetails(event)) {
-			kRoot.sendKey("\u232B")
+			kRoot.sendKey(backChar) // Backspace
 		}
 		// Exit Shortcut
 		if (api.keys.isCancel(event)) {
@@ -195,7 +203,7 @@ Item {
 						{key: "i", alt: "8", w: 1, il: 7, ih: 7},
 						{key: "o", alt: "9", w: 1, il: 8, ih: 8},
 						{key: "p", alt: "0", w: 1, il: 9, ih: 9},
-						{key: "\u232B", alt: "\u232B", w: 1, il: 10, ih: 10}
+						{key: backChar, alt: backChar, w: 1, il: 10, ih: 10}
 					]
 
 					delegate: KeyButton {
@@ -252,7 +260,7 @@ Item {
 						{key: "j", alt: "*", w: 1, il: 6, ih: 6},
 						{key: "k", alt: "(", w: 1, il: 7, ih: 7},
 						{key: "l", alt: ")", w: 1, il: 8, ih: 8},
-						{key: "\u2BA8", alt: "\u2BA8", w: 2, il: 9, ih: 10}
+						{key: enterChar, alt: enterChar, w: 2, il: 9, ih: 10}
 					]
 
 					// Button
@@ -295,7 +303,7 @@ Item {
 
 				Repeater {
 					model: [
-						{key: "\u2B06", alt: "\u2B06", w: 2, il: 0, ih: 1},
+						{key: shiftChar, alt: shiftChar, w: 2, il: 0, ih: 1},
 						{key: "z", alt: "-", w: 1, il: 2, ih: 2},
 						{key: "x", alt: "'", w: 1, il: 3, ih: 3},
 						{key: "c", alt: '"', w: 1, il: 4, ih: 4},
@@ -303,7 +311,7 @@ Item {
 						{key: "b", alt: ",", w: 1, il: 6, ih: 6},
 						{key: "n", alt: "?", w: 1, il: 7, ih: 7},
 						{key: "m", alt: "+", w: 1, il: 8, ih: 8},
-						{key: "\u2B06", alt: "\u2B06", w: 2, il: 9, ih: 10}
+						{key: shiftChar, alt: shiftChar, w: 2, il: 9, ih: 10}
 					]
 
 					delegate: KeyButton {

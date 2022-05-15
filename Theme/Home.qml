@@ -137,7 +137,7 @@ FocusScope {
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
 
-        source: "../assets/theme/up.svg"
+        source: useSVG ? "../assets/theme/up.svg" : "../assets/theme/up.png"
 
         Behavior on y {
             SmoothedAnimation { velocity: animVel }

@@ -17,6 +17,11 @@ Item {
 	signal sendKey(string text)
 	signal done()
 
+	// Quick Character Setting
+	property string back: "\u2190"
+	property string enter: "\u2193"
+	property string shiftc: "\u2191"
+
 	// Invokes the keyboard (shows it)
 	function invoke() {
 		keyboard.visible = true
@@ -28,6 +33,10 @@ Item {
 		id: keyboard
 		visible: false
 
+		backChar: back
+		enterChar: enter
+		shiftChar: shiftc
+
 		width: theme.width
 		height: theme.height * 0.6
 
@@ -35,11 +44,11 @@ Item {
 
 		// Send Key is a signal of KeyboardObject.qml as well.
 		onSendKey: {
-			if (text == "\u232B") { // Backspace Unicode Conversion
+			if (text == back) { // Backspace Unicode Conversion
 				kcreator.sendKey("bksp")
-			} else if (text == "\u2BA8") { // Enter Unicode Conversion
+			} else if (text == enter) { // Enter Unicode Conversion
 				keyboard.done()
-			} else if (text == "\u2B06") { // Shift Unicode Conversion
+			} else if (text == shiftc) { // Shift Unicode Conversion
 				keyboard.shift = true
 			} else if (text == "&123" || text == "ABCD") { // Alt Conversion
 				keyboard.alts = !keyboard.alts

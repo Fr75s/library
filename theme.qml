@@ -80,6 +80,7 @@ FocusScope {
     property bool mouseNav: api.memory.has("mouseNav") ? api.memory.get("mouseNav") : true
     property bool enlargeBar: api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false
     property bool limSearch: api.memory.has("limSearch") ? api.memory.get("limSearch") : false
+    property bool useSVG: api.memory.has("useSVG") ? api.memory.get("useSVG") : false
 
     property bool centerTitles: false
 
@@ -109,7 +110,7 @@ FocusScope {
             Image { // Home
                 id: bbHome
                 mipmap: true
-                source: "./assets/theme/home.svg"
+                source: useSVG ? "./assets/theme/home.svg" : "./assets/theme/home.png"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -124,7 +125,7 @@ FocusScope {
             Image { // All/Search
                 id: bbAll
                 mipmap: true
-                source: "./assets/theme/search.svg"
+                source: useSVG ? "./assets/theme/search.svg" : "./assets/theme/search.png"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -139,7 +140,7 @@ FocusScope {
             Image { // Collections
                 id: bbCollect
                 mipmap: true
-                source: "./assets/theme/collections.svg"
+                source: useSVG ? "./assets/theme/collections.svg" : "./assets/theme/collections.png"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -154,7 +155,7 @@ FocusScope {
             Image { // Settings
                 id: bbSet
                 mipmap: true
-                source: "./assets/theme/settings.svg"
+                source: useSVG ? "./assets/theme/settings.svg" : "./assets/theme/settings.png"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize

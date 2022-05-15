@@ -86,7 +86,7 @@ FocusScope {
 
         visible: gameView && mouseNav
 
-        source: "../assets/theme/up.svg"
+        source: useSVG ? "../assets/theme/up.svg" : "../assets/theme/up.png"
 
         MouseArea {
             anchors.fill: parent

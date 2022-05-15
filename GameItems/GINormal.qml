@@ -148,7 +148,7 @@ Item {
         anchors.rightMargin: parent.height * .025
         z: parent.z + 5
 
-        source: "../assets/theme/favorite.svg"
+        source: useSVG ? "../assets/theme/favorite.svg" : "../assets/theme/favorite.png"
         mipmap: true
         //color: light ? "#242424" : "#EEEEEE"
 
