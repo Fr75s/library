@@ -3,33 +3,49 @@
 html {
 	font-size: 18px;
 	font-family: "Outfit";
+
 	color: #CCCCCC;
 	font-weight: 300;
 
 	background-color: #16171A;
+
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin: 0 0 200px; /* Last margin is footer spacing + height*/
 }
 
 header {
-	margin: -8px;
 	margin-bottom: 20px;
 	background-color: #26282D;
 }
 
-/*
+main {
+	margin: 0 auto;
+
+	width: 800px;
+}
+
+@media screen and (max-width: 900px) {
+	main {
+		width: 90%;
+	}
+}
+
 footer {
 	background-color: #16171A;
 
-	margin: -8px;
-	margin-top: 120px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+
+	height: 80px;
 
 	border-style: solid;
+	border-color: #484858;
 	border-width: 2px 0px 0px 0px;
-}
-*/
-
-main {
-	margin: 0 auto;
-	width: 800px;
 }
 
 
