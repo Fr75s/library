@@ -84,7 +84,7 @@ Item {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
 
-            visible: (wideHead && index == 0)
+            visible: wide || (wideHead && index == 0)
 
             color: "#60000000"
         }
@@ -110,7 +110,7 @@ Item {
         radius: 32
         samples: 30
 
-        visible: (wideHead && index == 0)
+        visible: wide || (wideHead && index == 0)
     }
 
     // Wide header text
@@ -126,7 +126,7 @@ Item {
         text: currentGame.title
         wrapMode: Text.WordWrap
 
-        visible: (wideHead && index == 0)
+        visible: wide || (wideHead && index == 0)
 
         font.pixelSize: vpx(16)
         font.family: gilroyLight.name

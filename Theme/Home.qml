@@ -174,7 +174,7 @@ FocusScope {
             // doubleFocus property only selects game when the view and item is this one
             readonly property bool doubleFocus: recentView.focus && isCurrentItem
 
-            width: (index == 0) ? ListView.view.width / 2.25 : ListView.view.width / 6.75
+            width: (index == 0 || wide) ? ListView.view.width / 2.25 : ListView.view.width / 6.75
             height: ListView.view.height
 
             Item {
