@@ -24,6 +24,8 @@ FocusScope {
     property int sw: parent.width
     property int sh: parent.height
 
+    signal videoControl(bool pause)
+
     /* The menu variable controls the current page. It is an int as it also determines the indicator's location. Here is what each value can be:
      * 0: home
      * 1: search
@@ -388,6 +390,11 @@ FocusScope {
                 menu = 0
             else
                 menu++
+
+            if (menu == 1)
+                theme.videoControl(false)
+            else
+                theme.videoControl(true)
         }
         if (api.keys.isPrevPage(event)) {
             event.accepted = true;
@@ -397,6 +404,11 @@ FocusScope {
                 menu = 3
             else
                 menu--
+
+            if (menu == 1)
+                theme.videoControl(false)
+            else
+                theme.videoControl(true)
         }
     }
 

@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
-   sodipodi:docname="home.svg"
+   sodipodi:docname="feed.svg"
    inkscape:export-filename="/home/franc/.var/app/org.pegasus_frontend.Pegasus/config/pegasus-frontend/themes/Library/assets/theme/home.png"
    inkscape:export-xdpi="95.900002"
    inkscape:export-ydpi="95.900002"
@@ -45,9 +45,9 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.64583;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 35.189581,63.970221 v 36.303659 l 25.290023,0.003 V 82.515682 h 14.507454 v 17.761048 l 25.290022,-0.003 V 63.970221 L 67.746511,35.189543 Z"
-       id="path1342"
-       sodipodi:nodetypes="cccccccccc" />
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 35.189581,100.27716 V 35.189499 l 65.087659,32.54383 z"
+       id="path1068"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>

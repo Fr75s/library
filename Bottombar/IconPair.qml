@@ -17,7 +17,7 @@ Row {
 	// Labels for each page, with each element corresponding to each page
 	property var label: ["0", "1", "2", "3"]
 
-	spacing: width * 0.05
+	spacing: (textContent.width + height) * 0.05
 
 	width: textContent.width + height + spacing
 

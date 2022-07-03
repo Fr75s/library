@@ -19,6 +19,7 @@ import "PegaKey"
 FocusScope {
     id: search
 
+    property bool feed: false
     property bool searching: false
 
     // Define Current Game
@@ -50,6 +51,7 @@ FocusScope {
         else
             return api.allGames.get(searchSort.mapToSource(allView.currentIndex))
     }
+    property var feedCurrent
 
     //
     // Layouts
@@ -62,7 +64,7 @@ FocusScope {
 
         y: parent.height * 0.075
 
-        text: "Search"
+        text: feed ? "Feed" : "Search"
         color: light ? "black" : "white"
 
         // Alignment
@@ -80,6 +82,8 @@ FocusScope {
     Text {
         id: searchInput
         width: parent.width * .6
+
+        visible: !feed
 
         y: parent.height * 0.075
 
@@ -138,27 +142,6 @@ FocusScope {
 
             onClicked: keys.invoke()
         }
-
-        /*
-        Keys.onPressed: {
-            if (event.isAutoRepeat) {
-                return
-            }
-
-            if (event.key == Qt.Key_Down) {
-                if (!nosfx)
-                    sNav.play();
-                searching = false
-
-                allView.positionViewAtIndex(allView.currentIndex, GridView.Visible)
-                allView.focus = (menu == 1) && !searching
-            }
-
-            if (event.key == Qt.Key_Return) {
-                searching = false
-            }
-        }
-        */
     }
 
     /* The special keyboard implementation, instantiated here
@@ -208,6 +191,8 @@ FocusScope {
 
         anchors.top: parent.top
         anchors.topMargin: parent.height * .15
+
+        visible: !feed
 
         // Grid
         cellWidth: wide ? (width / 2) : (width / 6)
@@ -315,24 +300,172 @@ FocusScope {
             // Launch Game
             if (api.keys.isAccept(event)) {
                 event.accepted = true;
-                launchGame(current);
+                if (!feed) {
+                    launchGame(current);
+                } else {
+                    launchGame(feedCurrent);
+                }
             }
 
             // Favorite Game
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
-                if (!nosfx)
-                    sFav.play();
-                current.favorite = !current.favorite;
+                if (!feed) {
+                    if (!nosfx)
+                        sFav.play();
+                    current.favorite = !current.favorite;
+                } else {
+                    feedNext();
+                }
             }
 
             // Quick Search with X
             if (api.keys.isDetails(event)) {
                 event.accepted = true;
-                keys.invoke()
+                if (!feed) {
+                    keys.invoke()
+                }
+            }
+        }
+    }
+
+
+    // Feed Stuff
+    SortFilterProxyModel {
+        id: gamesWithVideos;
+
+        sourceModel: api.allGames;
+        filters: [
+            ExpressionFilter { expression: { assets.video !== ''; } }
+        ]
+    }
+
+    Video {
+        id: feedPlayer;
+
+        width: parent.width * 0.75
+        height: parent.height * 0.75
+        autoPlay: true
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: parent.height * 0.1
+
+        visible: feed
+
+        fillMode: VideoOutput.PreserveAspectFit
+
+        onStatusChanged: {
+            if (status === MediaPlayer.InvalidMedia) {
+                console.log("VIDEO INVALID");
+                feedNext();
+            }
+            if (status === MediaPlayer.EndOfMedia) {
+                console.log("VIDEO EOF");
+                feedNext();
             }
         }
 
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                launchGame(feedCurrent)
+            }
+        }
+    }
+
+    Rectangle {
+        id: feedPlayerBG
+        anchors.centerIn: feedPlayer;
+
+        width: feedPlayer.width
+        height: feedPlayer.height
+
+        visible: feedPlayer.visible
+
+        z: feedPlayer.z - 1
+
+        color: "#000000"
+    }
+
+    Text {
+        id: feedInfoLabel
+        width: parent.width * .9
+
+        y: parent.height * 0.91
+
+        text: "Press L2 at any time to stop."
+        color: light ? "black" : "white"
+
+        visible: feed
+
+        // Alignment
+        horizontalAlignment: Text.AlignHCenter
+
+        font.family: gilroyLight.name
+        font.pixelSize: parent.height * .025
+
+        anchors.left: parent.left
+        anchors.leftMargin: parent.width * 0.05
+    }
+
+    DropShadow {
+        anchors.fill: feedPlayerBG;
+        source: feedPlayerBG;
+
+        visible: feedPlayerBG.visible
+
+        opacity: giShadowOp
+
+        radius: giShadowRad * 2
+        samples: radius * 2 + 1
+        z: feedPlayerBG.z - 1
+    }
+
+    Keys.onPressed: {
+        if (event.isAutoRepeat) {
+            return
+        }
+
+        // Feed Mode
+        if (api.keys.isPageUp(event)) {
+            event.accepted = true;
+            feed = !feed;
+
+            if (feed) {
+                feedNext();
+            } else {
+                feedPlayer.stop();
+            }
+        }
+    }
+
+    function feedNext() {
+        const gindex = Math.floor(Math.random() * gamesWithVideos.count);
+        feedCurrent = api.allGames.get(gamesWithVideos.mapToSource(gindex));
+
+        console.log(feedCurrent.title);
+        feedPlayer.source = feedCurrent.assets.video;
+
+        console.log(feedPlayer.source);
+        feedPlayer.play();
+    }
+
+    Component.onCompleted: {
+        feedPlayer.stop();
+    }
+
+    Connections {
+        target: theme
+
+        function onVideoControl(pause) {
+            if (pause) {
+                feedPlayer.pause()
+            } else if (feed) {
+                feedPlayer.play()
+            }
+        }
     }
 
 }

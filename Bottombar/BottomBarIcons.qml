@@ -64,7 +64,7 @@ Item {
                 src: "../assets/buttons/B.svg"
                 srcp: "../assets/buttons/B.png"
 
-                label: ["", "Exit Search", "Exit Collection", ""]
+                label: ["", "Hide Keyboard", "Exit Collection", ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -76,7 +76,7 @@ Item {
                 src: "../assets/buttons/Y.svg"
                 srcp: "../assets/buttons/Y.png"
 
-                label: ["Favorite", "Favorite / Space", "Favorite", "Show Extra Info"]
+                label: ["Favorite", "Favorite / Space / Next", "Favorite", "Show Extra Info"]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -131,6 +131,18 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
             }
 
+            IconPair {
+                height: parent.height * .8
+
+                src: "../assets/buttons/L2.svg"
+                srcp: "../assets/buttons/L2.png"
+
+
+                label: [" ", "Feed", " ", " "]
+
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
             // X Button Actions
             IconPair {
                 height: parent.height * .8
@@ -138,7 +150,7 @@ Item {
                 src: "../assets/buttons/X.svg"
                 srcp: "../assets/buttons/X.png"
 
-                label: ["", "Show Keyboard / Backspace", "", ""]
+                label: ["", "Keyboard / Backspace", "", ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }

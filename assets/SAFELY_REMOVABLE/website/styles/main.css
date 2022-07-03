@@ -28,9 +28,9 @@ main {
 	width: 800px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 	main {
-		width: 90%;
+		width: 80%;
 	}
 }
 
