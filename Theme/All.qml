@@ -432,6 +432,7 @@ FocusScope {
         if (api.keys.isPageUp(event)) {
             event.accepted = true;
             feed = !feed;
+            theme.isFeed = !theme.isFeed
 
             if (feed) {
                 feedNext();

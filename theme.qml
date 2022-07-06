@@ -52,6 +52,9 @@ FocusScope {
 	// Opacity of games' shadows
 	property var giShadowOp: 0.75
 
+	// The IsFeed option checks if the all page is the feed page, converted with L2.
+	property bool isFeed: false
+
 	/* OPTIONS
      * There are many options for this theme, all used in several places, but defined here for convenience.
      * These options go as follows:
@@ -127,7 +130,7 @@ FocusScope {
             Image { // All/Search
                 id: bbAll
                 mipmap: true
-                source: useSVG ? "./assets/theme/search.svg" : "./assets/theme/search.png"
+                source: isFeed ? (useSVG ? "./assets/theme/feed.svg" : "./assets/theme/feed.png") : (useSVG ? "./assets/theme/search.svg" : "./assets/theme/search.png")
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize

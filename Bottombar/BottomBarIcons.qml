@@ -52,7 +52,7 @@ Item {
 
                 // Label for Home, Search, Collections & Settings respectively.
                 // Same pattern for each IconPair.
-                label: ["Select", "Select", "Select", "Change Setting"]
+                label: ["Select", (isFeed ? "Play" : "Select"), "Select", "Change Setting"]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -64,7 +64,7 @@ Item {
                 src: "../assets/buttons/B.svg"
                 srcp: "../assets/buttons/B.png"
 
-                label: ["", "Hide Keyboard", "Exit Collection", ""]
+                label: ["", (isFeed ? "" : "Hide Keyboard"), "Exit Collection", ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -76,7 +76,7 @@ Item {
                 src: "../assets/buttons/Y.svg"
                 srcp: "../assets/buttons/Y.png"
 
-                label: ["Favorite", "Favorite / Space / Next", "Favorite", "Show Extra Info"]
+                label: ["Favorite", (isFeed ? "Next" : "Favorite / Space"), "Favorite", "Show Extra Info"]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -150,7 +150,7 @@ Item {
                 src: "../assets/buttons/X.svg"
                 srcp: "../assets/buttons/X.png"
 
-                label: ["", "Keyboard / Backspace", "", ""]
+                label: ["", (isFeed ? "" : "Keyboard / Backspace"), "", ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
