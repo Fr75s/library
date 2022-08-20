@@ -37,6 +37,10 @@ FocusScope {
                     setting: sbsl
                 },
                 {
+                    name: "Rounded Games",
+                    setting: roundedGames
+                },
+                {
                     name: "Wide Games View",
                     setting: wide,
                     info: "Increases the width of games in grids.",
@@ -345,44 +349,49 @@ FocusScope {
                 set.setProperty(3, "setting", sbsl);
                 break;
             case 4:
-                wide = !wide
-                api.memory.set("wide", wide);
-                set.setProperty(4, "setting", wide);
+                roundedGames = !roundedGames
+                api.memory.set("roundedGames", roundedGames);
+                set.setProperty(4, "setting", roundedGames);
                 break;
             case 5:
-                mouseNav = !mouseNav
-                api.memory.set("mouseNav", mouseNav);
-                set.setProperty(5, "setting", mouseNav);
+                wide = !wide
+                api.memory.set("wide", wide);
+                set.setProperty(5, "setting", wide);
                 break;
             case 6:
-                moreRecent = !moreRecent
-                api.memory.set("moreRecent", moreRecent);
-                set.setProperty(6, "setting", moreRecent);
+                mouseNav = !mouseNav
+                api.memory.set("mouseNav", mouseNav);
+                set.setProperty(6, "setting", mouseNav);
                 break;
             case 7:
-                limSearch = !limSearch
-                api.memory.set("limSearch", limSearch);
-                set.setProperty(7, "setting", limSearch);
+                moreRecent = !moreRecent
+                api.memory.set("moreRecent", moreRecent);
+                set.setProperty(7, "setting", moreRecent);
                 break;
             case 8:
-                enlargeBar = !enlargeBar
-                api.memory.set("enlargeBar", enlargeBar);
-                set.setProperty(8, "setting", enlargeBar);
+                limSearch = !limSearch
+                api.memory.set("limSearch", limSearch);
+                set.setProperty(8, "setting", limSearch);
                 break;
             case 9:
-                useSVG = !useSVG
-                api.memory.set("useSVG", useSVG);
-                set.setProperty(9, "setting", useSVG);
+                enlargeBar = !enlargeBar
+                api.memory.set("enlargeBar", enlargeBar);
+                set.setProperty(9, "setting", enlargeBar);
                 break;
             case 10:
-                quiet = !quiet
-                api.memory.set("quiet", quiet);
-                set.setProperty(10, "setting", quiet);
+                useSVG = !useSVG
+                api.memory.set("useSVG", useSVG);
+                set.setProperty(10, "setting", useSVG);
                 break;
             case 11:
+                quiet = !quiet
+                api.memory.set("quiet", quiet);
+                set.setProperty(11, "setting", quiet);
+                break;
+            case 12:
                 nosfx = !nosfx
                 api.memory.set("nosfx", nosfx);
-                set.setProperty(11, "setting", nosfx);
+                set.setProperty(12, "setting", nosfx);
                 break;
         }
     }

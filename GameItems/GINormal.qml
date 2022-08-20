@@ -5,11 +5,11 @@ import QtGraphicalEffects 1.15
 import QtQuick.Window 2.15
 
 Item {
+    id: gameItem
+
     // The standard gameItem, showing for all instances where games are shown.
     property var currentGame: modelData
     property bool wideHead: false
-
-    id: gameItem
     property var backColor: light ? "#EEEEEE" : "#181818"
 
     width: parent.width
@@ -38,8 +38,11 @@ Item {
             z: parent.z - 1
 
             color: light ? "#EEEEEE" : "#242424"
+            radius: roundedGames ? height / roundedGamesRadiusFactor : 0
 
             LinearGradient {
+                id: gameItemTextBackGradient
+                source: parent
                 anchors.fill: parent
                 start: Qt.point(0, 0)
                 end: Qt.point(0, parent.height)
@@ -61,6 +64,7 @@ Item {
 
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectCrop
+        visible: false
 
         asynchronous: true
 
@@ -90,9 +94,18 @@ Item {
         }
     }
 
+    OpacityMask {
+        id: gameItemImageRounded
+        anchors.fill: gameItemImage
+        source: gameItemImage
+        maskSource: gameItemMask
+    }
+
+
+
     ShaderEffectSource{
         id: shaderSource
-        sourceItem: gameItemImage
+        sourceItem: gameItemImageRounded
         width: gameItemImage.width
         height: gameItemImage.height * .2
 
@@ -105,18 +118,35 @@ Item {
     }
 
     GaussianBlur {
+        id: gameItemImageBlur
         anchors.fill: shaderSource
         source: shaderSource
         radius: 32
         samples: 30
 
+        visible: false//wide || (wideHead && index == 0)
+    }
+
+    OpacityMask {
+        anchors.fill: gameItemImageBlur
+        source: gameItemImageBlur
+        maskSource: gameItemBlurMask
         visible: wide || (wideHead && index == 0)
+    }
+
+    Rectangle {
+        id: wideViewTextAnchor
+        visible: false
+        width: parent.width
+        height: parent.height * .2
+
+        anchors.bottom: parent.bottom
     }
 
     // Wide header text
     Text {
         id: wideViewText
-        anchors.centerIn: shaderSource
+        anchors.centerIn: wideViewTextAnchor
         width: parent.width * .9
         height: parent.height * .2
 
@@ -183,6 +213,31 @@ Item {
         radius: 16
         samples: 17
         z: favImg.z - 1
+    }
+
+
+
+    Rectangle {
+        id: gameItemMask
+        anchors.fill: parent
+        visible: false
+
+        radius: roundedGames ? height / roundedGamesRadiusFactor : 0
+    }
+
+    Rectangle {
+        id: gameItemBlurMask
+        anchors.fill: shaderSource
+        visible: false
+
+        radius: roundedGames ? height / roundedGamesRadiusFactor / .2 : 0
+
+        Rectangle {
+            width: parent.width
+            height: parent.height / 2
+
+            anchors.top: parent.top
+        }
     }
 
 

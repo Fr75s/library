@@ -48,6 +48,7 @@ Item {
 
     // Top bar
     Rectangle {
+        id: customTopBar
         width: parent.width
         height: parent.height * .3
 
@@ -57,6 +58,8 @@ Item {
         color: "#60000000"
 
         z: gameItemImage.z + 1
+        //radius: roundedGames ? height / roundedGamesRadiusFactor / .3 : 0
+        visible: false
     }
 
     // Collection Image
@@ -71,13 +74,65 @@ Item {
         asynchronous: true
 
         source: ".././assets/logo/banner/"+cc.clearShortname(currentItem.shortName)+".jpg"
+        visible: false
+    }
+
+
+
+    Rectangle {
+        id: gameItemMask
+        anchors.fill: parent
+        visible: false
+
+        radius: roundedGames ? height / roundedGamesRadiusFactor : 0
+    }
+
+    Rectangle {
+        id: customTopMask
+        width: parent.width
+        height: customTopBar.height
+        visible: false
+
+        radius: roundedGames ? height / roundedGamesRadiusFactor / .3 : 0
+
+        Rectangle {
+            width: parent.width
+            height: parent.height / 2
+
+            anchors.bottom: parent.bottom
+        }
+    }
+
+    OpacityMask {
+        id: gameItemRounded
+        anchors.fill: gameItemImage
+        source: gameItemImage
+        maskSource: gameItemMask
+        visible: false
     }
 
     // Blur
     FastBlur {
-        anchors.fill: gameItemImage
-        source: gameItemImage
+        id: gameItemBlur
+        visible: false
+        anchors.fill: gameItemRounded
+        source: gameItemRounded
         radius: 48
+    }
+
+    OpacityMask {
+        id: gameItemBlurRounded
+        anchors.fill: gameItemBlur
+        source: gameItemBlur
+        maskSource: gameItemMask
+    }
+
+
+
+    OpacityMask {
+        anchors.fill: customTopBar
+        source: customTopBar
+        maskSource: customTopMask
     }
 
     // Drop Shadow
@@ -85,7 +140,7 @@ Item {
         width: parent.width
         height: parent.height
 
-        source: gameItemImage
+        source: gameItemBlurRounded
 
         anchors.centerIn: parent
 

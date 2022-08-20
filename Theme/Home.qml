@@ -166,7 +166,6 @@ FocusScope {
         y: uiY
 
         orientation: ListView.Horizontal
-
         model: recent
 
         delegate: Item {
@@ -178,6 +177,8 @@ FocusScope {
             height: ListView.view.height
 
             Item {
+                id: gameItemRoot
+
                 anchors {
                     fill: parent
                     margins: (doubleFocus) ? 0 : vpx(10)
@@ -189,7 +190,7 @@ FocusScope {
 
                 GINormal { wideHead: true }
 
-                /* No more loader, everything is already loaded on start
+                /*
                 Loader {
                     anchors.fill: parent
                     asynchronous: true

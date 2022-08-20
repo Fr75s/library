@@ -51,6 +51,8 @@ FocusScope {
 	property var giShadowRad: light ? 16 : 24
 	// Opacity of games' shadows
 	property var giShadowOp: 0.75
+	// Radius of games with rounded corners on (height / roundedGamesRadiusFactor)
+	property var roundedGamesRadiusFactor: 16
 
 	// The IsFeed option checks if the all page is the feed page, converted with L2.
 	property bool isFeed: false
@@ -86,6 +88,7 @@ FocusScope {
     property bool enlargeBar: api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false
     property bool limSearch: api.memory.has("limSearch") ? api.memory.get("limSearch") : false
     property bool useSVG: api.memory.has("useSVG") ? api.memory.get("useSVG") : false
+    property bool roundedGames: api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false
 
     property bool centerTitles: false
 
