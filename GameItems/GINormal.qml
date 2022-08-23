@@ -30,14 +30,14 @@ Item {
         font.family: gilroyLight.name
         font.bold: true
 
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         Rectangle {
             id: gameItemTextBack
             anchors.fill: parent
             z: parent.z - 1
 
-            color: light ? "#EEEEEE" : "#242424"
+            color: colors["plainSetting"]
             radius: roundedGames ? height / roundedGamesRadiusFactor : 0
 
             LinearGradient {
@@ -48,7 +48,7 @@ Item {
                 end: Qt.point(0, parent.height)
                 gradient: Gradient {
                     GradientStop { position: 0.0; color: "transparent" }
-                    GradientStop { position: 1.0; color: light ? "#CCCCCC" : "black" }
+                    GradientStop { position: 1.0; color: colors["giGradient"] }
                 }
             }
         }
@@ -194,7 +194,7 @@ Item {
 
         anchors.centerIn: parent
 
-        visible: !plainBG
+        //visible: !plainBG
         opacity: giShadowOp
 
         radius: giShadowRad

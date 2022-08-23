@@ -65,7 +65,7 @@ FocusScope {
         y: parent.height * 0.075
 
         text: feed ? "Feed" : "Search"
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         // Alignment
         horizontalAlignment: Text.AlignLeft
@@ -75,6 +75,46 @@ FocusScope {
 
         anchors.left: parent.left
         anchors.leftMargin: parent.width * 0.05
+    }
+
+
+
+    // Search Background, to indicate it is a search field
+    // (outside of searchInput to prevent bug where searchInput text is under the bg)
+    Rectangle {
+        id: searchInputBG
+
+        width: searchInput.width + (searchInput.height * .5)
+        height: searchInput.height * 1.2
+        anchors.centerIn: searchInput
+
+        radius: height * .25
+        visible: !feed
+        color: colors["plainSetting"]
+
+        // Highlight when searching
+        Rectangle {
+            anchors.fill: parent
+            radius: parent.radius
+
+            visible: (menu == 1) && !(allView.focus)
+
+            border.color: colors["accent"]
+            border.width: 2
+            color: "transparent"
+        }
+    }
+
+    DropShadow {
+        anchors.fill: searchInputBG
+        source: searchInputBG
+
+        visible: !plainBG && !feed
+        opacity: giShadowOp
+
+        radius: giShadowRad
+        samples: giShadowRad * 2 + 1
+        z: searchInputBG.z - 1
     }
 
     // Search text input, used for searching
@@ -87,7 +127,7 @@ FocusScope {
 
         y: parent.height * 0.075
 
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         // Alignment
         horizontalAlignment: Text.AlignLeft
@@ -97,33 +137,6 @@ FocusScope {
 
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
-
-        // Background, to indicate it is a search field
-        Rectangle {
-            id: searchInputBG
-            z: parent.z - 1
-
-            width: parent.width + (parent.height * .5)
-            height: parent.height * 1.2
-
-            anchors.centerIn: parent
-
-            radius: height * .25
-            opacity: plainBG ? 1 : 0.6
-            color: light ? "#EEEEEE" : "#242424"
-
-            // Highlight when searching
-            Rectangle {
-                anchors.fill: parent
-                radius: parent.radius
-
-                visible: (menu == 1) && !(allView.focus)
-
-                border.color: "steelblue"
-                border.width: 2
-                color: "transparent"
-            }
-        }
 
         // Indicator for the word, used to show the end of the text
         Rectangle {
@@ -156,6 +169,8 @@ FocusScope {
         anchors.fill: parent
         z: 20
 
+        kcolors: colors["keyboard"]
+
         // Adds key to input, unless it's a backspace or clear
         onSendKey: {
             if (text == "bksp") {
@@ -166,6 +181,7 @@ FocusScope {
                 searchInput.text = ""
             } else {
                 searchInput.text = searchInput.text + text;
+                searchInput.forceLayout()
             }
         }
 
@@ -386,7 +402,7 @@ FocusScope {
 
         z: feedPlayer.z - 1
 
-        color: "#000000"
+        color: colors["plainBG"]
     }
 
     Text {
@@ -396,7 +412,7 @@ FocusScope {
         y: parent.height * 0.91
 
         text: "Press L2 at any time to stop."
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         visible: feed
 

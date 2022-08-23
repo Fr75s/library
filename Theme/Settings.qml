@@ -33,22 +33,24 @@ FocusScope {
                     setting: noBtns
                 },
                 {
-                    name: "Visible Top Bar",
-                    setting: sbsl
-                },
-                {
                     name: "Rounded Games",
                     setting: roundedGames
                 },
                 {
+                    name: "Enable Clock",
+                    setting: sbsl
+                },
+                {
                     name: "Wide Games View",
                     setting: wide,
-                    info: "Increases the width of games in grids.",
+                    info: "Increases the width of the game art shown.",
                     is: false
                 },
                 {
-                    name: "Enable Mouse Navigation Icons",
-                    setting: mouseNav
+                    name: "Enable Touch Navigation Icons",
+                    setting: mouseNav,
+                    info: "Adds arrows on the top right of certain game grids to allow you to go back if you're using a touch-based device or mouse.",
+                    is: false
                 },
                 {
                     name: "More Recent Games Shown",
@@ -72,6 +74,12 @@ FocusScope {
                     name: "Use SVG Icons",
                     setting: useSVG,
                     info: "Allows you to use higher quality SVG icons rather than PNG icons. Higher quality on very large screens, but may break images on some devices.",
+                    is: false
+                },
+                {
+                    name: "Use Classic Colorscheme",
+                    setting: classicColors,
+                    info: "Reverts the colors of the UI back to the colors used in Library prior to version 1.2.0.",
                     is: false
                 },
                 {
@@ -125,7 +133,7 @@ FocusScope {
         y: parent.height * 0.075
 
         text: "Settings"
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         font.family: gilroyLight.name
         font.pixelSize: parent.height * .05
@@ -142,7 +150,7 @@ FocusScope {
         id: settingsCredits
 
         text: "https://github.com/Fr75s/library"
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         width: parent.width * 0.95
 		anchors.horizontalCenter: parent.horizontalCenter
@@ -178,7 +186,7 @@ FocusScope {
 
             Rectangle {
                 id: settingRoot
-                color: plainBG ? (light ? "#EEEEEE" : "#242424") : (light ? "#22EEEEEE" : "#33121212")
+                color: plainBG ? colors["plainSetting"] : colors["setting"]
                 anchors.fill: parent
 
                 radius: height / 8
@@ -203,7 +211,7 @@ FocusScope {
                     text: name
                     wrapMode: Text.WordWrap
 
-                    color: light ? "black" : "white"
+                    color: colors["text"]
 
                     font.family: gilroyLight.name
                     font.bold: true
@@ -219,7 +227,7 @@ FocusScope {
                     anchors.leftMargin: parent.width * 0.045
                     anchors.verticalCenter: parent.verticalCenter
 
-                    color: light ? "black" : "white"
+                    color: colors["text"]
                     radius: height / 2
                     visible: info ? true : false
 
@@ -227,12 +235,23 @@ FocusScope {
                         anchors.fill: parent
 
                         text: "i"
+                        color: colors["plainBG"]
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         font.pixelSize: vpx(16)
                     }
                 }
 
+
+                // Slider bar
+                Rectangle {
+                    width: parent.width * 0.05
+                    height: vpx(2)
+
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: parent.x + parent.width * 0.85 + parent.height * 0.1
+                    color: colors["text"]
+                }
 
                 // Slider Circle
                 Rectangle {
@@ -242,21 +261,11 @@ FocusScope {
                     anchors.verticalCenter: parent.verticalCenter
                     x: setting ? parent.x + parent.width * 0.9 : parent.x + parent.width * 0.85
                     radius: height / 2
-                    color: light ? "black" : "white"
+                    color: colors["text"]
 
                     Behavior on x {
                         SmoothedAnimation { velocity: 800 }
                     }
-                }
-
-                // Slider bar
-                Rectangle {
-                    width: parent.width * 0.05
-                    height: vpx(2)
-
-                    anchors.verticalCenter: parent.verticalCenter
-                    x: parent.x + parent.width * 0.85 + parent.height * 0.1
-                    color: light ? "black" : "white"
                 }
 
                 // Click functionality
@@ -344,14 +353,14 @@ FocusScope {
                 set.setProperty(2, "setting", noBtns);
                 break;
             case 3:
-                sbsl = !sbsl
-                api.memory.set("sbsl", sbsl);
-                set.setProperty(3, "setting", sbsl);
-                break;
-            case 4:
                 roundedGames = !roundedGames
                 api.memory.set("roundedGames", roundedGames);
-                set.setProperty(4, "setting", roundedGames);
+                set.setProperty(3, "setting", roundedGames);
+                break;
+            case 4:
+                sbsl = !sbsl
+                api.memory.set("sbsl", sbsl);
+                set.setProperty(4, "setting", sbsl);
                 break;
             case 5:
                 wide = !wide
@@ -384,14 +393,19 @@ FocusScope {
                 set.setProperty(10, "setting", useSVG);
                 break;
             case 11:
-                quiet = !quiet
-                api.memory.set("quiet", quiet);
-                set.setProperty(11, "setting", quiet);
+                classicColors = !classicColors
+                api.memory.set("classicColors", classicColors);
+                set.setProperty(11, "setting", classicColors);
                 break;
             case 12:
+                quiet = !quiet
+                api.memory.set("quiet", quiet);
+                set.setProperty(12, "setting", quiet);
+                break;
+            case 13:
                 nosfx = !nosfx
                 api.memory.set("nosfx", nosfx);
-                set.setProperty(12, "setting", nosfx);
+                set.setProperty(13, "setting", nosfx);
                 break;
         }
     }

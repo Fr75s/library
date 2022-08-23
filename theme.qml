@@ -89,8 +89,98 @@ FocusScope {
     property bool limSearch: api.memory.has("limSearch") ? api.memory.get("limSearch") : false
     property bool useSVG: api.memory.has("useSVG") ? api.memory.get("useSVG") : false
     property bool roundedGames: api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false
+    property bool classicColors: api.memory.has("classicColors") ? api.memory.get("classicColors") : false
 
     property bool centerTitles: false
+
+
+    /* COLORS
+     * These are the lists of colors used by this theme.
+     * There are 2 default color schemes: POLAR and CLASSIC
+     * Each color scheme is an object with properties containing each color
+     * Use the properties for both color schemes here to make your own, or just see how these ones work.
+     */
+
+    property var colorschemes: {
+        "polar": {
+            "light": {
+                "plainBG": "#F2F6FF", // Used as the flat background color
+                "text": "#16171A", // Used as the text color
+                "accent": "#74AAFF", // Used as the accent color (slider circles in settings)
+                "barBG": "#0F1114", // Used as the bottom bar color
+                "bottomIcons": "#F2F6FF", // Used as the color of the bottom bar icons
+                "plainSetting": "#DEEAFF", // Used as the color of plain BG settings or alternative background color (e.g. search bar color)
+                "giGradient": "#BDD5FF", // Used as the secondary color of the Game Item gradient that appears when no image is found. Set to the same as plainSetting to have no gradient on imageless gameItems
+                "setting": "#30DEEAFF", // Used as the color of settings with no plain BG
+                "keyboard": {
+                    "bg": "#DEEAFF", // KEYBOARD: Background
+                    "key": "#F2F6FF", // KEYBOARD: Key Background
+                    "keyPush": "#BDD5FF", // KEYBOARD: Key Background when clicked
+                    "keyHighlight": "#74AAFF", // KEYBOARD: Selected Key Highlight
+                    "text": "#16171A" // KEYBOARD: Text
+                }
+            },
+            "dark": {
+                "plainBG": "#16171A",
+                "text": "#F2F6FF",
+                "accent": "#74AAFF",
+                "barBG": "#0F1114",
+                "bottomIcons": "#F2F6FF",
+                "plainSetting": "#26282D",
+                "giGradient": "#0F1114",
+                "setting": "#4016171A",
+                "keyboard": {
+                    "bg": "#0F1114",
+                    "key": "#16171A",
+                    "keyPush": "#31333A",
+                    "keyHighlight": "#74AAFF",
+                    "text": "#F2F6FF"
+                }
+            }
+        },
+        "classic": {
+            "light": {
+                "plainBG": "#FFFFFF",
+                "text": "black",
+                "accent": "black",
+                "barBG": "black",
+                "bottomIcons": "white",
+                "plainSetting": "#EEEEEE",
+                "giGradient": "#CCCCCC",
+                "setting": "#22EEEEEE",
+                "keyboard": {
+                    "bg": "#FFFFFF",
+                    "key": "#DDDDDD",
+                    "keyPush": "#BBBBBB",
+                    "keyHighlight": "#steelblue",
+                    "text": "#121212"
+                }
+            },
+            "dark": {
+                "plainBG": "#121212",
+                "text": "white",
+                "accent": "white",
+                "barBG": "black",
+                "bottomIcons": "white",
+                "plainSetting": "#242424",
+                "giGradient": "black",
+                "setting": "#33121212",
+                "keyboard": {
+                    "bg": "#080808",
+                    "key": "#242424",
+                    "keyPush": "#484848",
+                    "keyHighlight": "steelblue",
+                    "text": "#EEEEEE"
+                }
+            }
+        }
+    }
+
+    // Which colors to use right now
+    // MODIFICATION TIP: Replace everything after "colors:" with the address of your colorscheme to use a custom color scheme, like so: colorschemes["mycolorscheme"]["dark"]
+    property var colors: classicColors ? (light ? colorschemes["classic"]["light"] : colorschemes["classic"]["dark"]) : (light ? colorschemes["polar"]["light"] : colorschemes["polar"]["dark"])
+
+
 
     //
     // Layout
@@ -179,8 +269,8 @@ FocusScope {
         // The background for the bottom bar.
         Rectangle {
             id: bottomBarBG
-            color: "black"
-            opacity: plainBG ? 1 : 0.2
+            color: colors["barBG"]
+            opacity: plainBG ? 1 : 0.35
             z: parent.z
 
             anchors.fill: parent
@@ -195,7 +285,7 @@ FocusScope {
     // The indicator for the bottom bar, used to show the current page.
     Rectangle {
         id: bbIndicator
-        color: "white"
+        color: colors["bottomIcons"]
         z: bottomBarBG.z + 3
 
         width: bbHome.width
@@ -335,7 +425,7 @@ FocusScope {
     Rectangle {
 		id: backgroundPlain
 		z: -13
-		color: light ? "#FFFFFF" : "#121212"
+		color: colors["plainBG"]
 		anchors.fill: parent
 
 		visible: plainBG || !("./background-light.jpg" || "./background-dark.jpg")

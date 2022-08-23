@@ -11,11 +11,11 @@ Item {
 	height: parent.height * 0.035
 
 	Rectangle {
-
 		width: parent.width
 		height: parent.height
 
-		color: light ? "#88FFFFFF" : "#88000000"
+		opacity: 0.5
+		color: colors["barBG"]
 	}
 
 	Text {
@@ -46,7 +46,7 @@ Item {
 		horizontalAlignment: Text.AlignLeft
 		verticalAlignment: Text.AlignVCenter
 
-		color: light ? "black" : "white"
+		color: colors["text"]
 		font.family: gilroyExtraBold.name
 		font.pixelSize: height / 2
 		font.bold: true
@@ -67,7 +67,7 @@ Item {
 		verticalAlignment: Text.AlignVCenter
 
 		text: isNaN(api.device.batteryPercent) ? "" : api.device.batteryPercent + "%"
-		color: light ? "black" : "white"
+		color: colors["text"]
 		font.family: gilroyExtraBold.name
 		font.pixelSize: height / 2
 	}

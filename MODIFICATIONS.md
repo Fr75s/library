@@ -8,6 +8,7 @@
     - [Replacing Backgrounds](#replacing-the-backgrounds)
     - [Center the Titles](#center-titles)
     - [Wide Mode Consistency](#wide-mode-consistency-in-the-collections-page)
+    - [Custom Color Schemes (1.2.0+)](#custom-color-schemes)
     - [Extra Collections](#extra-collections)
 
 ## Some Information
@@ -99,6 +100,45 @@ GridView {
 ```
 
 This is all that is needed to make the Collections page top menu become wide in wide mode. One could get wide images if they wish, but to implement these, it would take a bit more effort in GICusart.qml, which I will not cover here.
+<br><br>
+
+### Custom Color Schemes
+
+Creating custom color schemes for this theme can be done by going into theme.qml and modifying the colorschemes variable.
+
+To do this, first open up theme.qml. You should then navigate to a big object with lots of strings, looking like so:
+
+```
+property var colorschemes: {
+    "polar": {
+        "light": {
+            "plainBG": "#F2F6FF",
+...
+```
+
+This is your color scheme variable, and is where you will define color schemes. I recommend adding something like so:
+
+```
+    },
+    "mycolorscheme": {
+        "light": {
+            ...
+        },
+        "dark": {
+            ...
+        }
+    }
+```
+
+After making this, add all the colors in. You can find the names of each color by looking at either the polar or classic color schemes, which are there by default and contain color names like "accent" and "text." Use the same style as the other color schemes, replacing the hex codes or color names with whatever colors you want.
+
+Once you finish your colorscheme, simply replace the line `property var colors: ...` with the following:
+
+```
+property var colors: light ? colorschemes["mycolorscheme"]["light"] : colorschemes["mycolorscheme"]["dark"]
+```
+
+Now you have a custom color scheme for use with Library.
 <br><br>
 
 ### Extra Collections

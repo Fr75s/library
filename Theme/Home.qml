@@ -82,7 +82,7 @@ FocusScope {
         y: uiY - parent.height * 0.075
 
         text: "Recent Games"
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         font.family: gilroyLight.name
         font.pixelSize: parent.height * .05
@@ -106,7 +106,7 @@ FocusScope {
         y: uiY + parent.height * 0.475
 
         text: "Favorite Games"
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         font.family: gilroyLight.name
         font.pixelSize: parent.height * .05
@@ -128,7 +128,7 @@ FocusScope {
 
         width: height
         height: parent.height * 0.1
-        visible: mouseNav
+        visible: false
 
         mipmap: true
 
@@ -136,14 +136,20 @@ FocusScope {
 
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
-
         source: useSVG ? "../assets/theme/up.svg" : "../assets/theme/up.png"
 
         Behavior on y {
             SmoothedAnimation { velocity: animVel }
         }
+    }
+    // Used to color the icon
+	ColorOverlay {
+		anchors.fill: homeUpArrow
+		source: homeUpArrow
+		color: colors["bottomIcons"]
+		visible: mouseNav
 
-        MouseArea {
+		MouseArea {
             anchors.fill: parent
 
             onClicked: {
@@ -154,7 +160,7 @@ FocusScope {
                 }
             }
         }
-    }
+	}
 
     // Recent Games List
     // Shows all the games you've recently played.

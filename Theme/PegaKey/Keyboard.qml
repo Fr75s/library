@@ -17,6 +17,14 @@ Item {
 	signal sendKey(string text)
 	signal done()
 
+	property var kcolors: {
+		"bg": "#FFFFFF", // KEYBOARD: Background
+		"key": "#DDDDDD", // KEYBOARD: Key Background
+		"keyPush": "#BBBBBB", // KEYBOARD: Key Background when clicked
+		"keyHighlight": "#121212", // KEYBOARD: Selected Key Highlight
+		"text": "#121212" // KEYBOARD: Text
+	}
+
 	// Quick Character Setting
 	property string back: "\u2190"
 	property string enter: "\u2193"
@@ -26,12 +34,15 @@ Item {
 	function invoke() {
 		keyboard.visible = true
 		keyboard.focus = true
+		// This allows the keyboard to immediately accept presses vs waiting to move the cursor
+		keyboard.focusEnableKB()
 	}
 
 	// The actual Keyboard Object Keyboard.qml shows
 	KeyboardObject {
 		id: keyboard
 		visible: false
+		colors: kcolors
 
 		backChar: back
 		enterChar: enter
@@ -49,7 +60,7 @@ Item {
 			} else if (text == enter) { // Enter Unicode Conversion
 				keyboard.done()
 			} else if (text == shiftc) { // Shift Unicode Conversion
-				keyboard.shift = true
+				keyboard.shift = !keyboard.shift
 			} else if (text == "&123" || text == "ABCD") { // Alt Conversion
 				keyboard.alts = !keyboard.alts
 			} else {

@@ -138,7 +138,7 @@ Item {
                 srcp: "../assets/buttons/L2.png"
 
 
-                label: [" ", "Feed", " ", " "]
+                label: ["", "Feed", "", ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }

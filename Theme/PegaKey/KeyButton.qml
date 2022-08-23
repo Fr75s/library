@@ -11,7 +11,11 @@ Rectangle {
 	id: btn
 	radius: 16
 
-	color: light ? (clickArea.containsPress ? "#BBBBBB" : "#DDDDDD") : (clickArea.containsPress ? "#484848" : "#242424")
+	property var clickedColor: "#000000"
+	property var regColor: "#FFFFFF"
+	property var textColor: "#888888"
+
+	color: clickArea.containsPress ? clickedColor : regColor
 
 	property string label: ""
 	property bool large: false
@@ -20,7 +24,7 @@ Rectangle {
 		anchors.centerIn: parent
 
 		text: label
-		color: light ? "#121212" : "#EEEEEE"
+		color: textColor
 
 		font.family: gilroyLight.name
 		font.pixelSize: large ? btn.height / 2 : btn.height / 5

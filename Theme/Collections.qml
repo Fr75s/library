@@ -34,7 +34,7 @@ FocusScope {
         y: parent.height * 0.075
 
         text: "Collections"
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         font.family: gilroyLight.name
         font.pixelSize: parent.height * .05
@@ -56,7 +56,7 @@ FocusScope {
         y: parent.height * 0.075
 
         text: collection.name
-        color: light ? "black" : "white"
+        color: colors["text"]
 
         font.family: gilroyLight.name
         font.pixelSize: parent.height * .05
@@ -84,11 +84,17 @@ FocusScope {
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
 
-        visible: gameView && mouseNav
-
+        visible: false
         source: useSVG ? "../assets/theme/up.svg" : "../assets/theme/up.png"
+    }
+    // Used to color the icon
+	ColorOverlay {
+		anchors.fill: collectionBackArrow
+		source: collectionBackArrow
+		color: colors["bottomIcons"]
+		visible: gameView && mouseNav
 
-        MouseArea {
+		MouseArea {
             anchors.fill: parent
 
             onClicked: {
@@ -97,7 +103,7 @@ FocusScope {
                 gameView = false;
             }
         }
-    }
+	}
 
     /* collectionsView: Shows collections
      * Works just like a gameView, but has some key differences
@@ -137,9 +143,8 @@ FocusScope {
 
                 /* Instead of GINormal, this view uses GICusart
                  * This is to permit collection art to show rather than game art.
-                 *
                  */
-                GICusart{}
+                GICusart{ }
 
                 /*
                 Loader {
@@ -187,7 +192,7 @@ FocusScope {
         // Go down with special property
         Keys.onDownPressed: { if (!nosfx) sNav.play();
             // Go to last element if no element below on non-final row
-            if (collectionsView.currentIndex + 6>= collectionsView.count && collectionsView.currentIndex % 6 > (collectionsView.count - 1) % 6)
+            if (collectionsView.currentIndex + 6 >= collectionsView.count && collectionsView.currentIndex % 6 > (collectionsView.count - 1) % 6)
                 collectionsView.currentIndex = collectionsView.count - 1;
             else {
                 moveCurrentIndexDown();

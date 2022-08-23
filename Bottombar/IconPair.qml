@@ -25,12 +25,23 @@ Row {
 
 	// Icon
 	Image {
+		id: iconpicon
 		width: height
 		height: parent.height * .8
 
 		anchors.verticalCenter: parent.verticalCenter
 
 		source: useSVG ? src : srcp
+		visible: false
+	}
+
+	// Used to color the icon
+	ColorOverlay {
+		width: iconpicon.width
+		height: iconpicon.height
+		source: iconpicon
+		color: colors["bottomIcons"]
+		anchors.verticalCenter: parent.verticalCenter
 	}
 
 	// Text
@@ -40,7 +51,7 @@ Row {
 		width: contentWidth
 
 		text: label[menu]
-		color: light ? "black" : "white"
+		color: colors["bottomIcons"]
 
 		font.pixelSize: parent.height * .6
 		font.family: gilroyLight.name

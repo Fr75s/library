@@ -29,7 +29,7 @@ Item {
 	property real colspacing: rowspacing //height * 0.01
 
 	// Highlight color
-	property var keyHighlightColor: "steelblue"
+	property var colors: {}
 
 	// Current Row & Column
 	property int curRow: 0
@@ -41,7 +41,7 @@ Item {
 	// Background: Parent rectangle has roundness
 	Rectangle {
 		anchors.fill: parent
-		color: light ? "#EEEEEE" : (plainBG ? "black" : "#121212")
+		color: colors["bg"]
 
 		radius: height / 16
 
@@ -214,12 +214,16 @@ Item {
 
 						focus: curRow == 0 && (curCol >= modelData.il && curCol <= modelData.ih)
 
+						clickedColor:colors["keyPush"]
+						regColor: colors["key"]
+						textColor: colors["text"]
+
 						// Key Highlight
 						Rectangle {
 							anchors.fill: parent
 							radius: parent.radius
 							border.width: 2
-							border.color: "steelblue"
+							border.color: colors["keyHighlight"]
 							color: "transparent"
 							visible: curRow == 0 && (curCol >= modelData.il && curCol <= modelData.ih)
 						}
@@ -272,6 +276,10 @@ Item {
 
 						focus: visible && curRow == 1 && (curCol >= modelData.il && curCol <= modelData.ih)
 
+						clickedColor:colors["keyPush"]
+						regColor: colors["key"]
+						textColor: colors["text"]
+
 						// Key send (click)
 						onClicked: {
 							kRoot.sendKey(label);
@@ -290,7 +298,7 @@ Item {
 							anchors.fill: parent
 							radius: parent.radius
 							border.width: 2
-							border.color: keyHighlightColor
+							border.color: colors["keyHighlight"]
 							color: "transparent"
 							visible: curRow == 1 && (curCol >= modelData.il && curCol <= modelData.ih)
 						}
@@ -322,6 +330,10 @@ Item {
 
 						focus: visible && curRow == 2 && (curCol >= modelData.il && curCol <= modelData.ih)
 
+						clickedColor:colors["keyPush"]
+						regColor: colors["key"]
+						textColor: colors["text"]
+
 						// Key send (click)
 						onClicked: {
 							kRoot.sendKey(label);
@@ -340,7 +352,7 @@ Item {
 							anchors.fill: parent
 							radius: parent.radius
 							border.width: 2
-							border.color: keyHighlightColor
+							border.color: colors["keyHighlight"]
 							color: "transparent"
 							visible: curRow == 2 && (curCol >= modelData.il && curCol <= modelData.ih)
 						}
@@ -368,6 +380,10 @@ Item {
 
 						focus: visible && curRow == 3 && (curCol >= modelData.il && curCol <= modelData.ih)
 
+						clickedColor:colors["keyPush"]
+						regColor: colors["key"]
+						textColor: colors["text"]
+
 						// Key send (click)
 						onClicked: {
 							kRoot.sendKey(label);
@@ -386,7 +402,7 @@ Item {
 							anchors.fill: parent
 							radius: parent.radius
 							border.width: 2
-							border.color: keyHighlightColor
+							border.color: colors["keyHighlight"]
 							color: "transparent"
 							visible: curRow == 3 && (curCol >= modelData.il && curCol <= modelData.ih)
 						}
@@ -396,4 +412,20 @@ Item {
 
 		}
 	}
+
+
+
+	function focusEnableKB() {
+		if (curRow >= 3) {
+			curRow = 0
+		} else {
+			curRow += 1
+		}
+		if (curRow <= 0) {
+			curRow = 3
+		} else {
+			curRow -= 1
+		}
+	}
+
 }
