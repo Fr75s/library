@@ -19,106 +19,90 @@ FocusScope {
 
         // We don't set these as ListElement items as setting the setting property to what it is breaks everything.
         Component.onCompleted: {
-            [
-                {
-                    name: "Light Mode",
-                    setting: light
-                },
-                {
-                    name: "Plain Background",
-                    setting: plainBG
-                },
-                {
-                    name: "Disable Button Prompts",
-                    setting: noBtns
-                },
-                {
-                    name: "Rounded Games",
-                    setting: roundedGames
-                },
-                {
-                    name: "Enable Clock",
-                    setting: sbsl
-                },
-                {
-                    name: "Wide Games View",
-                    setting: wide,
-                    info: "Increases the width of the game art shown.",
-                    is: false
-                },
-                {
-                    name: "Enable Touch Navigation Icons",
-                    setting: mouseNav,
-                    info: "Adds arrows on the top right of certain game grids to allow you to go back if you're using a touch-based device or mouse.",
-                    is: false
-                },
-                {
-                    name: "More Recent Games Shown",
-                    setting: moreRecent,
-                    info: "Increases the number of games on the recent list from 8 to 16.",
-                    is: false
-                },
-                {
-                    name: "Limit Search to Starting Characters",
-                    setting: limSearch,
-                    info: "Makes it so that searches search for games that start with the text searched, not games that contain the text searched (both in their titles)",
-                    is: false
-                },
-                {
-                    name: "Enlarge Bottom Bar",
-                    setting: enlargeBar,
-                    info: "Doubles the size of the bottom bar for easier mouse/touch navigation.",
-                    is: false
-                },
-                {
-                    name: "Use SVG Icons",
-                    setting: useSVG,
-                    info: "Allows you to use higher quality SVG icons rather than PNG icons. Higher quality on very large screens, but may break images on some devices.",
-                    is: false
-                },
-                {
-                    name: "Use Classic Colorscheme",
-                    setting: classicColors,
-                    info: "Reverts the colors of the UI back to the colors used in Library prior to version 1.2.0.",
-                    is: false
-                },
-                {
-                    name: "Quiet Sound Effects",
-                    setting: quiet
-                },
-                {
-                    name: "Mute Sound Effects",
-                    setting: nosfx
-                }
-            ].forEach(function(e) { append(e); });
+            set.clear();
+            refresh_settings();
         }
+    }
 
-        /*
-        ListElement {
-            name: "Light Mode"
-            setting: true
-        }
-        ListElement {
-            name: "Plain Background"
-            setting: false
-        }
-        ListElement {
-            name: "Disable Button Prompts"
-            setting: true
-        }
-        ListElement {
-            name: "Visible Top Bar"
-            setting: true
-        }
-        ListElement {
-            name: "Wide Games View"
-            setting: true
-        }
-        ListElement {
-            name: "No Sound Effects"
-            setting: true
-        }
-        */
+    // This readds all settings, with each property updated.
+    function refresh_settings() {
+        [
+            {
+                name: loc.settings_light_mode,
+                setting: light
+            },
+            {
+                name: loc.settings_plain_bg,
+                setting: plainBG
+            },
+            {
+                name: loc.settings_disable_buttons,
+                setting: noBtns
+            },
+            {
+                name: loc.settings_rounded_corners,
+                setting: roundedGames
+            },
+            {
+                name: loc.settings_enable_clockbar,
+                setting: sbsl
+            },
+            {
+                name: loc.settings_wide_games,
+                setting: wide,
+                info: loc.settings_wide_games_info,
+                is: false
+            },
+            {
+                name: loc.settings_enable_touchnav,
+                setting: mouseNav,
+                info: loc.settings_enable_touchnav_info,
+                is: false
+            },
+            {
+                name: loc.settings_more_recents,
+                setting: moreRecent,
+                info: loc.settings_more_recents_info,
+                is: false
+            },
+            {
+                name: loc.settings_limit_search,
+                setting: limSearch,
+                info: loc.settings_limit_search_info,
+                is: false
+            },
+            {
+                name: loc.settings_enlarge_bar,
+                setting: enlargeBar,
+                info: loc.settings_enlarge_bar_info,
+                is: false
+            },
+            {
+                name: loc.settings_use_svg,
+                setting: useSVG,
+                info: loc.settings_use_svg_info,
+                is: false
+            },
+            {
+                name: loc.settings_classic_colors,
+                setting: classicColors,
+                info: loc.settings_classic_colors_info,
+                is: false
+            },
+            {
+                name: loc.settings_quiet_sounds,
+                setting: quiet
+            },
+            {
+                name: loc.settings_mute_sounds,
+                setting: nosfx
+            },
+            {
+                name: loc.settings_change_localization,
+                setting: true,
+                strprop: currentLanguage
+            }
+        ].forEach(function(e) { set.append(e); });
     }
 
     //
@@ -132,7 +116,7 @@ FocusScope {
 
         y: parent.height * 0.075
 
-        text: "Settings"
+        text: loc.settings_title
         color: colors["text"]
 
         font.family: gilroyLight.name
@@ -251,6 +235,7 @@ FocusScope {
                     anchors.verticalCenter: parent.verticalCenter
                     x: parent.x + parent.width * 0.85 + parent.height * 0.1
                     color: colors["text"]
+                    visible: strprop ? false : true
                 }
 
                 // Slider Circle
@@ -262,10 +247,33 @@ FocusScope {
                     x: setting ? parent.x + parent.width * 0.9 : parent.x + parent.width * 0.85
                     radius: height / 2
                     color: colors["text"]
+                    visible: strprop ? false : true
 
                     Behavior on x {
                         SmoothedAnimation { velocity: 800 }
                     }
+                }
+
+                // State Text
+                Text {
+                    id: stateText
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: parent.x + parent.width * 0.85 + parent.height * 0.1
+                    width: parent.width * 0.05
+                    height: parent.height
+
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+
+                    text: strprop ? strprop : "e"
+                    wrapMode: Text.WordWrap
+                    visible: strprop ? true : false
+                    color: colors["text"]
+
+                    font.family: gilroyLight.name
+                    font.bold: true
+                    font.pixelSize: vpx(20)
+                    font.capitalization: Font.AllUppercase
                 }
 
                 // Click functionality
@@ -406,6 +414,20 @@ FocusScope {
                 nosfx = !nosfx
                 api.memory.set("nosfx", nosfx);
                 set.setProperty(13, "setting", nosfx);
+                break;
+            case 14:
+                //console.log(langs.indexOf(currentLanguage) + 1, langs.length)
+                if (langs.indexOf(currentLanguage) + 1 >= langs.length)
+                    currentLanguage = langs[0];
+                else
+                    currentLanguage = langs[langs.indexOf(currentLanguage) + 1];
+                loc = localizationData.getLocalization(currentLanguage);
+                //console.log(loc.collections_title)
+                api.memory.set("currentLanguage", currentLanguage);
+                set.setProperty(14, "strprop", currentLanguage);
+                set.clear();
+                refresh_settings();
+                setsView.currentIndex = 14;
                 break;
         }
     }

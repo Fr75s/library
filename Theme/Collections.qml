@@ -33,7 +33,7 @@ FocusScope {
 
         y: parent.height * 0.075
 
-        text: "Collections"
+        text: loc.collections_title
         color: colors["text"]
 
         font.family: gilroyLight.name
@@ -91,7 +91,7 @@ FocusScope {
 	ColorOverlay {
 		anchors.fill: collectionBackArrow
 		source: collectionBackArrow
-		color: colors["bottomIcons"]
+		color: colors["text"]
 		visible: gameView && mouseNav
 
 		MouseArea {

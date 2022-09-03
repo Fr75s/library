@@ -64,7 +64,7 @@ FocusScope {
 
         y: parent.height * 0.075
 
-        text: feed ? "Feed" : "Search"
+        text: feed ? loc.all_feed : loc.all_search
         color: colors["text"]
 
         // Alignment
@@ -411,7 +411,7 @@ FocusScope {
 
         y: parent.height * 0.91
 
-        text: "Press L2 at any time to stop."
+        text: loc.all_feed_instructions
         color: colors["text"]
 
         visible: feed

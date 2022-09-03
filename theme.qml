@@ -182,6 +182,21 @@ FocusScope {
 
 
 
+    // Localization
+    // Provides different languages to Library
+    // Please check Localization.qml for more
+    Localization {
+        id: localizationData
+    }
+
+    // Get all languages
+    property var langs: localizationData.getLangs()
+    // Get current Language
+    property string currentLanguage: api.memory.has("currentLanguage") ? api.memory.get("currentLanguage") : "en"
+    // Alias for the object that is the localization's current language
+    property var loc: localizationData.getLocalization(currentLanguage)
+
+
     //
     // Layout
     //

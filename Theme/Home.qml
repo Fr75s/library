@@ -81,7 +81,7 @@ FocusScope {
 
         y: uiY - parent.height * 0.075
 
-        text: "Recent Games"
+        text: loc.home_recent
         color: colors["text"]
 
         font.family: gilroyLight.name
@@ -105,7 +105,7 @@ FocusScope {
 
         y: uiY + parent.height * 0.475
 
-        text: "Favorite Games"
+        text: loc.home_favorite
         color: colors["text"]
 
         font.family: gilroyLight.name
@@ -142,11 +142,12 @@ FocusScope {
             SmoothedAnimation { velocity: animVel }
         }
     }
+
     // Used to color the icon
 	ColorOverlay {
 		anchors.fill: homeUpArrow
 		source: homeUpArrow
-		color: colors["bottomIcons"]
+		color: colors["text"]
 		visible: mouseNav
 
 		MouseArea {
