@@ -15,6 +15,7 @@ Item {
 
 	/* Currently, only English is available.
 	 * Translations are welcome: Simply create a pull request on github or message me on discord (Francisco75s#0331) to let me know if you have a good translation, and I will add it to the theme.
+	 * See more in the Translation section of MODIFICATIONS.md
 	 */
 	property var localization: {
 		"en": {

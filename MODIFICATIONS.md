@@ -10,6 +10,7 @@
     - [Wide Mode Consistency](#wide-mode-consistency-in-the-collections-page)
     - [Custom Color Schemes (1.2.0+)](#custom-color-schemes)
     - [Extra Collections](#extra-collections)
+3. [Translation](#translation)
 
 ## Some Information
 
@@ -193,8 +194,41 @@ This is good if Pico-8 is installed portably on your system; if not, simply use 
 Tic-80 comes as a libretro core, making it easy to use with retroarch. While retroarch may differ per system, using a metadata.pegasus.txt which links to the tic-80 core would allow you to run tic-80 games in retroarch.
 
 
-## Final Notes
+## Translation
 
-If you would like to know more, you may want to look through the comments of this theme's files to find out how exactly things work. These comments tell what each function does. If you would really like to know more, I encourage you to try to build your own theme, learning the ins and outs of theming and QML. By learning to build your own theme, referencing other themes, searched snippets and other resources, you will learn how to theme, and you will get a full understanding of QML theming. Indeed, I made themes that looked and worked horribly compared to this one in the past, but after spending time learning, I have made this theme which I am proud of.
+Translating this theme is done through the Localization.qml file.
 
-The skills you can learn with QML are not limited to Pegasus, but can be used in any QtQuick environment, notably most of the stuff made by [KDE](https://kde.org/). I heavily encourage you to take the plunge and learn how to make your own QML theme, or just find ways to absolutely butcher this one. I don't care, you should be able to mess with this theme however.
+First, open Localization.qml and navigate to the localization property, which should look like so:
+
+```
+property var localization: {
+    "en": {
+        home_recent: "Recent Games",
+        home_favorite: "Favorite Games",
+        ...
+    }
+    ...
+}
+```
+
+Pay attention to the "en" object within localization. This is what you should copy to translate the theme. Create a new object with the same keys as `"en"`, then replace the English strings with those of your desired language. Afterwards, rename the `"en"` copy to the 2 letter code for your language, e.g. `"es"` for Spanish. Your localization object should now look like so (using "es"/Spanish as an example):
+
+```
+property var localization: {
+    "en": {
+        home_recent: "Recent Games",
+        home_favorite: "Favorite Games",
+        ...
+    },
+    "es": {
+        home_recent: "Juegos Recientes",
+        home_favorite: "Juegos Favoritos",
+        ...
+    }
+    ...
+}
+```
+
+If your object is written properly, you are done, as Library handles the rest when it comes to using your strings and changing languages. To test your localization, change your language to the one you added by going to the Settings page and clicking the "Change Language" option, located at the bottom of the page.
+
+Afterwards, you probably want to add this to the theme officially to let others access your translation. Simply add a pull request to the github page (you can search a tutorial for that online) or message me on Discord (Francisco75s#0331; if you prefer matrix @fr75s:matrix.org), and I will happily add your translation.

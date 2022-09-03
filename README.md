@@ -31,3 +31,4 @@ I used other themes as references while building Library. These themes are liste
 
 If you find any issues or want to let me know of anything, feel free to open up an issue in this project. You may also want to check out the [Modifications Guide](https://github.com/Fr75s/library/blob/main/MODIFICATIONS.md) and see if I have placed a fix there. If not, then, once again, feel free to open up an issue, and I will fix it.
 
+If you know a language other than English, I encourage you to translate this theme. All relevant info is in the [Translation Section](https://github.com/Fr75s/library/blob/main/MODIFICATIONS.md) of the modifications guide and in Localization.qml.
