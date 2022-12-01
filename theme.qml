@@ -89,6 +89,7 @@ FocusScope {
     property bool limSearch: api.memory.has("limSearch") ? api.memory.get("limSearch") : false
     property bool useSVG: api.memory.has("useSVG") ? api.memory.get("useSVG") : false
     property bool roundedGames: api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false
+    property bool blurredCollections: api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true
     property bool classicColors: api.memory.has("classicColors") ? api.memory.get("classicColors") : false
 
     property bool centerTitles: false

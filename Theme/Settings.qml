@@ -44,6 +44,10 @@ FocusScope {
                 setting: roundedGames
             },
             {
+                name: loc.settings_blur_collects,
+                setting: blurredCollections
+            },
+            {
                 name: loc.settings_enable_clockbar,
                 setting: sbsl
             },
@@ -348,74 +352,79 @@ FocusScope {
             case 0:
                 light = !light;
                 api.memory.set("light", light);
-                set.setProperty(0, "setting", light);
+                set.setProperty(i, "setting", light);
                 break;
             case 1:
                 plainBG = !plainBG
                 api.memory.set("plainBG", plainBG);
-                set.setProperty(1, "setting", plainBG);
+                set.setProperty(i, "setting", plainBG);
                 break;
             case 2:
                 noBtns = !noBtns
                 api.memory.set("noBtns", noBtns);
-                set.setProperty(2, "setting", noBtns);
+                set.setProperty(i, "setting", noBtns);
                 break;
             case 3:
                 roundedGames = !roundedGames
                 api.memory.set("roundedGames", roundedGames);
-                set.setProperty(3, "setting", roundedGames);
+                set.setProperty(i, "setting", roundedGames);
                 break;
             case 4:
-                sbsl = !sbsl
-                api.memory.set("sbsl", sbsl);
-                set.setProperty(4, "setting", sbsl);
+                blurredCollections = !blurredCollections
+                api.memory.set("blurredCollections", blurredCollections);
+                set.setProperty(i, "setting", blurredCollections);
                 break;
             case 5:
-                wide = !wide
-                api.memory.set("wide", wide);
-                set.setProperty(5, "setting", wide);
+                sbsl = !sbsl
+                api.memory.set("sbsl", sbsl);
+                set.setProperty(i, "setting", sbsl);
                 break;
             case 6:
-                mouseNav = !mouseNav
-                api.memory.set("mouseNav", mouseNav);
-                set.setProperty(6, "setting", mouseNav);
+                wide = !wide
+                api.memory.set("wide", wide);
+                set.setProperty(i, "setting", wide);
                 break;
             case 7:
-                moreRecent = !moreRecent
-                api.memory.set("moreRecent", moreRecent);
-                set.setProperty(7, "setting", moreRecent);
+                mouseNav = !mouseNav
+                api.memory.set("mouseNav", mouseNav);
+                set.setProperty(i, "setting", mouseNav);
                 break;
             case 8:
-                limSearch = !limSearch
-                api.memory.set("limSearch", limSearch);
-                set.setProperty(8, "setting", limSearch);
+                moreRecent = !moreRecent
+                api.memory.set("moreRecent", moreRecent);
+                set.setProperty(i, "setting", moreRecent);
                 break;
             case 9:
-                enlargeBar = !enlargeBar
-                api.memory.set("enlargeBar", enlargeBar);
-                set.setProperty(9, "setting", enlargeBar);
+                limSearch = !limSearch
+                api.memory.set("limSearch", limSearch);
+                set.setProperty(i, "setting", limSearch);
                 break;
             case 10:
-                useSVG = !useSVG
-                api.memory.set("useSVG", useSVG);
-                set.setProperty(10, "setting", useSVG);
+                enlargeBar = !enlargeBar
+                api.memory.set("enlargeBar", enlargeBar);
+                set.setProperty(i, "setting", enlargeBar);
                 break;
             case 11:
-                classicColors = !classicColors
-                api.memory.set("classicColors", classicColors);
-                set.setProperty(11, "setting", classicColors);
+                useSVG = !useSVG
+                api.memory.set("useSVG", useSVG);
+                set.setProperty(i, "setting", useSVG);
                 break;
             case 12:
-                quiet = !quiet
-                api.memory.set("quiet", quiet);
-                set.setProperty(12, "setting", quiet);
+                classicColors = !classicColors
+                api.memory.set("classicColors", classicColors);
+                set.setProperty(i, "setting", classicColors);
                 break;
             case 13:
-                nosfx = !nosfx
-                api.memory.set("nosfx", nosfx);
-                set.setProperty(13, "setting", nosfx);
+                quiet = !quiet
+                api.memory.set("quiet", quiet);
+                set.setProperty(i, "setting", quiet);
                 break;
             case 14:
+                nosfx = !nosfx
+                api.memory.set("nosfx", nosfx);
+                set.setProperty(i, "setting", nosfx);
+                break;
+            case 15:
                 //console.log(langs.indexOf(currentLanguage) + 1, langs.length)
                 if (langs.indexOf(currentLanguage) + 1 >= langs.length)
                     currentLanguage = langs[0];
@@ -424,10 +433,10 @@ FocusScope {
                 loc = localizationData.getLocalization(currentLanguage);
                 //console.log(loc.collections_title)
                 api.memory.set("currentLanguage", currentLanguage);
-                set.setProperty(14, "strprop", currentLanguage);
+                set.setProperty(i, "strprop", currentLanguage);
                 set.clear();
                 refresh_settings();
-                setsView.currentIndex = 14;
+                setsView.currentIndex = i;
                 break;
         }
     }

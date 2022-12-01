@@ -27,7 +27,7 @@ Item {
 
 	// Quick Character Setting
 	property string back: "\u2190"
-	property string enter: "\u2193"
+	property string enter: "\u2192"
 	property string shiftc: "\u2191"
 
 	// Invokes the keyboard (shows it)

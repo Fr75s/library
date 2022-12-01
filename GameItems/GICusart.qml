@@ -55,7 +55,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
 
-        color: "#60000000"
+        color: blurredCollections ? "#60000000" : "#90000000"
 
         z: gameItemImage.z + 1
         //radius: roundedGames ? height / roundedGamesRadiusFactor / .3 : 0
@@ -108,7 +108,7 @@ Item {
         anchors.fill: gameItemImage
         source: gameItemImage
         maskSource: gameItemMask
-        visible: false
+        visible: !blurredCollections
     }
 
     // Blur
@@ -125,6 +125,8 @@ Item {
         anchors.fill: gameItemBlur
         source: gameItemBlur
         maskSource: gameItemMask
+
+        visible: blurredCollections
     }
 
 
@@ -140,7 +142,7 @@ Item {
         width: parent.width
         height: parent.height
 
-        source: gameItemBlurRounded
+        source: blurredCollections ? gameItemBlurRounded : gameItemRounded
 
         anchors.centerIn: parent
 

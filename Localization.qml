@@ -47,6 +47,7 @@ Item {
 			settings_classic_colors_info: "Reverts the colors of the UI back to the colors used in Library prior to version 1.2.0.",
 			settings_quiet_sounds: "Quiet Sound Effects",
 			settings_mute_sounds: "Mute Sound Effects",
+			settings_blur_collects: "Blur Collection Images",
 			settings_change_localization: "Change Language"
 		}
 	}
