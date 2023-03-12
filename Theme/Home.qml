@@ -175,12 +175,14 @@ FocusScope {
         orientation: ListView.Horizontal
         model: recent
 
+        displayMarginEnd: 20
+
         delegate: Item {
             readonly property bool isCurrentItem: ListView.isCurrentItem
             // doubleFocus property only selects game when the view and item is this one
             readonly property bool doubleFocus: recentView.focus && isCurrentItem
 
-            width: (index == 0 || wide) ? ListView.view.width / 2.25 : ListView.view.width / 6.75
+            width: (index == 0 || wide) ? ListView.view.height * (92/43) : ListView.view.height * (2/3)
             height: ListView.view.height
 
             Item {
@@ -280,12 +282,13 @@ FocusScope {
     // Shows all the games you've favorited.
     GridView {
         id: favoriteView
-        width: parent.width * 0.9
-        height: parent.height * 0.8 //* (Math.ceil(favorites.count / 6))
+        width: wide ? height * (2.14) : height * (2)
+        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(favorites.count / 6))
 
-        y: uiY + parent.height * 0.55
+        y: uiY + parent.height * 0.575
+        anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: wide ? (width / 2) : (width / 6)
+        cellWidth: wide ? (cellHeight * (92/43)) : (cellHeight * (2/3))
         cellHeight: height / 2/// (Math.ceil(favorites.count / 6))
 
         //currentIndex: 0
@@ -327,9 +330,6 @@ FocusScope {
                 }
             }
         }
-
-        anchors.right: parent.right
-        anchors.rightMargin: parent.width * 0.05
 
         clip: true
         focus: (focused == 1) && (menu == 0)

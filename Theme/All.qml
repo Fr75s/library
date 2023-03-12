@@ -202,16 +202,22 @@ FocusScope {
     // See all games or searched games
     GridView {
         id: allView
-        width: parent.width * 0.9
-        height: parent.height * 0.8 //* (Math.ceil(api.allGames.count / 6))
+        width: wide ? height * (2.14) : height * (2)
+        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
+
+        // Rectangle {
+        //     anchors.fill: parent
+        //     opacity: 0.1
+        // }
 
         anchors.top: parent.top
-        anchors.topMargin: parent.height * .15
+        anchors.topMargin: parent.height * .175
+        anchors.horizontalCenter: parent.horizontalCenter
 
         visible: !feed
 
         // Grid
-        cellWidth: wide ? (width / 2) : (width / 6)
+        cellWidth: wide ? (cellHeight * (92/43)) : (cellHeight * (2/3))
         cellHeight: height / 2
 
         // Sets the model to everything if the search is empty or contains all games
@@ -267,9 +273,6 @@ FocusScope {
 
 
         }
-
-        anchors.right: parent.right
-        anchors.rightMargin: parent.width * 0.05
 
         clip: true
         focus: (menu == 1) && !searching
@@ -439,6 +442,14 @@ FocusScope {
         z: feedPlayerBG.z - 1
     }
 
+    Timer {
+        id: feedRepeatTimer
+
+        interval: 500
+		repeat: false
+		running: false
+    }
+
     Keys.onPressed: {
         if (event.isAutoRepeat) {
             return
@@ -447,14 +458,20 @@ FocusScope {
         // Feed Mode
         if (api.keys.isPageUp(event)) {
             event.accepted = true;
-            feed = !feed;
-            theme.isFeed = !theme.isFeed
 
-            if (feed) {
-                feedNext();
-            } else {
-                feedPlayer.stop();
+            if (feedRepeatTimer.running == false) {
+                feed = !feed;
+                theme.isFeed = !theme.isFeed
+
+                if (feed) {
+                    feedNext();
+                } else {
+                    feedPlayer.stop();
+                }
+
+                feedRepeatTimer.start()
             }
+
         }
     }
 

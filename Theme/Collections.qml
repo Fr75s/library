@@ -111,11 +111,12 @@ FocusScope {
      */
     GridView {
         id: collectionsView
-        width: parent.width * 0.9
-        height: parent.height * 0.8 //* (Math.ceil(api.allGames.count / 6))
+        width: wide ? height * (2.14) : height * (2)
+        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
 
         anchors.top: parent.top
         anchors.topMargin: parent.height * .15
+        anchors.horizontalCenter: parent.horizontalCenter
 
         cellWidth: width / 6
         cellHeight: height / 2 /// (Math.ceil(api.allGames.count / 6))
@@ -180,9 +181,6 @@ FocusScope {
             }
         }
 
-        anchors.right: parent.right
-        anchors.rightMargin: parent.width * 0.05
-
         clip: true
         focus: (menu == 2) && !(gameView)
         visible: !gameView
@@ -222,11 +220,12 @@ FocusScope {
     // Actual Games in a collection
     GridView {
         id: collectionGamesView
-        width: parent.width * 0.9
-        height: parent.height * 0.8 //* (Math.ceil(api.allGames.count / 6))
+        width: wide ? height * (2.14) : height * (2)
+        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
 
         anchors.top: parent.top
         anchors.topMargin: parent.height * .15
+        anchors.horizontalCenter: parent.horizontalCenter
 
         cellWidth: wide ? (width / 2) : (width / 6)
         cellHeight: height / 2 /// (Math.ceil(api.allGames.count / 6))
@@ -280,9 +279,6 @@ FocusScope {
                 }
             }
         }
-
-        anchors.right: parent.right
-        anchors.rightMargin: parent.width * 0.05
 
         clip: true
         focus: (menu == 2) && (gameView)
