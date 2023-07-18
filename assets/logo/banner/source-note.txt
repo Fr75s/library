@@ -1,5 +1,5 @@
 Most of these images are sourced from neoretrō: https://github.com/valsou/neoretro
 
-At the bare minimum, steam.jpg is from shinretro: https://github.com/TigraTT-Driver/shinretro
+steam.jpg is from shinretro: https://github.com/TigraTT-Driver/shinretro
 
-Finally, android.jpg, flash.jpg, pc.jpg/ports.jpg, str.jpg, windows.jpg, pico-8.jpg, tic80.jpg and winuwp.jpg were all created from pre-existing images myself. If you're the author of the image and don't like me using it, tell me and I will replace it.
+Finally, android.jpg, cdi.jpg, flash.jpg, lutris.jpg, pc.jpg/ports.jpg, str.jpg, windows.jpg, pico-8.jpg, tic80.jpg and winuwp.jpg were all created from pre-existing images myself. If you're the author of the image and don't like me using it, tell me and I will replace it.
