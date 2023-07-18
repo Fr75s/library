@@ -52,7 +52,7 @@ Item {
 
                 // Label for Home, Search, Collections & Settings respectively.
                 // Same pattern for each IconPair.
-                label: ["Select", (isFeed ? "Play" : "Select"), "Select", "Change Setting"]
+                label: [loc.bottomBar_aSelect, (isFeed ? loc.bottomBar_aPlay : loc.bottomBar_aSelect), loc.bottomBar_aSelect, loc.bottomBar_aSetting]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -64,7 +64,7 @@ Item {
                 src: "../assets/buttons/B.svg"
                 srcp: "../assets/buttons/B.png"
 
-                label: ["", (isFeed ? "" : "Hide Keyboard"), "Exit Collection", ""]
+                label: ["", (isFeed ? "" : loc.bottomBar_bKeyboard), loc.bottomBar_bExit, ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -76,7 +76,7 @@ Item {
                 src: "../assets/buttons/Y.svg"
                 srcp: "../assets/buttons/Y.png"
 
-                label: ["Favorite", (isFeed ? "Next" : "Favorite / Space"), "Favorite", "Show Extra Info"]
+                label: [loc.bottomBar_yFavorite, (isFeed ? loc.bottomBar_yNext : loc.bottomBar_yKeyboard), loc.bottomBar_yFavorite, loc.bottomBar_yInfo]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -126,7 +126,7 @@ Item {
                 src: "../assets/buttons/R1.svg"
                 srcp: "../assets/buttons/R1.png"
 
-                label: ["Change Page", "Change Page", "Change Page", "Change Page"]
+                label: [loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -138,7 +138,7 @@ Item {
                 srcp: "../assets/buttons/L2.png"
 
 
-                label: ["", "Feed", "", ""]
+                label: ["", loc.all_feed, "", ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -150,7 +150,7 @@ Item {
                 src: "../assets/buttons/X.svg"
                 srcp: "../assets/buttons/X.png"
 
-                label: ["", (isFeed ? "" : "Keyboard / Backspace"), "", ""]
+                label: ["", (isFeed ? "" : loc.bottomBar_xKeyboard), "", ""]
 
                 anchors.verticalCenter: parent.verticalCenter
             }

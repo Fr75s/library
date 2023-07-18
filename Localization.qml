@@ -48,7 +48,19 @@ Item {
 			settings_quiet_sounds: "Quiet Sound Effects",
 			settings_mute_sounds: "Mute Sound Effects",
 			settings_blur_collects: "Blur Collection Images",
-			settings_change_localization: "Change Language"
+			settings_change_localization: "Change Language",
+			bottomBar_changePage: "Change Page",
+			bottomBar_aSelect: "Select",
+			bottomBar_aPlay: "Play",
+			bottomBar_aSetting: "Change Setting",
+			bottomBar_bKeyboard: "Hide Keyboard",
+			bottomBar_bExit: "Exit Collection",
+			bottomBar_xKeyboard: "Keyboard / Backspace",
+			bottomBar_yFavorite: "Favorite",
+			bottomBar_yNext: "Next",
+			bottomBar_yKeyboard: "Favorite / Space",
+			bottomBar_yInfo: "Show Extra Info"
+
 		}
 	}
 
