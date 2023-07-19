@@ -102,6 +102,11 @@ FocusScope {
                 setting: nosfx
             },
             {
+                name: loc.settings_video_playback,
+                setting: videoplayback,
+                is: false
+            },          
+            {
                 name: loc.settings_change_localization,
                 setting: true,
                 strprop: currentLanguage
@@ -425,6 +430,11 @@ FocusScope {
                 set.setProperty(i, "setting", nosfx);
                 break;
             case 15:
+                videoplayback = !videoplayback
+                api.memory.set("videoplayback", videoplayback);
+                set.setProperty(i, "setting", videoplayback);
+                break;
+            case 16:
                 //console.log(langs.indexOf(currentLanguage) + 1, langs.length)
                 if (langs.indexOf(currentLanguage) + 1 >= langs.length)
                     currentLanguage = langs[0];

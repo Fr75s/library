@@ -65,6 +65,7 @@ FocusScope {
      * noBtns: No button indicators in the bottom bar
      * sbsl: Shows the clock bar
      * nosfx: Mutes all sound effects
+     * videoplayback: enables Playback of video for current selected game or collection
      * wide: Widens all the games in GridViews
      * quiet: Quiets all sound effects
      * moreRecent: Adds more games to the recents page
@@ -81,6 +82,7 @@ FocusScope {
     property bool noBtns: api.memory.has("noBtns") ? api.memory.get("noBtns") : true
     property bool sbsl: api.memory.has("sbsl") ? api.memory.get("sbsl") : false
     property bool nosfx: api.memory.has("nosfx") ? api.memory.get("nosfx") : false
+    property bool videoplayback: api.memory.has("videoplayback") ? api.memory.get("videoplayback") : false
     property bool wide: api.memory.has("wide") ? api.memory.get("wide") : false
     property bool quiet: api.memory.has("quiet") ? api.memory.get("quiet") : false
     property bool moreRecent: api.memory.has("moreRecent") ? api.memory.get("moreRecent") : false
