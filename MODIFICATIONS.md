@@ -4,7 +4,6 @@
 
 1. [Necessary Information](#some-information)
 2. [Quick Modifications](#quick-modifications)
-    - [Video Support](#video-support)
     - [Replacing Backgrounds](#replacing-the-backgrounds)
     - [Center the Titles](#center-titles)
     - [Wide Mode Consistency](#wide-mode-consistency-in-the-collections-page)
@@ -19,45 +18,6 @@ You may want to refer to the QML documentation for common types. QML has many di
 ## Quick Modifications
 
 Here are some quick modifications you can do on Library. These don't teach you much, but they add functionality that isn't included by default or in the settings.
-
-### Video Support
-
-Adding video support is relatively simple. This guide will do the modification on the normal gameitem, which covers most instances where games are shown. This may also be applied to the widehead gameitem, though this won't be covered.
-
-Firstly, you will want to go to GINormal.qml, located under GameItems in the theme folder. Then, scroll down to the `Image` with the id `gameItemImage`. Just above this, add a video with the following code, which creates a Video object that behaves identically to the image while only showing if there is a video:
-
-```
-Video {
-    id: gameItemVideo
-    width: parent.width
-    height: parent.height
-
-    visible: currentGame.assets.video
-
-    z: gameItemText.z + 1
-
-    anchors.centerIn: parent
-    fillMode: Image.PreserveAspectCrop
-
-    source: currentGame.assets.video
-}
-```
-
-You will then want to add the following line in `gameItemImage`, which hides the image if a video is present. This line can be placed anywhere in `gameItemImage`.
-
-```
-Image {
-    id: gameItemImage
-    ...
-
-    visible: !(currentGame.assets.video)
-
-    ...
-}
-```
-
-This is all that's necessary to add video functionality to most parts of the theme. You may want to do the same for GIWidehead.qml if you want this functionality in the home screen's recent games list.
-<br><br>
 
 ### Replacing the Backgrounds
 
