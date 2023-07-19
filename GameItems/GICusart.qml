@@ -32,6 +32,7 @@ Item {
 
         color: "white"
         font.pixelSize: vpx(16)
+        visible: !(videoplayback && doubleFocus && currentItem.assets.videoList.length)
     }
 
     /*
@@ -75,8 +76,15 @@ Item {
 
         source: ".././assets/logo/banner/"+cc.clearShortname(currentItem.shortName)+".jpg"
         visible: false
+        VideoPlayer {
+            game: currentItem
+            width: parent.width
+            height: parent.height
+            anchors.centerIn: parent
+            playing: videoplayback && doubleFocus
+            noSound: nosfx
+        }
     }
-
 
 
     Rectangle {
@@ -135,6 +143,7 @@ Item {
         anchors.fill: customTopBar
         source: customTopBar
         maskSource: customTopMask
+        visible: !(videoplayback && doubleFocus && currentItem.assets.videoList.length)
     }
 
     // Drop Shadow

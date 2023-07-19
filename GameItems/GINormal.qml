@@ -92,6 +92,15 @@ Item {
 
             color: "#60000000"
         }
+        VideoPlayer {
+            id:videoplayer
+            game: currentGame
+            width: parent.width
+            height: parent.height
+            anchors.centerIn: parent
+            playing: videoplayback && doubleFocus  && !isFeed
+            noSound: nosfx
+        }
     }
 
     OpacityMask {
