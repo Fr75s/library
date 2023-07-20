@@ -9,7 +9,6 @@ FocusScope {
 	/* A tool to convert Launchbox items to actual counterparts
 	 * Directly from neoretrō: https://github.com/valsou/neoretro
 	 * Used in GICusart.
-	 *
 	 */
 
 	function clearShortname(shortname) {

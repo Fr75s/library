@@ -11,7 +11,7 @@ Item {
      */
 
     width: sw
-    height: enlargeBar ? parent.height * .1 : parent.height * .05
+    height: settings["enlargeBar"] ? parent.height * .1 : parent.height * .05
 
     anchors.bottom: parent.bottom
 
@@ -150,7 +150,7 @@ Item {
                 src: "../assets/buttons/X.svg"
                 srcp: "../assets/buttons/X.png"
 
-                label: ["", (isFeed ? "" : loc.bottomBar_xKeyboard), "", ""]
+                label: ["", (isFeed ? "" : loc.bottomBar_xKeyboard), "", loc.bottomBar_xNext]
 
                 anchors.verticalCenter: parent.verticalCenter
             }

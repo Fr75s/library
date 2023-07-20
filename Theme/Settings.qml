@@ -28,87 +28,137 @@ FocusScope {
     function refresh_settings() {
         [
             {
+                id: "light_mode",
+                behavior: "toggle",
+                header: loc.settings_header_appearance,
                 name: loc.settings_light_mode,
-                setting: light
+                setting: "light"
             },
             {
+                id: "plain_bg",
+                behavior: "toggle",
                 name: loc.settings_plain_bg,
-                setting: plainBG
+                setting: "plainBG"
             },
             {
+                id: "disable_buttons",
+                behavior: "toggle",
                 name: loc.settings_disable_buttons,
-                setting: noBtns
+                setting: "noBtns"
             },
             {
+                id: "rounded_corners",
+                behavior: "toggle",
                 name: loc.settings_rounded_corners,
-                setting: roundedGames
+                setting: "roundedGames"
             },
+
             {
+                id: "blur_collects",
+                behavior: "toggle",
                 name: loc.settings_blur_collects,
-                setting: blurredCollections
+                setting: "blurredCollections"
             },
             {
-                name: loc.settings_enable_clockbar,
-                setting: sbsl
-            },
-            {
-                name: loc.settings_wide_games,
-                setting: wide,
-                info: loc.settings_wide_games_info,
-                is: false
-            },
-            {
-                name: loc.settings_enable_touchnav,
-                setting: mouseNav,
-                info: loc.settings_enable_touchnav_info,
-                is: false
-            },
-            {
-                name: loc.settings_more_recents,
-                setting: moreRecent,
-                info: loc.settings_more_recents_info,
-                is: false
-            },
-            {
-                name: loc.settings_limit_search,
-                setting: limSearch,
-                info: loc.settings_limit_search_info,
-                is: false
-            },
-            {
-                name: loc.settings_enlarge_bar,
-                setting: enlargeBar,
-                info: loc.settings_enlarge_bar_info,
-                is: false
-            },
-            {
+                id: "use_svg",
+                behavior: "toggle",
                 name: loc.settings_use_svg,
-                setting: useSVG,
+                setting: "useSVG",
                 info: loc.settings_use_svg_info,
                 is: false
             },
             {
+                id: "classic_colors",
+                behavior: "toggle",
                 name: loc.settings_classic_colors,
-                setting: classicColors,
+                setting: "classicColors",
                 info: loc.settings_classic_colors_info,
                 is: false
             },
+
+
+
             {
-                name: loc.settings_quiet_sounds,
-                setting: quiet
-            },
-            {
-                name: loc.settings_mute_sounds,
-                setting: nosfx
-            },
-            {
-                name: loc.settings_video_playback,
-                setting: videoplayback,
+                id: "wide_games",
+                behavior: "toggle",
+                header: loc.settings_header_interface,
+                name: loc.settings_wide_games,
+                setting: "wide",
+                info: loc.settings_wide_games_info,
                 is: false
-            },          
+            },
             {
+                id: "enlarge_bar",
+                behavior: "toggle",
+                name: loc.settings_enlarge_bar,
+                setting: "enlargeBar",
+                info: loc.settings_enlarge_bar_info,
+                is: false
+            },
+            {
+                id: "enable_clockbar",
+                behavior: "toggle",
+                name: loc.settings_enable_clockbar,
+                setting: "useClockbar"
+            },
+
+
+
+            {
+                id: "enable_touchnav",
+                behavior: "toggle",
+                header: loc.settings_header_behavior,
+                name: loc.settings_enable_touchnav,
+                setting: "mouseNav",
+                info: loc.settings_enable_touchnav_info,
+                is: false
+            },
+            {
+                id: "more_recents",
+                behavior: "toggle",
+                name: loc.settings_more_recents,
+                setting: "moreRecent",
+                info: loc.settings_more_recents_info,
+                is: false
+            },
+            {
+                id: "limit_search_info",
+                behavior: "toggle",
+                name: loc.settings_limit_search,
+                setting: "limSearch",
+                info: loc.settings_limit_search_info,
+                is: false
+            },
+
+
+
+            {
+                id: "mute_sounds",
+                behavior: "toggle",
+                header: loc.settings_header_av,
+                name: loc.settings_mute_sounds,
+                setting: "nosfx"
+            },
+            {
+                id: "quiet_sounds",
+                behavior: "toggle",
+                name: loc.settings_quiet_sounds,
+                setting: "quiet"
+            },
+            {
+                id: "video_playback",
+                behavior: "toggle",
+                name: loc.settings_video_playback,
+                setting: "videoPlayback",
+            },
+
+
+
+            {
+                id: "change_localization",
+                behavior: "set_lang",
+                header: loc.settings_header_localization,
                 name: loc.settings_change_localization,
-                setting: true,
                 strprop: currentLanguage
             }
         ].forEach(function(e) { set.append(e); });
@@ -132,7 +182,7 @@ FocusScope {
         font.pixelSize: parent.height * .05
 
         // Alignment
-        horizontalAlignment: centerTitles ? Text.AlignHCenter : Text.AlignLeft
+        horizontalAlignment: settings["centerTitles"] ? Text.AlignHCenter : Text.AlignLeft
 
         anchors.left: parent.left
         anchors.leftMargin: parent.width * 0.05
@@ -142,8 +192,9 @@ FocusScope {
     Text {
         id: settingsCredits
 
-        text: "https://github.com/Fr75s/library"
-        color: colors["text"]
+        textFormat: Text.RichText
+        text: "<a style=\"text-decoration: none; color: " + colors["text"] + ";\" href=\"https://github.com/Fr75s/library\">https://github.com/Fr75s/library</a>"
+        onLinkActivated: Qt.openUrlExternally(link)
 
         width: parent.width * 0.95
 		anchors.horizontalCenter: parent.horizontalCenter
@@ -171,133 +222,198 @@ FocusScope {
         delegate: Item {
             // Custom setting delegate
             readonly property bool isCurrentItem: ListView.isCurrentItem
-            // The last doubleFocus
+
+            // doubleFocus for Settings
             readonly property bool doubleFocus: setsView.focus && isCurrentItem
 
-            width: setsView.width
-            height: setsView.height / 4
+            // Determines whether or not this setting contains a header
+            readonly property bool isHeader: header ? true : false
 
-            Rectangle {
-                id: settingRoot
-                color: plainBG ? colors["plainSetting"] : colors["setting"]
+            // Measurements
+            readonly property real baseHeight: setsView.height / 4
+            readonly property real rectMargins: doubleFocus ? 0 : vpx(10)
+
+            width: setsView.width
+            height: isHeader ? (index === 0 ? baseHeight + vpx(48) : baseHeight + vpx(96)) : baseHeight
+
+            Item {
                 anchors.fill: parent
 
-                radius: height / 8
-
-                anchors.margins: doubleFocus ? 0 : vpx(10)
-
-                Behavior on anchors.margins {
-                    SmoothedAnimation { velocity: marginAnimVel }
-                }
-
-                // Setting name, shows info if it exists
+                // Header text, shows if behavior is "header"
                 Text {
-                    id: settingText
+                    id: settingHeader
+
                     anchors.left: parent.left
-                    anchors.leftMargin: parent.width * 0.1
+                    anchors.leftMargin: parent.width * 0.075
+
+                    anchors.bottom: settingBoxContainer.top
+                    anchors.bottomMargin: vpx(4)
+
                     width: parent.width * 0.6
-                    height: parent.height
+                    height: vpx(48)
 
                     horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
+                    verticalAlignment: Text.AlignTop
 
-                    text: name
+                    text: header ? header : ""
                     wrapMode: Text.WordWrap
 
                     color: colors["text"]
+                    visible: isHeader
 
                     font.family: gilroyLight.name
                     font.bold: true
-                    font.pixelSize: is ? vpx(16) : vpx(28)
+                    font.pixelSize: vpx(28)
                 }
 
-                // Information indicator
+                // Header Underline
                 Rectangle {
-                    width: height
-                    height: vpx(32)
-
-                    anchors.left: parent.left
-                    anchors.leftMargin: parent.width * 0.045
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    color: colors["text"]
-                    radius: height / 2
-                    visible: info ? true : false
-
-                    Text {
-                        anchors.fill: parent
-
-                        text: "i"
-                        color: colors["plainBG"]
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        font.pixelSize: vpx(16)
-                    }
-                }
-
-
-                // Slider bar
-                Rectangle {
-                    width: parent.width * 0.05
+                    width: parent.width * 0.9
                     height: vpx(2)
 
-                    anchors.verticalCenter: parent.verticalCenter
-                    x: parent.x + parent.width * 0.85 + parent.height * 0.1
+                    anchors.top: settingHeader.bottom
+                    anchors.topMargin: -1 * vpx(8)
+                    anchors.horizontalCenter: parent.horizontalCenter
+
                     color: colors["text"]
-                    visible: strprop ? false : true
+                    visible: isHeader
                 }
 
-                // Slider Circle
-                Rectangle {
-                    width: height
-                    height: parent.height * 0.2
+                // All the other stuff
+                Item {
+                    id: settingBoxContainer
 
-                    anchors.verticalCenter: parent.verticalCenter
-                    x: setting ? parent.x + parent.width * 0.9 : parent.x + parent.width * 0.85
-                    radius: height / 2
-                    color: colors["text"]
-                    visible: strprop ? false : true
+                    width: parent.width
+                    height: baseHeight
 
-                    Behavior on x {
-                        SmoothedAnimation { velocity: 800 }
-                    }
-                }
+                    anchors.bottom: parent.bottom
 
-                // State Text
-                Text {
-                    id: stateText
-                    anchors.verticalCenter: parent.verticalCenter
-                    x: parent.x + parent.width * 0.85 + parent.height * 0.1
-                    width: parent.width * 0.05
-                    height: parent.height
+                    Rectangle {
+                        id: settingRoot
 
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+                        color: settings["plainBG"] ? colors["plainSetting"] : colors["setting"]
 
-                    text: strprop ? strprop : "e"
-                    wrapMode: Text.WordWrap
-                    visible: strprop ? true : false
-                    color: colors["text"]
+                        anchors.fill: parent
+                        anchors.margins: rectMargins
 
-                    font.family: gilroyLight.name
-                    font.bold: true
-                    font.pixelSize: vpx(20)
-                    font.capitalization: Font.AllUppercase
-                }
+                        radius: height / 8
 
-                // Click functionality
-                MouseArea {
-                    anchors.fill: parent
+                        Behavior on anchors.margins {
+                            SmoothedAnimation { velocity: marginAnimVel }
+                        }
 
-                    onClicked: {
-                        if (isCurrentItem) {
-                            changeSetting();
-                            if (!nosfx)
-                                sSwitch.play();
-                        } else {
-                            if (!nosfx)
-                                sNav.play();
-                            setsView.currentIndex = index;
+                        // Setting name, shows info if it exists
+                        Text {
+                            id: settingText
+                            anchors.left: parent.left
+                            anchors.leftMargin: parent.width * 0.1
+                            width: parent.width * 0.6
+                            height: parent.height
+
+                            horizontalAlignment: Text.AlignLeft
+                            verticalAlignment: Text.AlignVCenter
+
+                            text: name
+                            wrapMode: Text.WordWrap
+
+                            color: colors["text"]
+
+                            font.family: gilroyLight.name
+                            font.bold: true
+                            font.pixelSize: is ? vpx(16) : vpx(28)
+                        }
+
+                        // Information indicator
+                        Rectangle {
+                            width: height
+                            height: vpx(32)
+
+                            anchors.left: parent.left
+                            anchors.leftMargin: parent.width * 0.045
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            color: colors["text"]
+                            radius: height / 2
+                            visible: info ? true : false
+
+                            Text {
+                                anchors.fill: parent
+
+                                text: "i"
+                                color: colors["plainBG"]
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                font.pixelSize: vpx(16)
+                            }
+                        }
+
+
+                        // Slider bar
+                        Rectangle {
+                            width: parent.width * 0.05
+                            height: vpx(2)
+
+                            anchors.verticalCenter: parent.verticalCenter
+                            x: parent.x + parent.width * 0.85 + parent.height * 0.1
+                            color: colors["text"]
+                            visible: !strprop
+                        }
+
+                        // Slider Circle
+                        Rectangle {
+                            width: height
+                            height: baseHeight * 0.2
+
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            x: settings[setting] ? parent.x + parent.width * 0.9 : parent.x + parent.width * 0.85
+
+                            radius: height / 2
+                            color: colors["text"]
+                            visible: !strprop
+
+                            Behavior on x {
+                                SmoothedAnimation { duration: 100 }
+                            }
+                        }
+
+                        // State Text
+                        Text {
+                            id: stateText
+                            anchors.verticalCenter: parent.verticalCenter
+                            x: parent.x + parent.width * 0.85 + parent.height * 0.1
+                            width: parent.width * 0.05
+                            height: parent.height
+
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+
+                            text: strprop ? strprop : ""
+                            wrapMode: Text.WordWrap
+                            color: colors["text"]
+
+                            font.family: gilroyLight.name
+                            font.bold: true
+                            font.pixelSize: parent.height * 0.15
+                            font.capitalization: Font.AllUppercase
+                        }
+
+                        // Click functionality
+                        MouseArea {
+                            anchors.fill: parent
+                            enabled: !isHeader
+
+                            onClicked: {
+                                if (isCurrentItem) {
+                                    changeSetting(behavior, setting);
+                                    if (!settings["nosfx"])
+                                        sSwitch.play();
+                                } else {
+                                    if (!settings["nosfx"])
+                                        sNav.play();
+                                    setsView.currentIndex = index;
+                                }
+                            }
                         }
                     }
                 }
@@ -311,16 +427,27 @@ FocusScope {
         focus: (menu == 3)
 
         highlightMoveDuration: 200
-		highlightResizeDuration: 0
+		highlightResizeDuration: 200
 
 		// Move up/down
         Keys.onUpPressed: {
-            if (!nosfx) sNav.play();
-            decrementCurrentIndex();
+            if (!settings["nosfx"]) sNav.play();
+
+            if (currentIndex === 0) {
+                currentIndex = set.count - 1;
+            } else {
+                decrementCurrentIndex();
+            }
         }
+
         Keys.onDownPressed: {
-            if (!nosfx) sNav.play();
-            incrementCurrentIndex();
+            if (!settings["nosfx"]) sNav.play();
+
+            if (currentIndex === set.count - 1) {
+                currentIndex = 0;
+            } else {
+                incrementCurrentIndex();
+            }
         }
 
         Keys.onPressed: {
@@ -330,118 +457,70 @@ FocusScope {
 
             // Change the setting with a button press
             if (api.keys.isAccept(event)) {
-                if (!nosfx)
+                if (!settings["nosfx"])
                     sSwitch.play();
                 event.accepted = true;
-                changeSetting()
+
+                var selectedSetting = set.get(setsView.currentIndex);
+                changeSetting(selectedSetting.behavior, selectedSetting.setting);
             }
 
             // Show the info: It switches the info and name properties, and toggles 'is'.
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
                 if (set.get(setsView.currentIndex).info) {
-                    if (!nosfx)
+                    if (!settings["nosfx"])
                         sSwitch.play();
-                    var temp = set.get(setsView.currentIndex).name
-                    set.setProperty(setsView.currentIndex, "name", set.get(setsView.currentIndex) .info)
-                    set.setProperty(setsView.currentIndex, "info", temp)
-                    set.setProperty(setsView.currentIndex, "is", !set.get(setsView.currentIndex).is)
+
+                    // Swap Name & Info
+                    var temp = set.get(setsView.currentIndex).name;
+                    set.setProperty(setsView.currentIndex, "name", set.get(setsView.currentIndex) .info);
+                    set.setProperty(setsView.currentIndex, "info", temp);
+
+                    set.setProperty(setsView.currentIndex, "is", !set.get(setsView.currentIndex).is);
+                }
+            }
+
+            if (api.keys.isDetails(event)) {
+                event.accepted = true;
+                if (!settings["nosfx"])
+                    sNav.play();
+
+                let j = i;
+                let stopped = false;
+
+                while (j < set.count - 1) {
+                    j += 1;
+                    const nextHeader = set.get(j).header
+                    if (nextHeader) {
+                        setsView.currentIndex = j;
+                        stopped = true;
+                        break;
+                    }
+                }
+
+                if (!stopped && j >= set.count - 1) {
+                    setsView.currentIndex = 0;
                 }
             }
         }
     }
 
     // Changing the setting. Quite clunky, but there is little that can be done.
-    function changeSetting() {
-        switch (i) {
-            case 0:
-                light = !light;
-                api.memory.set("light", light);
-                set.setProperty(i, "setting", light);
+    function changeSetting(behavior, setting) {
+        switch (behavior) {
+            case "toggle":
+                console.log("Toggling", setting)
+                settings[setting] = !settings[setting];
+                api.memory.set(setting, settings[setting]);
                 break;
-            case 1:
-                plainBG = !plainBG
-                api.memory.set("plainBG", plainBG);
-                set.setProperty(i, "setting", plainBG);
-                break;
-            case 2:
-                noBtns = !noBtns
-                api.memory.set("noBtns", noBtns);
-                set.setProperty(i, "setting", noBtns);
-                break;
-            case 3:
-                roundedGames = !roundedGames
-                api.memory.set("roundedGames", roundedGames);
-                set.setProperty(i, "setting", roundedGames);
-                break;
-            case 4:
-                blurredCollections = !blurredCollections
-                api.memory.set("blurredCollections", blurredCollections);
-                set.setProperty(i, "setting", blurredCollections);
-                break;
-            case 5:
-                sbsl = !sbsl
-                api.memory.set("sbsl", sbsl);
-                set.setProperty(i, "setting", sbsl);
-                break;
-            case 6:
-                wide = !wide
-                api.memory.set("wide", wide);
-                set.setProperty(i, "setting", wide);
-                break;
-            case 7:
-                mouseNav = !mouseNav
-                api.memory.set("mouseNav", mouseNav);
-                set.setProperty(i, "setting", mouseNav);
-                break;
-            case 8:
-                moreRecent = !moreRecent
-                api.memory.set("moreRecent", moreRecent);
-                set.setProperty(i, "setting", moreRecent);
-                break;
-            case 9:
-                limSearch = !limSearch
-                api.memory.set("limSearch", limSearch);
-                set.setProperty(i, "setting", limSearch);
-                break;
-            case 10:
-                enlargeBar = !enlargeBar
-                api.memory.set("enlargeBar", enlargeBar);
-                set.setProperty(i, "setting", enlargeBar);
-                break;
-            case 11:
-                useSVG = !useSVG
-                api.memory.set("useSVG", useSVG);
-                set.setProperty(i, "setting", useSVG);
-                break;
-            case 12:
-                classicColors = !classicColors
-                api.memory.set("classicColors", classicColors);
-                set.setProperty(i, "setting", classicColors);
-                break;
-            case 13:
-                quiet = !quiet
-                api.memory.set("quiet", quiet);
-                set.setProperty(i, "setting", quiet);
-                break;
-            case 14:
-                nosfx = !nosfx
-                api.memory.set("nosfx", nosfx);
-                set.setProperty(i, "setting", nosfx);
-                break;
-            case 15:
-                videoplayback = !videoplayback
-                api.memory.set("videoplayback", videoplayback);
-                set.setProperty(i, "setting", videoplayback);
-                break;
-            case 16:
-                //console.log(langs.indexOf(currentLanguage) + 1, langs.length)
+            case "set_lang":
                 if (langs.indexOf(currentLanguage) + 1 >= langs.length)
                     currentLanguage = langs[0];
                 else
                     currentLanguage = langs[langs.indexOf(currentLanguage) + 1];
                 loc = localizationData.getLocalization(currentLanguage);
-                //console.log(loc.collections_title)
+
                 api.memory.set("currentLanguage", currentLanguage);
                 set.setProperty(i, "strprop", currentLanguage);
                 set.clear();
@@ -450,5 +529,4 @@ FocusScope {
                 break;
         }
     }
-
 }

@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtMultimedia 5.9
 
 Item {
 
@@ -17,6 +18,7 @@ Item {
 	signal sendKey(string text)
 	signal done()
 
+	// Default Keyboard Colors
 	property var kcolors: {
 		"bg": "#FFFFFF", // KEYBOARD: Background
 		"key": "#DDDDDD", // KEYBOARD: Key Background
@@ -29,6 +31,17 @@ Item {
 	property string back: "\u2190"
 	property string enter: "\u2192"
 	property string shiftc: "\u2191"
+
+	property url sfxSource: ""
+	property bool quietSfx: false
+	property bool muteSfx: false
+
+	// Typing Sound Effect
+	SoundEffect {
+		id: kSfx
+		source: sfxSource
+		volume: quietSfx ? 0.5 : 1.0
+	}
 
 	// Invokes the keyboard (shows it)
 	function invoke() {
@@ -55,6 +68,10 @@ Item {
 
 		// Send Key is a signal of KeyboardObject.qml as well.
 		onSendKey: {
+			if (!muteSfx) {
+				kSfx.play();
+			}
+
 			if (text == back) { // Backspace Unicode Conversion
 				kcreator.sendKey("bksp")
 			} else if (text == enter) { // Enter Unicode Conversion

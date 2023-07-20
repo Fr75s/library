@@ -32,7 +32,7 @@ Item {
 
         color: "white"
         font.pixelSize: vpx(16)
-        visible: !(videoplayback && doubleFocus && currentItem.assets.videoList.length)
+        visible: !(settings["videoPlayback"] && doubleFocus && currentItem.assets.videoList.length)
     }
 
     /*
@@ -56,7 +56,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
 
-        color: blurredCollections ? "#60000000" : "#90000000"
+        color: settings["blurredCollections"] ? "#60000000" : "#90000000"
 
         z: gameItemImage.z + 1
         //radius: roundedGames ? height / roundedGamesRadiusFactor / .3 : 0
@@ -74,15 +74,18 @@ Item {
 
         asynchronous: true
 
-        source: ".././assets/logo/banner/"+cc.clearShortname(currentItem.shortName)+".jpg"
+        source: ".././assets/logo/banner/" + cc.clearShortname(currentItem.shortName) + ".jpg"
         visible: false
+
         VideoPlayer {
             game: currentItem
+
             width: parent.width
             height: parent.height
             anchors.centerIn: parent
-            playing: videoplayback && doubleFocus
-            noSound: nosfx
+
+            playing: settings["videoPlayback"] && doubleFocus
+            noSound: settings["nosfx"]
         }
     }
 
@@ -92,7 +95,7 @@ Item {
         anchors.fill: parent
         visible: false
 
-        radius: roundedGames ? height / roundedGamesRadiusFactor : 0
+        radius: settings["roundedGames"] ? height / roundedGamesRadiusFactor : 0
     }
 
     Rectangle {
@@ -101,7 +104,7 @@ Item {
         height: customTopBar.height
         visible: false
 
-        radius: roundedGames ? height / roundedGamesRadiusFactor / .3 : 0
+        radius: settings["roundedGames"] ? height / roundedGamesRadiusFactor / .3 : 0
 
         Rectangle {
             width: parent.width
@@ -116,7 +119,7 @@ Item {
         anchors.fill: gameItemImage
         source: gameItemImage
         maskSource: gameItemMask
-        visible: !blurredCollections
+        visible: !settings["blurredCollections"]
     }
 
     // Blur
@@ -134,7 +137,7 @@ Item {
         source: gameItemBlur
         maskSource: gameItemMask
 
-        visible: blurredCollections
+        visible: settings["blurredCollections"]
     }
 
 
@@ -143,7 +146,7 @@ Item {
         anchors.fill: customTopBar
         source: customTopBar
         maskSource: customTopMask
-        visible: !(videoplayback && doubleFocus && currentItem.assets.videoList.length)
+        visible: !(settings["videoPlayback"] && doubleFocus && currentItem.assets.videoList.length)
     }
 
     // Drop Shadow
@@ -151,11 +154,11 @@ Item {
         width: parent.width
         height: parent.height
 
-        source: blurredCollections ? gameItemBlurRounded : gameItemRounded
+        source: settings["blurredCollections"] ? gameItemBlurRounded : gameItemRounded
 
         anchors.centerIn: parent
 
-        visible: !plainBG
+        visible: !settings["plainBG"]
         opacity: giShadowOp
 
         radius: giShadowRad

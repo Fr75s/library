@@ -19,7 +19,7 @@ FocusScope {
     property int focused: 0
 
     // Add more recent games with moreRecents
-    property int maxRecents: moreRecent ? 16 : 8
+    property int maxRecents: settings["moreRecent"] ? 20 : 10
 
     // Sort Recents
 
@@ -88,7 +88,7 @@ FocusScope {
         font.pixelSize: parent.height * .05
 
         // Alignment
-        horizontalAlignment: centerTitles ? Text.AlignHCenter : Text.AlignLeft
+        horizontalAlignment: settings["centerTitles"] ? Text.AlignHCenter : Text.AlignLeft
 
         anchors.left: parent.left
         anchors.leftMargin: parent.width * 0.05
@@ -112,7 +112,7 @@ FocusScope {
         font.pixelSize: parent.height * .05
 
         // Alignment
-        horizontalAlignment: centerTitles ? Text.AlignHCenter : Text.AlignLeft
+        horizontalAlignment: settings["centerTitles"] ? Text.AlignHCenter : Text.AlignLeft
 
         anchors.left: parent.left
         anchors.leftMargin: parent.width * 0.05
@@ -136,7 +136,7 @@ FocusScope {
 
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
-        source: useSVG ? "../assets/theme/up.svg" : "../assets/theme/up.png"
+        source: settings["useSVG"] ? "../assets/theme/up.svg" : "../assets/theme/up.png"
 
         Behavior on y {
             SmoothedAnimation { velocity: animVel }
@@ -148,7 +148,7 @@ FocusScope {
 		anchors.fill: homeUpArrow
 		source: homeUpArrow
 		color: colors["text"]
-		visible: mouseNav
+		visible: settings["mouseNav"]
 
 		MouseArea {
             anchors.fill: parent
@@ -182,7 +182,7 @@ FocusScope {
             // doubleFocus property only selects game when the view and item is this one
             readonly property bool doubleFocus: recentView.focus && isCurrentItem
 
-            width: (index == 0 || wide) ? ListView.view.height * (92/43) : ListView.view.height * (2/3)
+            width: (index == 0 || settings["wide"]) ? ListView.view.height * (92/43) : ListView.view.height * (2/3)
             height: ListView.view.height
 
             Item {
@@ -218,7 +218,7 @@ FocusScope {
                         else
                             if (focused == 1)
                                 focused = 0;
-                            if (!nosfx)
+                            if (!settings["nosfx"])
                                 sNav.play();
                             recentView.currentIndex = index;
                     }
@@ -242,21 +242,21 @@ FocusScope {
 
         // Scroll down when down is pressed
         Keys.onDownPressed: {
-            if (!nosfx) sNav.play();
+            if (!settings["nosfx"]) sNav.play();
             focused = 1;
         }
+
         // Move left/right
         Keys.onLeftPressed: {
-            if (!nosfx)
-                sNav.play();
+            if (!settings["nosfx"]) sNav.play();
             decrementCurrentIndex();
         }
         Keys.onRightPressed: {
-            if (!nosfx)
-                sNav.play();
+            if (!settings["nosfx"]) sNav.play();
             incrementCurrentIndex();
         }
 
+        // Game Actions
         Keys.onPressed: {
             if (event.isAutoRepeat) {
                 return
@@ -271,8 +271,9 @@ FocusScope {
             // Favorite/Unfavorite the current game
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
-                if (!nosfx)
+                if (!settings["nosfx"])
                     sFav.play();
+
                 api.allGames.get(sort_last_played_base.mapToSource(recentView.currentIndex)).favorite = !api.allGames.get(sort_last_played_base.mapToSource(recentView.currentIndex)).favorite;
             }
         }
@@ -282,14 +283,14 @@ FocusScope {
     // Shows all the games you've favorited.
     GridView {
         id: favoriteView
-        width: wide ? height * (2.14) : height * (2)
-        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(favorites.count / 6))
+        width: settings["wide"] ? height * (2.14) : height * (2)
+        height: settings["wide"] ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(favorites.count / 6))
 
         y: uiY + parent.height * 0.575
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: wide ? (cellHeight * (92/43)) : (cellHeight * (2/3))
-        cellHeight: height / 2/// (Math.ceil(favorites.count / 6))
+        cellWidth: settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
+        cellHeight: height / 2 /// (Math.ceil(favorites.count / 6))
 
         //currentIndex: 0
         model: favorites
@@ -323,7 +324,7 @@ FocusScope {
                         else
                             if (focused == 0)
                                 focused = 1;
-                            if (!nosfx)
+                            if (!settings["nosfx"])
                                 sNav.play();
                             favoriteView.currentIndex = index;
                     }
@@ -340,9 +341,9 @@ FocusScope {
 
         // Scroll back up if at the top, otherwise just move up
         Keys.onUpPressed: {
-            if (!nosfx)
+            if (!settings["nosfx"])
                 sNav.play();
-            if (wide) {
+            if (settings["wide"]) {
                 if (favoriteView.currentIndex < 2)
                     focused = 0
             } else {
@@ -352,10 +353,13 @@ FocusScope {
             if (focused == 1)
                 moveCurrentIndexUp();
         }
+
         // Scroll down
-        Keys.onDownPressed: { if (!nosfx) sNav.play();
+        Keys.onDownPressed: {
+            if (!settings["nosfx"]) sNav.play();
+
             // Go to last element if no element below on non-final row
-            if (wide) {
+            if (settings["wide"]) {
                 if (favoriteView.currentIndex + 2 >= favoriteView.count)
                     favoriteView.currentIndex = favoriteView.count - 1;
                 else {
@@ -369,10 +373,18 @@ FocusScope {
                 }
             }
         }
-        // Move left/right
-        Keys.onLeftPressed: { if (!nosfx) sNav.play(); moveCurrentIndexLeft() }
-        Keys.onRightPressed: { if (!nosfx) sNav.play(); moveCurrentIndexRight() }
 
+        // Move left/right
+        Keys.onLeftPressed: {
+            if (!settings["nosfx"]) sNav.play();
+            moveCurrentIndexLeft();
+        }
+        Keys.onRightPressed: {
+            if (!settings["nosfx"]) sNav.play();
+            moveCurrentIndexRight();
+        }
+
+        // Game Actions
         Keys.onPressed: {
             if (event.isAutoRepeat) {
                 return

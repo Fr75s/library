@@ -10,7 +10,7 @@ Item {
     // The standard gameItem, showing for all instances where games are shown.
     property var currentGame: modelData
     property bool wideHead: false
-    property var backColor: light ? "#EEEEEE" : "#181818"
+    property var backColor: settings["light"] ? "#EEEEEE" : "#181818"
 
     width: parent.width
     height: parent.height
@@ -38,7 +38,7 @@ Item {
             z: parent.z - 1
 
             color: colors["plainSetting"]
-            radius: roundedGames ? height / roundedGamesRadiusFactor : 0
+            radius: settings["roundedGames"] ? height / roundedGamesRadiusFactor : 0
 
             LinearGradient {
                 id: gameItemTextBackGradient
@@ -68,13 +68,13 @@ Item {
 
         asynchronous: true
 
-        source: (wide || (wideHead && index == 0)) ? (currentGame.assets.steam || currentGame.assets.screenshot || currentGame.assets.background || currentGame.assets.banner || currentGame.assets.boxFront || currentGame.assets.marquee || currentGame.assets.poster) : (boxArt(currentGame))
+        source: (settings["wide"] || (wideHead && index == 0)) ? (currentGame.assets.steam || currentGame.assets.screenshot || currentGame.assets.background || currentGame.assets.banner || currentGame.assets.boxFront || currentGame.assets.marquee || currentGame.assets.poster) : (boxArt(currentGame))
 
         // For Steam games that lack portrait mode art
         onStatusChanged: {
             if (status == Image.Error) {
-                // The funny
-                console.log("No Steam Art?\n⠀⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝\n⠸⡸⠜⠕⠕⠁⢁⢇⢏⢽⢺⣪⡳⡝⣎⣏⢯⢞⡿⣟⣷⣳⢯⡷⣽⢽⢯⣳⣫⠇\n⠀⠀⢀⢀⢄⢬⢪⡪⡎⣆⡈⠚⠜⠕⠇⠗⠝⢕⢯⢫⣞⣯⣿⣻⡽⣏⢗⣗⠏⠀\n⠀⠪⡪⡪⣪⢪⢺⢸⢢⢓⢆⢤⢀⠀⠀⠀⠀⠈⢊⢞⡾⣿⡯⣏⢮⠷⠁⠀⠀\n⠀⠀⠀⠈⠊⠆⡃⠕⢕⢇⢇⢇⢇⢇⢏⢎⢎⢆⢄⠀⢑⣽⣿⢝⠲⠉⠀⠀⠀⠀\n⠀⠀⠀⠀⠀⡿⠂⠠⠀⡇⢇⠕⢈⣀⠀⠁⠡⠣⡣⡫⣂⣿⠯⢪⠰⠂⠀⠀⠀⠀\n⠀⠀⠀⠀⡦⡙⡂⢀⢤⢣⠣⡈⣾⡃⠠⠄⠀⡄⢱⣌⣶⢏⢊⠂⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⢝⡲⣜⡮⡏⢎⢌⢂⠙⠢⠐⢀⢘⢵⣽⣿⡿⠁⠁⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠨⣺⡺⡕⡕⡱⡑⡆⡕⡅⡕⡜⡼⢽⡻⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⣼⣳⣫⣾⣵⣗⡵⡱⡡⢣⢑⢕⢜⢕⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⣴⣿⣾⣿⣿⣿⡿⡽⡑⢌⠪⡢⡣⣣⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⡟⡾⣿⢿⢿⢵⣽⣾⣼⣘⢸⢸⣞⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n⠀⠀⠀⠀⠁⠇⠡⠩⡫⢿⣝⡻⡮⣒⢽⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+                // The funny is gone
+                console.log("No Steam Game art Found.")
                 gameItemImage.source = currentGame.assets.boxFront;
             }
         }
@@ -88,18 +88,21 @@ Item {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
 
-            visible: wide || (wideHead && index == 0)
+            visible: settings["wide"] || (wideHead && index == 0)
 
             color: "#60000000"
         }
+
         VideoPlayer {
-            id:videoplayer
+            id: videoPlayer
             game: currentGame
+
             width: parent.width
             height: parent.height
             anchors.centerIn: parent
-            playing: videoplayback && doubleFocus  && !isFeed
-            noSound: nosfx
+
+            playing: settings["videoPlayback"] && doubleFocus && !isFeed
+            noSound: settings["nosfx"]
         }
     }
 
@@ -133,14 +136,14 @@ Item {
         radius: 32
         samples: 30
 
-        visible: false//wide || (wideHead && index == 0)
+        visible: false //wide || (wideHead && index == 0)
     }
 
     OpacityMask {
         anchors.fill: gameItemImageBlur
         source: gameItemImageBlur
         maskSource: gameItemBlurMask
-        visible: wide || (wideHead && index == 0)
+        visible: settings["wide"] || (wideHead && index == 0)
     }
 
     Rectangle {
@@ -165,7 +168,7 @@ Item {
         text: currentGame.title
         wrapMode: Text.WordWrap
 
-        visible: wide || (wideHead && index == 0)
+        visible: settings["wide"] || (wideHead && index == 0)
 
         font.pixelSize: vpx(16)
         font.family: gilroyLight.name
@@ -187,7 +190,7 @@ Item {
         anchors.rightMargin: parent.height * .025
         z: parent.z + 5
 
-        source: useSVG ? "../assets/theme/favorite.svg" : "../assets/theme/favorite.png"
+        source: settings["useSVG"] ? "../assets/theme/favorite.svg" : "../assets/theme/favorite.png"
         mipmap: true
         //color: light ? "#242424" : "#EEEEEE"
 
@@ -231,7 +234,7 @@ Item {
         anchors.fill: parent
         visible: false
 
-        radius: roundedGames ? height / roundedGamesRadiusFactor : 0
+        radius: settings["roundedGames"] ? height / roundedGamesRadiusFactor : 0
     }
 
     Rectangle {
@@ -239,7 +242,7 @@ Item {
         anchors.fill: shaderSource
         visible: false
 
-        radius: roundedGames ? height / roundedGamesRadiusFactor / .2 : 0
+        radius: settings["roundedGames"] ? height / roundedGamesRadiusFactor / .2 : 0
 
         Rectangle {
             width: parent.width
@@ -250,10 +253,7 @@ Item {
     }
 
 
-    /* Hey future me,
-    * please mention this code is from shinretro by TigraTT-Driver.
-    * Don't publish this on github without it.
-    */
+    // The following code used to get portrait art for steam games is from shinretro by TigraTT-Driver.
 
     // Box art
     function steamAppID (gameData) {

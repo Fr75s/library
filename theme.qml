@@ -7,6 +7,7 @@ import QtQuick.Window 2.15
 import SortFilterProxyModel 0.2
 
 import "Theme"
+import "Extra"
 import "GameItems"
 import "Bottombar"
 
@@ -48,7 +49,7 @@ FocusScope {
 	property int marginAnimVel: 100
 
 	// Radius of games' shadows
-	property var giShadowRad: light ? 16 : 24
+	property var giShadowRad: settings["light"] ? 16 : 24
 	// Opacity of games' shadows
 	property var giShadowOp: 0.75
 	// Radius of games with rounded corners on (height / roundedGamesRadiusFactor)
@@ -65,7 +66,7 @@ FocusScope {
      * noBtns: No button indicators in the bottom bar
      * sbsl: Shows the clock bar
      * nosfx: Mutes all sound effects
-     * videoplayback: enables Playback of video for current selected game or collection
+     * videoPlayback: Enables playback of video for the currently selected game or collection
      * wide: Widens all the games in GridViews
      * quiet: Quiets all sound effects
      * moreRecent: Adds more games to the recents page
@@ -74,28 +75,36 @@ FocusScope {
      * limSearch: Limits searches so that results start with what's searched rather than containing what's searched.
      *
      * Additionally, there is a centerTitles option which centers the titles, though this is off unless you really want it.
-     *
      */
 
-    property bool light: api.memory.has("light") ? api.memory.get("light") : false
-    property bool plainBG: api.memory.has("plainBG") ? api.memory.get("plainBG") : false
-    property bool noBtns: api.memory.has("noBtns") ? api.memory.get("noBtns") : true
-    property bool sbsl: api.memory.has("sbsl") ? api.memory.get("sbsl") : false
-    property bool nosfx: api.memory.has("nosfx") ? api.memory.get("nosfx") : false
-    property bool videoplayback: api.memory.has("videoplayback") ? api.memory.get("videoplayback") : false
-    property bool wide: api.memory.has("wide") ? api.memory.get("wide") : false
-    property bool quiet: api.memory.has("quiet") ? api.memory.get("quiet") : false
-    property bool moreRecent: api.memory.has("moreRecent") ? api.memory.get("moreRecent") : false
-    property bool mouseNav: api.memory.has("mouseNav") ? api.memory.get("mouseNav") : true
-    property bool enlargeBar: api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false
-    property bool limSearch: api.memory.has("limSearch") ? api.memory.get("limSearch") : false
-    property bool useSVG: api.memory.has("useSVG") ? api.memory.get("useSVG") : false
-    property bool roundedGames: api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false
-    property bool blurredCollections: api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true
-    property bool classicColors: api.memory.has("classicColors") ? api.memory.get("classicColors") : false
+    property var settings: {
+        // Appearance Settings
+        "light": api.memory.has("light") ? api.memory.get("light") : false,
+        "plainBG": api.memory.has("plainBG") ? api.memory.get("plainBG") : false,
+        "noBtns": api.memory.has("noBtns") ? api.memory.get("noBtns") : true,
+        "roundedGames": api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false,
+        "blurredCollections": api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true,
+        "useSVG": api.memory.has("useSVG") ? api.memory.get("useSVG") : false,
+        "classicColors": api.memory.has("classicColors") ? api.memory.get("classicColors") : false,
 
-    property bool centerTitles: false
+        "centerTitles": false, // Currently Unused
 
+        // Behavior Settings
+        "mouseNav": api.memory.has("mouseNav") ? api.memory.get("mouseNav") : true,
+        "moreRecent": api.memory.has("moreRecent") ? api.memory.get("moreRecent") : false,
+        "limSearch": api.memory.has("limSearch") ? api.memory.get("limSearch") : false,
+
+        // Audio/Video Settings
+        "nosfx": api.memory.has("nosfx") ? api.memory.get("nosfx") : false,
+        "quiet": api.memory.has("quiet") ? api.memory.get("quiet") : false,
+        "videoPlayback": api.memory.has("videoPlayback") ? api.memory.get("videoPlayback") : false,
+
+        // Interface Settings
+        "wide": api.memory.has("wide") ? api.memory.get("wide") : false,
+        "enlargeBar": api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false,
+        "useClockbar": api.memory.has("useClockbar") ? api.memory.get("useClockbar") : false, // Formerly sbsl
+        // + Language
+    }
 
     /* COLORS
      * These are the lists of colors used by this theme.
@@ -103,6 +112,7 @@ FocusScope {
      * Each color scheme is an object with properties containing each color
      * Use the properties for both color schemes here to make your own, or just see how these ones work.
      */
+
 
     property var colorschemes: {
         "polar": {
@@ -181,7 +191,7 @@ FocusScope {
 
     // Which colors to use right now
     // MODIFICATION TIP: Replace everything after "colors:" with the address of your colorscheme to use a custom color scheme, like so: colorschemes["mycolorscheme"]["dark"]
-    property var colors: classicColors ? (light ? colorschemes["classic"]["light"] : colorschemes["classic"]["dark"]) : (light ? colorschemes["polar"]["light"] : colorschemes["polar"]["dark"])
+    property var colors: settings["classicColors"] ? (settings["light"] ? colorschemes["classic"]["light"] : colorschemes["classic"]["dark"]) : (settings["light"] ? colorschemes["polar"]["light"] : colorschemes["polar"]["dark"])
 
 
 
@@ -209,7 +219,7 @@ FocusScope {
      */
     Item {
         id: bottomBar
-        height: enlargeBar ? parent.height * .1 : parent.height * .05
+        height: settings["enlargeBar"] ? parent.height * .1 : parent.height * .05
         width: parent.width
 
         anchors.bottom: parent.bottom
@@ -226,7 +236,7 @@ FocusScope {
             Image { // Home
                 id: bbHome
                 mipmap: true
-                source: useSVG ? "./assets/theme/home.svg" : "./assets/theme/home.png"
+                source: settings["useSVG"] ? "./assets/theme/home.svg" : "./assets/theme/home.png"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -234,14 +244,14 @@ FocusScope {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {menu = 0; if (!nosfx) sTab.play();}
+                    onClicked: {menu = 0; if (!settings["nosfx"]) sTab.play();}
                 }
             }
 
             Image { // All/Search
                 id: bbAll
                 mipmap: true
-                source: isFeed ? (useSVG ? "./assets/theme/feed.svg" : "./assets/theme/feed.png") : (useSVG ? "./assets/theme/search.svg" : "./assets/theme/search.png")
+                source: isFeed ? (settings["useSVG"] ? "./assets/theme/feed.svg" : "./assets/theme/feed.png") : (settings["useSVG"] ? "./assets/theme/search.svg" : "./assets/theme/search.png")
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -249,14 +259,14 @@ FocusScope {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {menu = 1; if (!nosfx) sTab.play();}
+                    onClicked: {menu = 1; if (!settings["nosfx"]) sTab.play();}
                 }
             }
 
             Image { // Collections
                 id: bbCollect
                 mipmap: true
-                source: useSVG ? "./assets/theme/collections.svg" : "./assets/theme/collections.png"
+                source: settings["useSVG"] ? "./assets/theme/collections.svg" : "./assets/theme/collections.png"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -264,14 +274,14 @@ FocusScope {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {menu = 2; if (!nosfx) sTab.play();}
+                    onClicked: {menu = 2; if (!settings["nosfx"]) sTab.play();}
                 }
             }
 
             Image { // Settings
                 id: bbSet
                 mipmap: true
-                source: useSVG ? "./assets/theme/settings.svg" : "./assets/theme/settings.png"
+                source: settings["useSVG"] ? "./assets/theme/settings.svg" : "./assets/theme/settings.png"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -279,7 +289,7 @@ FocusScope {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: {menu = 3; if (!nosfx) sTab.play();}
+                    onClicked: {menu = 3; if (!settings["nosfx"]) sTab.play();}
                 }
             }
         }
@@ -288,7 +298,7 @@ FocusScope {
         Rectangle {
             id: bottomBarBG
             color: colors["barBG"]
-            opacity: plainBG ? 1 : 0.35
+            opacity: settings["plainBG"] ? 1 : 0.35
             z: parent.z
 
             anchors.fill: parent
@@ -328,10 +338,11 @@ FocusScope {
 
     // This shows button icons, not the main icons themselves.
     BottomBarIcons {
-        visible: !noBtns
+        visible: !settings["noBtns"]
     }
 
-    // Collection converter: Not visible, but used.
+    // Imported from Extra/Colcon.qml
+    // Used in GICusart for Custom Collection Posters
     Colcon {
         id: cc
     }
@@ -392,7 +403,7 @@ FocusScope {
         /* It was originally called sbsl (Search bar search last?) because it was a search
          * bar setting, and I was too lazy to rename it.
          */
-        visible: sbsl
+        visible: settings["useClockbar"]
 
         z: 15
     }
@@ -406,9 +417,9 @@ FocusScope {
         z: -15
         anchors.fill: parent
 
-        source: light ? "./background-light.jpg" : "./background-dark.jpg"
+        source: settings["light"] ? "./background-light.jpg" : "./background-dark.jpg"
 
-        visible: !plainBG
+        visible: !settings["plainBG"]
     }
 
     // Background Blur
@@ -426,7 +437,7 @@ FocusScope {
         }
 
         sourceRect: Qt.rect(x,y, width, height)
-        visible: !plainBG
+        visible: !settings["plainBG"]
     }
 
     GaussianBlur {
@@ -436,7 +447,7 @@ FocusScope {
         source: shaderSource
         radius: 16
         samples: 14
-        visible: !plainBG
+        visible: !settings["plainBG"]
     }
 
     // The background color if plain mode is on.
@@ -446,7 +457,7 @@ FocusScope {
 		color: colors["plainBG"]
 		anchors.fill: parent
 
-		visible: plainBG || !("./background-light.jpg" || "./background-dark.jpg")
+		visible: settings["plainBG"] || !("./background-light.jpg" || "./background-dark.jpg")
 	}
 
 	//
@@ -456,37 +467,37 @@ FocusScope {
 	SoundEffect {
 		id: sAccept
 		source: "./assets/audio/accept.wav"
-		volume: quiet ? 0.5 : 1.0
+		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 	SoundEffect {
 		id: sFav
 		source: "./assets/audio/favorite.wav"
-		volume: quiet ? 0.5 : 1.0
+		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 	SoundEffect {
 		id: sNav
 		source: "./assets/audio/nav.wav"
-		volume: quiet ? 0.5 : 1.0
+		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 	SoundEffect {
 		id: sBack
 		source: "./assets/audio/back.wav"
-		volume: quiet ? 0.5 : 1.0
+		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 	SoundEffect {
 		id: sTab
 		source: "./assets/audio/tab.wav"
-		volume: quiet ? 0.5 : 1.0
+		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 	SoundEffect {
 		id: sGame
 		source: "./assets/audio/game.wav"
-		volume: quiet ? 0.5 : 1.0
+		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 	SoundEffect {
 		id: sSwitch
 		source: "./assets/audio/switchF.wav"
-		volume: quiet ? 0.5 : 1.0
+		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 
 
@@ -498,7 +509,7 @@ FocusScope {
     Keys.onPressed: {
         if (api.keys.isNextPage(event)) {
             event.accepted = true;
-            if (!nosfx)
+            if (!settings["nosfx"])
                 sTab.play();
             if (menu >= 3)
                 menu = 0
@@ -512,7 +523,7 @@ FocusScope {
         }
         if (api.keys.isPrevPage(event)) {
             event.accepted = true;
-            if (!nosfx)
+            if (!settings["nosfx"])
                 sTab.play();
             if (menu <= 0)
                 menu = 3
@@ -528,7 +539,7 @@ FocusScope {
 
     // Launching a game
     function launchGame(game) {
-        if (!nosfx)
+        if (!settings["nosfx"])
             sGame.play();
 		game.launch();
 	}

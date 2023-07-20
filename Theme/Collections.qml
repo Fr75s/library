@@ -23,6 +23,7 @@ FocusScope {
      * 1: Games
      */
     property var collection: 0
+
     // Adds a delay to mouse clicks on the collection screen so that they don't immediately click a game
     property bool interact: true
 
@@ -40,7 +41,7 @@ FocusScope {
         font.pixelSize: parent.height * .05
 
         // Alignment
-        horizontalAlignment: centerTitles ? Text.AlignHCenter : Text.AlignLeft
+        horizontalAlignment: settings["centerTitles"] ? Text.AlignHCenter : Text.AlignLeft
 
         anchors.left: parent.left
         anchors.leftMargin: parent.width * 0.05
@@ -62,7 +63,7 @@ FocusScope {
         font.pixelSize: parent.height * .05
 
         // Alignment
-        horizontalAlignment: centerTitles ? Text.AlignHCenter : Text.AlignLeft
+        horizontalAlignment: settings["centerTitles"] ? Text.AlignHCenter : Text.AlignLeft
 
         anchors.left: parent.left
         anchors.leftMargin: parent.width * 0.05
@@ -85,20 +86,20 @@ FocusScope {
         anchors.rightMargin: parent.width * 0.05
 
         visible: false
-        source: useSVG ? "../assets/theme/up.svg" : "../assets/theme/up.png"
+        source: settings["useSVG"] ? "../assets/theme/up.svg" : "../assets/theme/up.png"
     }
     // Used to color the icon
 	ColorOverlay {
 		anchors.fill: collectionBackArrow
 		source: collectionBackArrow
 		color: colors["text"]
-		visible: gameView && mouseNav
+		visible: gameView && settings["mouseNav"]
 
 		MouseArea {
             anchors.fill: parent
 
             onClicked: {
-                if (!nosfx)
+                if (!settings["nosfx"])
                     sBack.play();
                 gameView = false;
             }
@@ -111,8 +112,8 @@ FocusScope {
      */
     GridView {
         id: collectionsView
-        width: wide ? height * (2.14) : height * (2)
-        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
+        width: height * (2)
+        height: parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
 
         anchors.top: parent.top
         anchors.topMargin: parent.height * .15
@@ -163,17 +164,17 @@ FocusScope {
 
                     onClicked: {
                         if (isCurrentItem) {
-                            if (!nosfx)
-                                sAccept.play();
+                            if (!settings["nosfx"]) sAccept.play();
                             collection = api.collections.get(collectionsView.currentIndex);
+
                             // We set interact to false so that the click doesn't interact
                             interact = false;
                             gameView = true;
+
                             // Timeout is .5s, enough to let go of the previous click
                             setTimeout({interact = true}, 500)
                         } else {
-                            if (!nosfx)
-                                sNav.play();
+                            if (!settings["nosfx"]) sNav.play();
                             collectionsView.currentIndex = index;
                         }
                     }
@@ -186,9 +187,15 @@ FocusScope {
         visible: !gameView
 
         // Go up
-        Keys.onUpPressed: { if (!nosfx) sNav.play(); moveCurrentIndexUp() }
+        Keys.onUpPressed: {
+            if (!settings["nosfx"]) sNav.play();
+            moveCurrentIndexUp();
+        }
+
         // Go down with special property
-        Keys.onDownPressed: { if (!nosfx) sNav.play();
+        Keys.onDownPressed: {
+            if (!settings["nosfx"]) sNav.play();
+
             // Go to last element if no element below on non-final row
             if (collectionsView.currentIndex + 6 >= collectionsView.count && collectionsView.currentIndex % 6 > (collectionsView.count - 1) % 6)
                 collectionsView.currentIndex = collectionsView.count - 1;
@@ -197,8 +204,8 @@ FocusScope {
             }
         }
         // Go left/right
-        Keys.onLeftPressed: { if (!nosfx) sNav.play(); moveCurrentIndexLeft() }
-        Keys.onRightPressed: { if (!nosfx) sNav.play(); moveCurrentIndexRight() }
+        Keys.onLeftPressed: { if (!settings["nosfx"]) sNav.play(); moveCurrentIndexLeft() }
+        Keys.onRightPressed: { if (!settings["nosfx"]) sNav.play(); moveCurrentIndexRight() }
 
         Keys.onPressed: {
             // Stop auto repeat: Don't open a game if A is held down.
@@ -208,7 +215,7 @@ FocusScope {
 
             // Open the current collection
             if (api.keys.isAccept(event)) {
-                if (!nosfx)
+                if (!settings["nosfx"])
                     sAccept.play();
                 // Set the current Collection
                 collection = api.collections.get(collectionsView.currentIndex)
@@ -220,14 +227,14 @@ FocusScope {
     // Actual Games in a collection
     GridView {
         id: collectionGamesView
-        width: wide ? height * (2.14) : height * (2)
-        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
+        width: settings["wide"] ? height * (2.14) : height * (2)
+        height: settings["wide"] ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
 
         anchors.top: parent.top
         anchors.topMargin: parent.height * .15
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: wide ? (width / 2) : (width / 6)
+        cellWidth: settings["wide"] ? (width / 2) : (width / 6)
         cellHeight: height / 2 /// (Math.ceil(api.allGames.count / 6))
 
         // Games in the current collection is the model
@@ -272,7 +279,7 @@ FocusScope {
                         }
                         else {
                             collectionGamesView.currentIndex = index;
-                            if (!nosfx)
+                            if (!settings["nosfx"])
                                 sNav.play();
                         }
                     }
@@ -285,10 +292,15 @@ FocusScope {
         visible: gameView
 
         // Move up, down, left & right like collectionsView
-        Keys.onUpPressed: { if (!nosfx) sNav.play(); moveCurrentIndexUp() }
-        Keys.onDownPressed: { if (!nosfx) sNav.play();
+        Keys.onUpPressed: {
+            if (!settings["nosfx"]) sNav.play();
+            moveCurrentIndexUp();
+        }
+        Keys.onDownPressed: {
+            if (!settings["nosfx"]) sNav.play();
+
             // Go to last element if no element below on non-final row
-            if (wide) {
+            if (settings["wide"]) {
                 if (collectionGamesView.currentIndex + 2 >= collectionGamesView.count)
                     collectionGamesView.currentIndex = collectionGamesView.count - 1;
                 else {
@@ -302,8 +314,8 @@ FocusScope {
                 }
             }
         }
-        Keys.onLeftPressed: { if (!nosfx) sNav.play(); moveCurrentIndexLeft() }
-        Keys.onRightPressed: { if (!nosfx) sNav.play(); moveCurrentIndexRight() }
+        Keys.onLeftPressed: { if (!settings["nosfx"]) sNav.play(); moveCurrentIndexLeft() }
+        Keys.onRightPressed: { if (!settings["nosfx"]) sNav.play(); moveCurrentIndexRight() }
 
         Keys.onPressed: {
             if (event.isAutoRepeat) {
@@ -320,7 +332,7 @@ FocusScope {
 
             // Go back to the collections
             if (api.keys.isCancel(event)) {
-                if (!nosfx)
+                if (!settings["nosfx"])
                     sBack.play();
                 event.accepted = true;
                 gameView = false
@@ -328,7 +340,7 @@ FocusScope {
 
             // Favorite a game
             if (api.keys.isFilters(event)) {
-                if (!nosfx)
+                if (!settings["nosfx"])
                     sFav.play();
                 event.accepted = true;
                 collection.games.get(collectionGamesView.currentIndex).favorite = !collection.games.get(collectionGamesView.currentIndex).favorite;

@@ -31,7 +31,7 @@ FocusScope {
         filters: RegExpFilter {
             roleName: "title";
             // Limited search matches ^[term] rather than [term]
-            pattern: limSearch ? "^" + searchInput.text : searchInput.text;
+            pattern: settings["limSearch"] ? "^" + searchInput.text : searchInput.text;
             enabled: searchInput.text != "";
             caseSensitivity: Qt.CaseInsensitive;
         }
@@ -109,7 +109,7 @@ FocusScope {
         anchors.fill: searchInputBG
         source: searchInputBG
 
-        visible: !plainBG && !feed
+        visible: !settings["plainBG"] && !feed
         opacity: giShadowOp
 
         radius: giShadowRad
@@ -171,6 +171,10 @@ FocusScope {
 
         kcolors: colors["keyboard"]
 
+        sfxSource: ".././assets/audio/type.wav"
+        quietSfx: settings["quiet"];
+        muteSfx: settings["nosfx"];
+
         // Adds key to input, unless it's a backspace or clear
         onSendKey: {
             if (text == "bksp") {
@@ -202,8 +206,8 @@ FocusScope {
     // See all games or searched games
     GridView {
         id: allView
-        width: wide ? height * (2.14) : height * (2)
-        height: wide ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
+        width: settings["wide"] ? height * (2.14) : height * (2)
+        height: settings["wide"] ? parent.height * 0.7 : parent.height * 0.75 //* (Math.ceil(api.allGames.count / 6))
 
         // Rectangle {
         //     anchors.fill: parent
@@ -217,7 +221,7 @@ FocusScope {
         visible: !feed
 
         // Grid
-        cellWidth: wide ? (cellHeight * (92/43)) : (cellHeight * (2/3))
+        cellWidth: settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
         cellHeight: height / 2
 
         // Sets the model to everything if the search is empty or contains all games
@@ -262,7 +266,7 @@ FocusScope {
                         }
                         else {
                             allView.currentIndex = index
-                            if (!nosfx)
+                            if (!settings["nosfx"])
                                 sNav.play();
                             if (searching)
                                 searching = false
@@ -279,8 +283,8 @@ FocusScope {
 
         // Invokes search if at top, otherwise move up
         Keys.onUpPressed: {
-            if (!nosfx) sNav.play();
-            if (wide) {
+            if (!settings["nosfx"]) sNav.play();
+            if (settings["wide"]) {
                 if (allView.currentIndex < 2)
                     keys.invoke()
             } else {
@@ -291,9 +295,11 @@ FocusScope {
                 moveCurrentIndexUp()
         }
         // Move down with special behavior
-        Keys.onDownPressed: { if (!nosfx) sNav.play();
+        Keys.onDownPressed: {
+            if (!settings["nosfx"]) sNav.play();
+
             // Go to last element if no element below on non-final row
-            if (wide) {
+            if (settings["wide"]) {
                 if (allView.currentIndex + 2 >= allView.count)
                     allView.currentIndex = allView.count - 1;
                 else {
@@ -308,8 +314,8 @@ FocusScope {
             }
         }
         // Move left/right
-        Keys.onLeftPressed: { if (!nosfx) sNav.play(); moveCurrentIndexLeft() }
-        Keys.onRightPressed: { if (!nosfx) sNav.play(); moveCurrentIndexRight() }
+        Keys.onLeftPressed: { if (!settings["nosfx"]) sNav.play(); moveCurrentIndexLeft() }
+        Keys.onRightPressed: { if (!settings["nosfx"]) sNav.play(); moveCurrentIndexRight() }
 
         Keys.onPressed: {
             if (event.isAutoRepeat) {
@@ -326,11 +332,11 @@ FocusScope {
                 }
             }
 
-            // Favorite Game
+            // Favorite Game / Skip Game Video
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
                 if (!feed) {
-                    if (!nosfx)
+                    if (!settings["nosfx"])
                         sFav.play();
                     current.favorite = !current.favorite;
                 } else {

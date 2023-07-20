@@ -28,10 +28,11 @@ Row {
 		id: iconpicon
 		width: height
 		height: parent.height * .8
+		mipmap: true
 
 		anchors.verticalCenter: parent.verticalCenter
 
-		source: useSVG ? src : srcp
+		source: settings["useSVG"] ? src : srcp
 		visible: false
 	}
 

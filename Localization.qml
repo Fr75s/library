@@ -24,6 +24,9 @@ Item {
 	 */
 
 	/* Translations are welcome: Simply create a pull request on github or message me on discord (Francisco75s#0331) or matrix (@fr75s:matrix.org) to let me know if you have a good translation, and I will add it to the theme.
+	 *
+	 * TRANSLATION NOTE: If you've previously contributed, please add any translations to any fields labeled [], as these indicate new text that need to be translated.
+	 *
 	 * See more in the Translation section of MODIFICATIONS.md
 	 */
 
@@ -56,10 +59,17 @@ Item {
 			settings_classic_colors: "Use Classic Colorscheme",
 			settings_classic_colors_info: "Reverts the colors of the UI back to the colors used in Library prior to version 1.2.0.",
 			settings_quiet_sounds: "Quiet Sound Effects",
-			settings_mute_sounds: "Mute Sound Effects",
-			settings_video_playback: "Video playback",
+			settings_mute_sounds: "Mute Audio",
+			settings_video_playback: "Video Playback",
 			settings_blur_collects: "Blur Collection Images",
 			settings_change_localization: "Change Language",
+
+			settings_header_appearance: "Appearance",
+			settings_header_behavior: "Behavior",
+			settings_header_av: "Audio & Video",
+			settings_header_interface: "Interface",
+			settings_header_localization: "Localization",
+
 			bottomBar_changePage: "Change Page",
 			bottomBar_aSelect: "Select",
 			bottomBar_aPlay: "Play",
@@ -67,6 +77,7 @@ Item {
 			bottomBar_bKeyboard: "Hide Keyboard",
 			bottomBar_bExit: "Exit Collection",
 			bottomBar_xKeyboard: "Keyboard / Backspace",
+			bottomBar_xNext: "Next Section",
 			bottomBar_yFavorite: "Favorite",
 			bottomBar_yNext: "Next",
 			bottomBar_yKeyboard: "Favorite / Space",
@@ -105,6 +116,13 @@ Item {
 			settings_video_playback: "Videowiedergabe",
 			settings_blur_collects: "Unscharfe Sammlungsbilder",
 			settings_change_localization: "Anzeigesprache",
+
+			settings_header_appearance: "[]",
+			settings_header_behavior: "[]",
+			settings_header_av: "[]",
+			settings_header_interface: "[]",
+			settings_header_localization: "[]",
+
 			bottomBar_changePage: "Seite wechseln",
 			bottomBar_aSelect: "Auswählen",
 			bottomBar_aPlay: "Spielen",
@@ -112,6 +130,7 @@ Item {
 			bottomBar_bKeyboard: "verstecke Tastatur",
 			bottomBar_bExit: "Sammlung verlassen",
 			bottomBar_xKeyboard: "Tastatur / Rücktaste",
+			bottomBar_xNext: "[]",
 			bottomBar_yFavorite: "Favorit",
 			bottomBar_yNext: "Nächstes",
 			bottomBar_yKeyboard: "Favorit / Leertaste",
