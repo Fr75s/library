@@ -401,7 +401,6 @@ FocusScope {
                         // Click functionality
                         MouseArea {
                             anchors.fill: parent
-                            enabled: !isHeader
 
                             onClicked: {
                                 if (isCurrentItem) {
