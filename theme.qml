@@ -104,6 +104,7 @@ FocusScope {
         "enlargeBar": api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false,
         "useClockbar": api.memory.has("useClockbar") ? api.memory.get("useClockbar") : false, // Formerly sbsl
         // + Language
+        "24hClock": api.memory.has("24hClock") ? api.memory.get("24hClock") : false,
     }
 
     /* COLORS

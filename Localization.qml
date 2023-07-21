@@ -63,6 +63,7 @@ Item {
 			settings_video_playback: "Video Playback",
 			settings_blur_collects: "Blur Collection Images",
 			settings_change_localization: "Change Language",
+			settings_24h_clock: "24-hour clock",
 
 			settings_header_appearance: "Appearance",
 			settings_header_behavior: "Behavior",
@@ -116,6 +117,7 @@ Item {
 			settings_video_playback: "Videowiedergabe",
 			settings_blur_collects: "Unscharfe Sammlungsbilder",
 			settings_change_localization: "Anzeigesprache",
+			settings_24h_clock: "24-Stunden Uhr",
 
 			settings_header_appearance: "Erscheinungsbild",
 			settings_header_behavior: "Verhalten",

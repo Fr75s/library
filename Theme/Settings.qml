@@ -160,6 +160,12 @@ FocusScope {
                 header: loc.settings_header_localization,
                 name: loc.settings_change_localization,
                 strprop: currentLanguage
+            },
+            {
+                id: "24h_clock",
+                behavior: "toggle",
+                name: loc.settings_24h_clock,
+                setting: "24hClock",
             }
         ].forEach(function(e) { set.append(e); });
     }

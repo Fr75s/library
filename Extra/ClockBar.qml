@@ -26,7 +26,7 @@ Item {
 
 		// Set Time
 		function set() {
-			currentTime.text = Qt.formatTime(new Date(), "hh:mm AP");
+			currentTime.text = settings["24hClock"] ? Qt.formatTime(new Date(), "hh:mm") : Qt.formatTime(new Date(), "hh:mm AP");
 		}
 
 		// Runs the timer to update the time every second
