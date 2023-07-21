@@ -73,8 +73,6 @@ FocusScope {
      * mouseNav: Enables clickable mouse navigation icons
      * enlargeBar: Enlarges the bottom bar to touch size
      * limSearch: Limits searches so that results start with what's searched rather than containing what's searched.
-     *
-     * Additionally, there is a centerTitles option which centers the titles, though this is off unless you really want it.
      */
 
     property var settings: {
@@ -86,8 +84,7 @@ FocusScope {
         "blurredCollections": api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true,
         "useSVG": api.memory.has("useSVG") ? api.memory.get("useSVG") : false,
         "classicColors": api.memory.has("classicColors") ? api.memory.get("classicColors") : false,
-
-        "centerTitles": false, // Currently Unused
+        "centerTitles": api.memory.has("centerTitles") ? api.memory.get("centerTitles") : false,
 
         // Behavior Settings
         "mouseNav": api.memory.has("mouseNav") ? api.memory.get("mouseNav") : true,

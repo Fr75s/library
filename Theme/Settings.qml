@@ -52,7 +52,12 @@ FocusScope {
                 name: loc.settings_rounded_corners,
                 setting: "roundedGames"
             },
-
+            {
+                id: "center_titles",
+                behavior: "toggle",
+                name: loc.settings_center_titles,
+                setting: "centerTitles"
+            },
             {
                 id: "blur_collects",
                 behavior: "toggle",
