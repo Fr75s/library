@@ -119,8 +119,8 @@ FocusScope {
         anchors.topMargin: parent.height * .15
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: width / 6
-        cellHeight: height / 2 /// (Math.ceil(api.allGames.count / 6))
+        cellWidth: (cellHeight * (2/3))
+        cellHeight: height / settings["collectionRows"]
 
         // Collections model from Pegasus
         model: api.collections
@@ -234,8 +234,8 @@ FocusScope {
         anchors.topMargin: parent.height * .15
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: settings["wide"] ? (width / 2) : (width / 6)
-        cellHeight: height / 2 /// (Math.ceil(api.allGames.count / 6))
+        cellWidth: settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
+        cellHeight: height / settings["gamesRows"]
 
         // Games in the current collection is the model
         model: collection.games

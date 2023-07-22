@@ -222,7 +222,7 @@ FocusScope {
 
         // Grid
         cellWidth: settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
-        cellHeight: height / 2
+        cellHeight: height / settings["gamesRows"]
 
         // Sets the model to everything if the search is empty or contains all games
         model: (searchSort.count == 0 || searchSort.count == api.allGames.count) ? api.allGames : searchSort

@@ -93,6 +93,18 @@ FocusScope {
                 is: false
             },
             {
+                id: "games_rows",
+                behavior: "set_games_rows",
+                name: loc.settings_games_grid_rows,
+                intprop: settings["gamesRows"]
+            },
+            {
+                id: "collection_rows",
+                behavior: "set_collection_rows",
+                name: loc.settings_collection_grid_rows,
+                intprop: settings["collectionRows"]
+            },
+            {
                 id: "enlarge_bar",
                 behavior: "toggle",
                 name: loc.settings_enlarge_bar,
@@ -367,7 +379,7 @@ FocusScope {
                             anchors.verticalCenter: parent.verticalCenter
                             x: parent.x + parent.width * 0.85 + parent.height * 0.1
                             color: colors["text"]
-                            visible: !strprop
+                            visible: !(strprop || intprop)
                         }
 
                         // Slider Circle
@@ -381,7 +393,7 @@ FocusScope {
 
                             radius: height / 2
                             color: colors["text"]
-                            visible: !strprop
+                            visible: !(strprop || intprop)
 
                             Behavior on x {
                                 SmoothedAnimation { duration: 100 }
@@ -399,7 +411,7 @@ FocusScope {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
 
-                            text: strprop ? strprop : ""
+                            text: strprop ? strprop : intprop ? intprop :""
                             wrapMode: Text.WordWrap
                             color: colors["text"]
 
@@ -536,6 +548,22 @@ FocusScope {
                 set.clear();
                 refresh_settings();
                 setsView.currentIndex = i;
+                break;
+            case "set_games_rows":
+                if (settings["gamesRows"] >= 5)
+                    settings["gamesRows"] = 1;
+                else
+                    settings["gamesRows"] = (settings["gamesRows"] + 1);
+                api.memory.set("gamesRows", settings["gamesRows"]);
+                set.setProperty(i, "intprop", settings["gamesRows"]);
+                break;
+            case "set_collection_rows":
+                if (settings["collectionRows"] >= 3)
+                    settings["collectionRows"] = 1;
+                else
+                    settings["collectionRows"] = (settings["collectionRows"] + 1);
+                api.memory.set("collectionRows", settings["collectionRows"]);
+                set.setProperty(i, "intprop", settings["collectionRows"]);
                 break;
         }
     }
