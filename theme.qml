@@ -98,6 +98,8 @@ FocusScope {
 
         // Interface Settings
         "wide": api.memory.has("wide") ? api.memory.get("wide") : false,
+        "gamesRows": api.memory.has("gamesRows") ? api.memory.get("gamesRows") : 2,
+        "collectionRows": api.memory.has("collectionRows") ? api.memory.get("collectionRows") : 2,         
         "enlargeBar": api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false,
         "useClockbar": api.memory.has("useClockbar") ? api.memory.get("useClockbar") : false, // Formerly sbsl
         // + Language

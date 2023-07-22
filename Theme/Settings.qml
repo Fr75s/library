@@ -93,6 +93,16 @@ FocusScope {
                 is: false
             },
             {
+                id: "games_rows",
+                behavior: "set_games_rows",
+                name: loc.settings_games_grid_rows
+            },
+            {
+                id: "collection_rows",
+                behavior: "set_collection_rows",
+                name: loc.settings_collection_grid_rows
+            },
+            {
                 id: "enlarge_bar",
                 behavior: "toggle",
                 name: loc.settings_enlarge_bar,
@@ -536,6 +546,18 @@ FocusScope {
                 set.clear();
                 refresh_settings();
                 setsView.currentIndex = i;
+                break;
+            case "set_games_rows":
+                if (settings["gamesRows"] >= 5)
+                    api.memory.set("gamesRows", 1);
+                else
+                    api.memory.set("gamesRows", (settings["gamesRows"] + 1));
+                break;
+            case "set_collection_rows":
+                if (settings["collectionRows"] >= 3)
+                    api.memory.set("collectionRows", 1);
+                else
+                    api.memory.set("collectionRows", (settings["collectionRows"] + 1));
                 break;
         }
     }
