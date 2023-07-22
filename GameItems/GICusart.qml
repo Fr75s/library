@@ -158,7 +158,6 @@ Item {
 
         anchors.centerIn: parent
 
-        visible: !settings["plainBG"]
         opacity: giShadowOp
 
         radius: giShadowRad

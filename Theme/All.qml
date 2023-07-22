@@ -1,5 +1,5 @@
 import QtQuick 2.8
-import QtMultimedia 5.9
+import QtMultimedia 5.15
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
 import QtQuick.Window 2.15

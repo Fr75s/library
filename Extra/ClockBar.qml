@@ -15,7 +15,7 @@ Item {
 		height: parent.height
 
 		opacity: 0.5
-		color: colors["barBG"]
+		color: colors["clockBarBG"]
 	}
 
 	Text {
@@ -66,10 +66,16 @@ Item {
 		horizontalAlignment: Text.AlignLeft
 		verticalAlignment: Text.AlignVCenter
 
-		text: isNaN(api.device.batteryPercent) ? "" : api.device.batteryPercent + "%"
+		text: isNaN(api.device.batteryPercent) ? "" : formPercent(api.device.batteryPercent) + "%"
 		color: colors["text"]
 		font.family: gilroyExtraBold.name
 		font.pixelSize: height / 2
+	}
+
+
+	// Makes battery percentage readable (rather than a random decimal number)
+	function formPercent(percent) {
+		return Math.round(percent * 100);
 	}
 
 }
