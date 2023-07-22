@@ -102,24 +102,26 @@ FocusScope {
         "collectionRows": api.memory.has("collectionRows") ? api.memory.get("collectionRows") : 2,         
         "enlargeBar": api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false,
         "useClockbar": api.memory.has("useClockbar") ? api.memory.get("useClockbar") : false, // Formerly sbsl
-        // + Language
+
+        // Localization + Language
         "24hClock": api.memory.has("24hClock") ? api.memory.get("24hClock") : false,
     }
 
     /* COLORS
      * These are the lists of colors used by this theme.
-     * There are 2 default color schemes: POLAR and CLASSIC
+     * There are 2 default color schemes: PLANET and CLASSIC
      * Each color scheme is an object with properties containing each color
      * Use the properties for both color schemes here to make your own, or just see how these ones work.
      */
 
 
     property var colorschemes: {
-        "polar": {
+        "planet": {
             "light": {
                 "plainBG": "#F2F6FF", // Used as the flat background color
                 "text": "#16171A", // Used as the text color
                 "accent": "#74AAFF", // Used as the accent color (slider circles in settings)
+                "clockBarBG": "#FFFFFF", // Used as the clock bar background color
                 "barBG": "#0F1114", // Used as the bottom bar color
                 "bottomIcons": "#F2F6FF", // Used as the color of the bottom bar icons
                 "plainSetting": "#DEEAFF", // Used as the color of plain BG settings or alternative background color (e.g. search bar color)
@@ -137,6 +139,7 @@ FocusScope {
                 "plainBG": "#16171A",
                 "text": "#F2F6FF",
                 "accent": "#74AAFF",
+                "clockBarBG": "#000000",
                 "barBG": "#0F1114",
                 "bottomIcons": "#F2F6FF",
                 "plainSetting": "#26282D",
@@ -156,6 +159,7 @@ FocusScope {
                 "plainBG": "#FFFFFF",
                 "text": "black",
                 "accent": "black",
+                "clockBarBG": "#DDDDDD",
                 "barBG": "black",
                 "bottomIcons": "white",
                 "plainSetting": "#EEEEEE",
@@ -173,6 +177,7 @@ FocusScope {
                 "plainBG": "#121212",
                 "text": "white",
                 "accent": "white",
+                "clockBarBG": "black",
                 "barBG": "black",
                 "bottomIcons": "white",
                 "plainSetting": "#242424",
@@ -191,7 +196,7 @@ FocusScope {
 
     // Which colors to use right now
     // MODIFICATION TIP: Replace everything after "colors:" with the address of your colorscheme to use a custom color scheme, like so: colorschemes["mycolorscheme"]["dark"]
-    property var colors: settings["classicColors"] ? (settings["light"] ? colorschemes["classic"]["light"] : colorschemes["classic"]["dark"]) : (settings["light"] ? colorschemes["polar"]["light"] : colorschemes["polar"]["dark"])
+    property var colors: settings["classicColors"] ? (settings["light"] ? colorschemes["classic"]["light"] : colorschemes["classic"]["dark"]) : (settings["light"] ? colorschemes["planet"]["light"] : colorschemes["planet"]["dark"])
 
 
 

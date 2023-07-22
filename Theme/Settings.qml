@@ -170,17 +170,17 @@ FocusScope {
 
 
             {
-                id: "change_localization",
-                behavior: "set_lang",
-                header: loc.settings_header_localization,
-                name: loc.settings_change_localization,
-                strprop: currentLanguage
-            },
-            {
                 id: "24h_clock",
                 behavior: "toggle",
+                header: loc.settings_header_localization,
                 name: loc.settings_24h_clock,
                 setting: "24hClock",
+            },
+            {
+                id: "change_localization",
+                behavior: "set_lang",
+                name: loc.settings_change_localization,
+                strprop: currentLanguage
             }
         ].forEach(function(e) { set.append(e); });
     }
