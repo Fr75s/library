@@ -86,7 +86,7 @@ FocusScope {
         anchors.rightMargin: parent.width * 0.05
 
         visible: false
-        source: settings["useSVG"] ? "../assets/theme/up.svg" : "../assets/theme/up.png"
+        source: "../assets/theme/up.svg"
     }
     // Used to color the icon
 	ColorOverlay {

@@ -12,7 +12,6 @@ Row {
 
 	// Image Source
 	property url src: ""
-	property url srcp: ""
 
 	// Labels for each page, with each element corresponding to each page
 	property var label: ["0", "1", "2", "3"]
@@ -32,7 +31,7 @@ Row {
 
 		anchors.verticalCenter: parent.verticalCenter
 
-		source: settings["useSVG"] ? src : srcp
+		source: src
 		visible: false
 	}
 

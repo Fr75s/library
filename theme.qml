@@ -83,7 +83,6 @@ FocusScope {
         "roundedGames": api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false,
         "blurredCollections": api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true,
         "disableWideHeader": api.memory.has("disableWideHeader") ? api.memory.get("disableWideHeader") : false,
-        "useSVG": api.memory.has("useSVG") ? api.memory.get("useSVG") : false,
         "classicColors": api.memory.has("classicColors") ? api.memory.get("classicColors") : false,
         "centerTitles": api.memory.has("centerTitles") ? api.memory.get("centerTitles") : false,
         "bgChoice": api.memory.has("bgChoice") ? api.memory.get("bgChoice") : 1,
@@ -243,7 +242,7 @@ FocusScope {
             Image { // Home
                 id: bbHome
                 mipmap: true
-                source: settings["useSVG"] ? "./assets/theme/home.svg" : "./assets/theme/home.png"
+                source: "./assets/theme/home.svg"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -258,7 +257,7 @@ FocusScope {
             Image { // All/Search
                 id: bbAll
                 mipmap: true
-                source: isFeed ? (settings["useSVG"] ? "./assets/theme/feed.svg" : "./assets/theme/feed.png") : (settings["useSVG"] ? "./assets/theme/search.svg" : "./assets/theme/search.png")
+                source: isFeed ? "./assets/theme/feed.svg" : "./assets/theme/search.svg"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -273,7 +272,7 @@ FocusScope {
             Image { // Collections
                 id: bbCollect
                 mipmap: true
-                source: settings["useSVG"] ? "./assets/theme/collections.svg" : "./assets/theme/collections.png"
+                source: "./assets/theme/collections.svg"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize
@@ -288,7 +287,7 @@ FocusScope {
             Image { // Settings
                 id: bbSet
                 mipmap: true
-                source: settings["useSVG"] ? "./assets/theme/settings.svg" : "./assets/theme/settings.png"
+                source: "./assets/theme/settings.svg"
                 fillMode: Image.PreserveAspectFit
 
                 height: iconSize

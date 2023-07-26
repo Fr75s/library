@@ -71,14 +71,6 @@ FocusScope {
                 setting: "disableWideHeader"
             },
             {
-                id: "use_svg",
-                behavior: "toggle",
-                name: loc.settings_use_svg,
-                setting: "useSVG",
-                info: loc.settings_use_svg_info,
-                is: false
-            },
-            {
                 id: "classic_colors",
                 behavior: "toggle",
                 name: loc.settings_classic_colors,
