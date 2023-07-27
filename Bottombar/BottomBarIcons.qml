@@ -47,7 +47,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/A.svg"
+                src: "../assets/buttons/universal/A.svg"
 
                 // Label for Home, Search, Collections & Settings respectively.
                 // Same pattern for each IconPair.
@@ -60,7 +60,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/B.svg"
+                src: "../assets/buttons/universal/B.svg"
 
                 label: ["", (isFeed ? "" : loc.bottomBar_bKeyboard), loc.bottomBar_bExit, ""]
 
@@ -71,7 +71,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/Y.svg"
+                src: "../assets/buttons/universal/Y.svg"
 
                 label: [loc.bottomBar_yFavorite, (isFeed ? loc.bottomBar_yNext : loc.bottomBar_yKeyboard), loc.bottomBar_yFavorite, loc.bottomBar_yInfo]
 
@@ -107,7 +107,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/L1.svg"
+                src: "../assets/buttons/universal/L1.svg"
 
 
                 label: [" ", " ", " ", " "]
@@ -119,7 +119,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/R1.svg"
+                src: "../assets/buttons/universal/R1.svg"
 
                 label: [loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage]
 
@@ -129,7 +129,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/L2.svg"
+                src: "../assets/buttons/universal/L2.svg"
 
                 label: ["", loc.all_feed, "", ""]
 
@@ -140,7 +140,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/X.svg"
+                src: "../assets/buttons/universal/X.svg"
 
                 label: ["", (isFeed ? "" : loc.bottomBar_xKeyboard), "", loc.bottomBar_xNext]
 
