@@ -123,45 +123,39 @@ FocusScope {
     }
 
     // Clickable icon to scroll back up
-    Image {
-        id: homeUpArrow
-
+    Item {
         width: height
         height: parent.height * 0.1
-        visible: false
-
-        mipmap: true
-
         y: uiY + parent.height * 0.45
-
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
-        source: "../assets/theme/up.svg"
-
+        visible: settings["mouseNav"]
         Behavior on y {
             SmoothedAnimation { velocity: animVel }
         }
-    }
-
-    // Used to color the icon
-	ColorOverlay {
-		anchors.fill: homeUpArrow
-		source: homeUpArrow
-		color: colors["text"]
-		visible: settings["mouseNav"]
-
-		MouseArea {
+        Image {
+            id: homeUpArrow
+            visible: false
+            mipmap: true
             anchors.fill: parent
-
-            onClicked: {
-                if (focused == 1) {
-                    if (!nosfx)
-                        sNav.play();
-                    focused = 0;
+            source: "../assets/theme/up.svg"
+        }
+        ColorOverlay {
+            anchors.fill: homeUpArrow
+            source: homeUpArrow
+            color: colors["text"]
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (focused == 1) {
+                        if (!nosfx)
+                            sNav.play();
+                        focused = 0;
+                    }
                 }
             }
         }
-	}
+    }
 
     // Recent Games List
     // Shows all the games you've recently played.

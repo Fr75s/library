@@ -22,26 +22,24 @@ Row {
 
 	visible: (label[menu] != "")
 
-	// Icon
-	Image {
-		id: iconpicon
+	Item { // Home
 		width: height
 		height: parent.height * .8
-		mipmap: true
-
 		anchors.verticalCenter: parent.verticalCenter
-
-		source: src
-		visible: false
-	}
-
-	// Used to color the icon
-	ColorOverlay {
-		width: iconpicon.width
-		height: iconpicon.height
-		source: iconpicon
-		color: colors["bottomIcons"]
-		anchors.verticalCenter: parent.verticalCenter
+		// Icon
+		Image {
+			id: iconpicon
+			anchors.fill: parent
+			mipmap: true
+			source: src
+			visible: false
+		}
+		// Used to color the icon
+		ColorOverlay {
+            anchors.fill: iconpicon
+            source: iconpicon
+			color: colors["bottomIcons"]
+		}
 	}
 
 	// Text
