@@ -65,6 +65,12 @@ FocusScope {
                 setting: "blurredCollections"
             },
             {
+                id: "disable_wide_header",
+                behavior: "toggle",
+                name: loc.settings_disable_wide_header,
+                setting: "disableWideHeader"
+            },
+            {
                 id: "use_svg",
                 behavior: "toggle",
                 name: loc.settings_use_svg,
@@ -80,6 +86,13 @@ FocusScope {
                 info: loc.settings_classic_colors_info,
                 is: false
             },
+            {
+                id: "change_bg",
+                behavior: "sp_change_bg",
+                name: loc.settings_change_bg,
+                setting: "bgChoice",
+                intprop: settings["bgChoice"]
+            },
 
 
 
@@ -94,14 +107,18 @@ FocusScope {
             },
             {
                 id: "games_rows",
-                behavior: "set_games_rows",
+                behavior: "counter",
+                maxValue: 5,
                 name: loc.settings_games_grid_rows,
+                setting: "gamesRows",
                 intprop: settings["gamesRows"]
             },
             {
                 id: "collection_rows",
-                behavior: "set_collection_rows",
+                behavior: "counter",
+                maxValue: 3,
                 name: loc.settings_collection_grid_rows,
+                setting: "collectionRows",
                 intprop: settings["collectionRows"]
             },
             {
@@ -180,7 +197,7 @@ FocusScope {
             },
             {
                 id: "change_localization",
-                behavior: "set_lang",
+                behavior: "sp_set_lang",
                 name: loc.settings_change_localization,
                 strprop: currentLanguage
             }
@@ -427,7 +444,11 @@ FocusScope {
 
                             onClicked: {
                                 if (isCurrentItem) {
-                                    changeSetting(behavior, setting);
+                                    if (behavior === "counter") {
+                                        changeSetting(behavior, setting, maxValue);
+                                    } else {
+                                        changeSetting(behavior, setting);
+                                    }
                                     if (!settings["nosfx"])
                                         sSwitch.play();
                                 } else {
@@ -484,7 +505,12 @@ FocusScope {
                 event.accepted = true;
 
                 var selectedSetting = set.get(setsView.currentIndex);
-                changeSetting(selectedSetting.behavior, selectedSetting.setting);
+
+                if (selectedSetting.behavior === "counter") {
+                    changeSetting(selectedSetting.behavior, selectedSetting.setting, selectedSetting.maxValue);
+                } else {
+                    changeSetting(selectedSetting.behavior, selectedSetting.setting);
+                }
             }
 
             // Show the info: It switches the info and name properties, and toggles 'is'.
@@ -529,42 +555,116 @@ FocusScope {
     }
 
     // Changing the setting. Quite clunky, but there is little that can be done.
-    function changeSetting(behavior, setting) {
+    function changeSetting(behavior, setting, maxValue = 5) {
         switch (behavior) {
+            // Generic Behaviors
             case "toggle":
-                console.log("Toggling", setting)
+                console.log("Toggling", setting);
                 settings[setting] = !settings[setting];
                 api.memory.set(setting, settings[setting]);
+
+                // Special Case: Update background on light/dark mode
+                if (setting === "light") {
+                    backgroundImage.source = settings["light"] ? `../assets/backgrounds/light-${settings["bgChoice"]}.jpg` : `../assets/backgrounds/dark-${settings["bgChoice"]}.jpg`
+                }
+
                 break;
-            case "set_lang":
+            case "counter":
+                console.log("Incrementing", setting);
+                if (settings[setting] >= maxValue)
+                    settings[setting] = 1;
+                else
+                    settings[setting] = (settings[setting] + 1);
+                api.memory.set(setting, settings[setting]);
+                set.setProperty(i, "intprop", settings[setting]);
+                break;
+
+            // Special Behaviors
+            case "sp_set_lang":
                 if (langs.indexOf(currentLanguage) + 1 >= langs.length)
                     currentLanguage = langs[0];
                 else
                     currentLanguage = langs[langs.indexOf(currentLanguage) + 1];
                 loc = localizationData.getLocalization(currentLanguage);
 
+                console.log("Setting Language to", currentLanguage);
+
                 api.memory.set("currentLanguage", currentLanguage);
                 set.setProperty(i, "strprop", currentLanguage);
+
                 set.clear();
                 refresh_settings();
                 setsView.currentIndex = i;
                 break;
-            case "set_games_rows":
-                if (settings["gamesRows"] >= 5)
-                    settings["gamesRows"] = 1;
-                else
-                    settings["gamesRows"] = (settings["gamesRows"] + 1);
-                api.memory.set("gamesRows", settings["gamesRows"]);
-                set.setProperty(i, "intprop", settings["gamesRows"]);
-                break;
-            case "set_collection_rows":
-                if (settings["collectionRows"] >= 3)
-                    settings["collectionRows"] = 1;
-                else
-                    settings["collectionRows"] = (settings["collectionRows"] + 1);
-                api.memory.set("collectionRows", settings["collectionRows"]);
-                set.setProperty(i, "intprop", settings["collectionRows"]);
+            case "sp_change_bg":
+                console.log("Attempting to Increment Background");
+
+                // Don't do anything if we're not loading
+                if ((bgCheckImage.status == Image.Ready || bgCheckImage.status == Image.Error)) {
+                    validDarkBG = false;
+                    validBG = false;
+
+                    bgCheckNumber += 1;
+                    bgChangeSettingIndex = i;
+
+                    bgCheckImage.source = `../assets/backgrounds/dark-${bgCheckNumber}.jpg`;
+                }
+
                 break;
         }
+    }
+
+    // For Background image validity checks
+    property int bgCheckNumber: settings["bgChoice"]
+    property int bgChangeSettingIndex: 1
+
+    property bool validDarkBG: false
+    property bool validBG: false
+
+    Image {
+        id: bgCheckImage
+        visible: false
+        //z: -10
+        source: `../assets/backgrounds/dark-${bgCheckNumber}.jpg`
+
+        onStatusChanged: {
+            //console.log(`STATUS (${source}): ${bgCheckImage.status}`);
+            if (bgCheckImage.status == Image.Ready) {
+                if (!validDarkBG) {
+                    console.log(`Checking Light Mode... (${bgCheckNumber})`);
+                    validDarkBG = true;
+                    source = `../assets/backgrounds/light-${bgCheckNumber}.jpg`
+                } else {
+                    console.log(`Background Index is valid! (${bgCheckNumber})`);
+                    validBG = true;
+                    setBgTo(bgCheckNumber);
+                }
+            }
+            if (bgCheckImage.status == Image.Error) {
+                validDarkBG = false;
+                validBG = false;
+                if (bgCheckNumber > 1) {
+                    console.log("Final background reached, going back...");
+                    bgCheckNumber = 1;
+                    source = `../assets/backgrounds/dark-${bgCheckNumber}.jpg`
+                } else {
+                    // No backgrounds available
+                    console.log("No backgrounds available at all.");
+                    noBackgroundsAvailable = true;
+                }
+            }
+        }
+    }
+
+    function setBgTo(index) {
+        console.log("Changing to background", index);
+
+        settings["bgChoice"] = index;
+        api.memory.set("bgChoice", index);
+        set.setProperty(bgChangeSettingIndex, "intprop", index);
+
+        backgroundImage.source = settings["light"] ? `../assets/backgrounds/light-${settings["bgChoice"]}.jpg` : `../assets/backgrounds/dark-${settings["bgChoice"]}.jpg`
+
+        console.log(`Background Image Source is now ${backgroundImage.source}`);
     }
 }

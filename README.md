@@ -25,6 +25,8 @@ I used other themes as references while building Library. These themes are liste
 - https://github.com/TigraTT-Driver/shinretro: A theme which provided the functionality for portrait-style steam game box art and more. I didn't find out about this theme until Library was mostly complete.
 - https://github.com/PlayingKarrde/clearOS: A theme providing part of the search functionality of the theme.
 
+I would also like to thank [TigraTT-Driver](https://github.com/TigraTT-Driver/), who has contributed several new features to Library and who has provided the German translation.
+
 ***
 
 ## Issues?

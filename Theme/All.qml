@@ -285,10 +285,10 @@ FocusScope {
         Keys.onUpPressed: {
             if (!settings["nosfx"]) sNav.play();
             if (settings["wide"]) {
-                if (allView.currentIndex < 2)
+                if (allView.currentIndex < settings["gamesRows"])
                     keys.invoke()
             } else {
-                if (allView.currentIndex < 6)
+                if (allView.currentIndex < (settings["gamesRows"] * 3))
                     keys.invoke()
             }
             if (!searching)
@@ -300,13 +300,13 @@ FocusScope {
 
             // Go to last element if no element below on non-final row
             if (settings["wide"]) {
-                if (allView.currentIndex + 2 >= allView.count)
+                if (allView.currentIndex + (settings["gamesRows"]) >= allView.count && allView.currentIndex % (settings["gamesRows"]) > (allView.count - 1) % (settings["gamesRows"]))
                     allView.currentIndex = allView.count - 1;
                 else {
                     moveCurrentIndexDown();
                 }
             } else {
-                if (allView.currentIndex + 6 >= allView.count && allView.currentIndex % 6 > (allView.count - 1) % 6)
+                if (allView.currentIndex + (settings["gamesRows"] * 3) >= allView.count && allView.currentIndex % (settings["gamesRows"] * 3) > (allView.count - 1) % (settings["gamesRows"] * 3))
                     allView.currentIndex = allView.count - 1;
                 else {
                     moveCurrentIndexDown();

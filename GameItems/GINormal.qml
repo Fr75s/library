@@ -18,6 +18,7 @@ Item {
     // Imageless backdrop
     Text {
         id: gameItemText
+
         anchors.fill: parent
 
         horizontalAlignment: Text.AlignHCenter
@@ -26,7 +27,8 @@ Item {
         text: currentGame.title
         wrapMode: Text.Wrap
 
-        font.pixelSize: vpx(16)
+        // Max gamesRows can be is 5, i've found 5 / rows to work well for scaling
+        font.pixelSize: vpx(8) * (5 / settings["gamesRows"])
         font.family: gilroyLight.name
         font.bold: true
 
@@ -88,7 +90,7 @@ Item {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
 
-            visible: settings["wide"] || (wideHead && index == 0)
+            visible: (settings["wide"] || (wideHead && index == 0)) && !settings["disableWideHeader"]
 
             color: "#60000000"
         }
@@ -143,7 +145,7 @@ Item {
         anchors.fill: gameItemImageBlur
         source: gameItemImageBlur
         maskSource: gameItemBlurMask
-        visible: settings["wide"] || (wideHead && index == 0)
+        visible: (settings["wide"] || (wideHead && index == 0)) && !settings["disableWideHeader"]
     }
 
     Rectangle {
@@ -168,9 +170,11 @@ Item {
         text: currentGame.title
         wrapMode: Text.WordWrap
 
-        visible: settings["wide"] || (wideHead && index == 0)
+        visible: (settings["wide"] || (wideHead && index == 0)) && !settings["disableWideHeader"]
 
-        font.pixelSize: vpx(16)
+        // The wide header is always present in the home screen at the same size;
+        // to accomodate smaller wide games, scale based on height.
+        font.pixelSize: height / 3.5
         font.family: gilroyLight.name
         font.bold: true
 

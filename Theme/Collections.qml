@@ -197,7 +197,7 @@ FocusScope {
             if (!settings["nosfx"]) sNav.play();
 
             // Go to last element if no element below on non-final row
-            if (collectionsView.currentIndex + 6 >= collectionsView.count && collectionsView.currentIndex % 6 > (collectionsView.count - 1) % 6)
+            if (collectionsView.currentIndex + (settings["collectionRows"] * 3) >= collectionsView.count && collectionsView.currentIndex % (settings["collectionRows"] * 3) > (collectionsView.count - 1) % (settings["collectionRows"] * 3))
                 collectionsView.currentIndex = collectionsView.count - 1;
             else {
                 moveCurrentIndexDown();
@@ -301,13 +301,13 @@ FocusScope {
 
             // Go to last element if no element below on non-final row
             if (settings["wide"]) {
-                if (collectionGamesView.currentIndex + 2 >= collectionGamesView.count)
+                if (collectionGamesView.currentIndex + (settings["gamesRows"]) >= collectionGamesView.count && collectionGamesView.currentIndex % (settings["gamesRows"]) > (collectionGamesView.count - 1) % (settings["gamesRows"]))
                     collectionGamesView.currentIndex = collectionGamesView.count - 1;
                 else {
                     moveCurrentIndexDown();
                 }
             } else {
-                if (collectionGamesView.currentIndex + 6>= collectionGamesView.count && collectionGamesView.currentIndex % 6 > (collectionGamesView.count - 1) % 6)
+                if (collectionGamesView.currentIndex + (settings["gamesRows"] * 3) >= collectionGamesView.count && collectionGamesView.currentIndex % (settings["gamesRows"] * 3) > (collectionGamesView.count - 1) % (settings["gamesRows"] * 3))
                     collectionGamesView.currentIndex = collectionGamesView.count - 1;
                 else {
                     moveCurrentIndexDown();

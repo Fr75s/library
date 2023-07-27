@@ -82,9 +82,11 @@ FocusScope {
         "noBtns": api.memory.has("noBtns") ? api.memory.get("noBtns") : true,
         "roundedGames": api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false,
         "blurredCollections": api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true,
+        "disableWideHeader": api.memory.has("disableWideHeader") ? api.memory.get("disableWideHeader") : false,
         "useSVG": api.memory.has("useSVG") ? api.memory.get("useSVG") : false,
         "classicColors": api.memory.has("classicColors") ? api.memory.get("classicColors") : false,
         "centerTitles": api.memory.has("centerTitles") ? api.memory.get("centerTitles") : false,
+        "bgChoice": api.memory.has("bgChoice") ? api.memory.get("bgChoice") : 1,
 
         // Behavior Settings
         "mouseNav": api.memory.has("mouseNav") ? api.memory.get("mouseNav") : true,
@@ -422,16 +424,18 @@ FocusScope {
         z: -15
         anchors.fill: parent
 
-        source: settings["light"] ? "./background-light.jpg" : "./background-dark.jpg"
+        // source: settings["light"] ? "./background-light.jpg" : "./background-dark.jpg"
+        source: settings["light"] ? `./assets/backgrounds/light-${settings["bgChoice"]}.jpg` : `./assets/backgrounds/dark-${settings["bgChoice"]}.jpg`
 
         visible: !settings["plainBG"]
     }
 
     // Background Blur
 
-    ShaderEffectSource{
-        id: shaderSource
+    ShaderEffectSource {
+        id: backgroundShaderSource
         sourceItem: backgroundImage
+        live: true
         width: backgroundImage.width
         height: backgroundImage.height
         z: -14
@@ -446,10 +450,10 @@ FocusScope {
     }
 
     GaussianBlur {
-        anchors.fill: shaderSource
+        anchors.fill: backgroundShaderSource
         z: -14
 
-        source: shaderSource
+        source: backgroundShaderSource
         radius: 16
         samples: 14
         visible: !settings["plainBG"]
@@ -462,7 +466,7 @@ FocusScope {
 		color: colors["plainBG"]
 		anchors.fill: parent
 
-		visible: settings["plainBG"] || !("./background-light.jpg" || "./background-dark.jpg")
+		visible: settings["plainBG"] || (backgroundImage.status == Image.Error)
 	}
 
 	//
@@ -509,6 +513,8 @@ FocusScope {
 	//
     // Behaviors
     //
+
+    property bool noBackgroundsAvailable: false
 
     // Change the page if L1/R1 (LB/RB) are pressed, and loop around if necessary.
     Keys.onPressed: {

@@ -4,9 +4,7 @@
 
 1. [Necessary Information](#some-information)
 2. [Quick Modifications](#quick-modifications)
-    - [Replacing Backgrounds](#replacing-the-backgrounds)
-    - [Center the Titles](#center-titles)
-    - [Wide Mode Consistency](#wide-mode-consistency-in-the-collections-page)
+    - [Adding/Replacing Backgrounds (Updated for 1.4.0)](#replacing-the-backgrounds)
     - [Custom Color Schemes (1.2.0+)](#custom-color-schemes)
     - [Extra Collections](#extra-collections)
 3. [Translation](#translation)
@@ -21,17 +19,11 @@ Here are some quick modifications you can do on Library. These don't teach you m
 
 ### Replacing the Backgrounds
 
-Replacing the backgrounds involves either replacing the images or replacing the plain color. Each will be covered below:
+You can easily add/change the backgrounds shown in Library.
 
-- Image Replacement<br>
-To replace the background images, simply copy the background images to the theme folder and rename them to background-dark and background-light. Make sure that both images exist, and that they have the .jpg extension.
+To do this, go to `assets/backgrounds` in the theme's root directory (`[LIBRARY FOLDER]/assets/backgrounds`). Then, add your desired backgrounds, but be sure to add one for light mode and one for dark mode. Rename the backgrounds to `light-[number].jpg` and `dark-[number].jpg`, where `[number]` is the next number from the last backgrounds (which would be 3 if no backgrounds have been added, as Library comes with 2 sets of backgrounds.). Now, you can change to your background by finding the "Change Background" option.
 
-- Color Replacement<br>
-To replace the plain background color, open theme.qml, and find the Rectangle object with the id `backgroundPlain` (you may ctrl+f for this). You will see a line defining the property `color`, which looks like the code block below this. Change #FFFFFF to the light mode color, and #121212 to the dark mode color, each in hex format.
-```
-color: light ? "#FFFFFF" : "#121212"
-```
-<br>
+You can also set the color of the plain background by setting the color for `plainBG`. To learn more about changing colors, see [Custom Color Schemes](#custom-color-schemes).
 
 ### Center Titles
 
@@ -41,23 +33,6 @@ Go into theme.qml, and find the variable `centerTitles` (it should be under all 
 
 ```
 property bool centerTitles: true
-```
-
-### Wide Mode Consistency In the Collections Page
-
-By default, wide mode does not affect the collections page collections. This is because there are only portrait-style icons for each collection. A simple modification, however, can easily allow you to change this.
-
-To perform this modification, go to `[THEME_FOLDER]/Theme/Collections.qml`. Then, under the GridView `collectionsView`, modify the following line.
-
-```
-GridView {
-    id: collectionsView
-    ...
-
-    cellWidth: wide ? (width / 2) : (width / 6)
-
-    ...
-}
 ```
 
 This is all that is needed to make the Collections page top menu become wide in wide mode. One could get wide images if they wish, but to implement these, it would take a bit more effort in GICusart.qml, which I will not cover here.

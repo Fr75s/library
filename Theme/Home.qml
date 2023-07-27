@@ -290,7 +290,7 @@ FocusScope {
         anchors.horizontalCenter: parent.horizontalCenter
 
         cellWidth: settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
-        cellHeight: height / 2 /// (Math.ceil(favorites.count / 6))
+        cellHeight: height / settings["gamesRows"] /// (Math.ceil(favorites.count / 6))
 
         //currentIndex: 0
         model: favorites
@@ -343,11 +343,22 @@ FocusScope {
         Keys.onUpPressed: {
             if (!settings["nosfx"])
                 sNav.play();
+
+            /*
+
+             TOP ROW:
+                normal:
+                    n * 3 rows
+                wide:
+                    n rows
+
+             */
+
             if (settings["wide"]) {
-                if (favoriteView.currentIndex < 2)
+                if (favoriteView.currentIndex < settings["gamesRows"])
                     focused = 0
             } else {
-                if (favoriteView.currentIndex < 6)
+                if (favoriteView.currentIndex < (settings["gamesRows"] * 3))
                     focused = 0
             }
             if (focused == 1)
@@ -360,13 +371,13 @@ FocusScope {
 
             // Go to last element if no element below on non-final row
             if (settings["wide"]) {
-                if (favoriteView.currentIndex + 2 >= favoriteView.count)
+                if (favoriteView.currentIndex + (settings["gamesRows"]) >= favoriteView.count && favoriteView.currentIndex % (settings["gamesRows"]) > (favoriteView.count - 1) % (settings["gamesRows"]))
                     favoriteView.currentIndex = favoriteView.count - 1;
                 else {
                     moveCurrentIndexDown();
                 }
             } else {
-                if (favoriteView.currentIndex + 6 >= favoriteView.count && favoriteView.currentIndex % 6 > (favoriteView.count - 1) % 6)
+                if (favoriteView.currentIndex + (settings["gamesRows"] * 3) >= favoriteView.count && favoriteView.currentIndex % (settings["gamesRows"] * 3) > (favoriteView.count - 1) % (settings["gamesRows"] * 3))
                     favoriteView.currentIndex = favoriteView.count - 1;
                 else {
                     moveCurrentIndexDown();

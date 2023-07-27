@@ -31,7 +31,7 @@ Item {
         font.bold: true
 
         color: "white"
-        font.pixelSize: vpx(16)
+        font.pixelSize: vpx(10) * (3 / settings["collectionRows"])
         visible: !(settings["videoPlayback"] && doubleFocus && currentItem.assets.videoList.length)
     }
 
