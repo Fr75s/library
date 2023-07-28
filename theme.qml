@@ -304,91 +304,78 @@ FocusScope {
 
             // Note: Each iamge contains a MouseArea that changes the page to the corresponding one when clicked.
             Item { // Home
+                id: bbHome
                 height: iconSize
                 width: iconSize
-                Image {
-                    id: bbHome
-                    anchors.fill: parent
-                    visible: false
-                    mipmap: true
-                    fillMode: Image.PreserveAspectFit
-                    source: "./assets/theme/home.svg"
-
-                }
-                ColorOverlay {
-                    anchors.fill: bbHome
-                    source: bbHome
-                    color: colors["bottomIcons"]
+                Text {
+                    text: icons.nav_home
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {menu = 0; if (!settings["nosfx"]) sTab.play();}
                     }
+                    color: colors["bottomIcons"]
                 }
             }
 
             Item { // All/Search
+                id: bbAll
                 height: iconSize
                 width: iconSize
-                Image {
-                    id: bbAll
-                    anchors.fill: parent
-                    visible: false
-                    mipmap: true
-                    fillMode: Image.PreserveAspectFit
-                    source: isFeed ? "./assets/theme/feed.svg" : "./assets/theme/search.svg"
-                }
-                ColorOverlay {
-                    anchors.fill: bbAll
-                    source: bbAll
-                    color: colors["bottomIcons"]
+                Text {
+                    text: isFeed ? icons.nav_feed : icons.nav_search
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {menu = 1; if (!settings["nosfx"]) sTab.play();}
                     }
+                    color: colors["bottomIcons"]
                 }
             }
 
             Item { // Collections
+                id: bbCollect
                 height: iconSize
                 width: iconSize
-                Image {
-                    id: bbCollect
-                    anchors.fill: parent
-                    visible: false
-                    mipmap: true
-                    fillMode: Image.PreserveAspectFit
-                    source: "./assets/theme/collections.svg"
-                }
-                ColorOverlay {
-                    anchors.fill: bbCollect
-                    source: bbCollect
-                    color: colors["bottomIcons"]
+                Text {
+                    text: icons.nav_collections
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {menu = 2; if (!settings["nosfx"]) sTab.play();}
                     }
+                    color: colors["bottomIcons"]
                 }
             }
 
             Item { // Settings
+                id: bbSet
                 height: iconSize
                 width: iconSize
-                Image {
-                    id: bbSet
-                    anchors.fill: parent
-                    visible: false
-                    mipmap: true
-                    fillMode: Image.PreserveAspectFit
-                    source: "./assets/theme/settings.svg"
-                }
-                ColorOverlay {
-                    anchors.fill: bbSet
-                    source: bbSet
-                    color: colors["bottomIcons"]
+                Text {
+                    text: icons.nav_settings
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {menu = 3; if (!settings["nosfx"]) sTab.play();}
                     }
+                    color: colors["bottomIcons"]
                 }
             }
         }

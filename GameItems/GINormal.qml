@@ -196,16 +196,14 @@ Item {
         Behavior on y {
             SmoothedAnimation { velocity: animVel }
         }
-        Image {
-            id: favImg
-            anchors.fill: parent
-            source: "../assets/theme/favorite.svg"
-            mipmap: true          
-        }
-        ColorOverlay {
-            anchors.fill: favImg
-            source: favImg
-            color: "#EEEEEE"
+        Text {
+            text: icons.star
+            anchors.centerIn: parent
+            font {
+                family: icons.name;
+                pixelSize: parent.height * .6
+            }
+            color: colors["bottomIcons"]
         }
     }
 

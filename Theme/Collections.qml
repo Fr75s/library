@@ -82,17 +82,13 @@ FocusScope {
         Behavior on y {
             SmoothedAnimation { velocity: animVel }
         }
-        Image {
-            id: collectionBackArrow
-            anchors.fill: parent
-            visible: false
-            mipmap: true
-            source: "../assets/theme/up.svg"
-        }
-        ColorOverlay {
-            anchors.fill: collectionBackArrow
-            source: collectionBackArrow
-            color: colors["text"]
+        Text {
+            text: icons.touch_up
+            anchors.centerIn: parent
+            font {
+                family: icons.name;
+                pixelSize: parent.height * .6
+            }
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -101,6 +97,7 @@ FocusScope {
                     gameView = false;
                 }
             }
+            color: colors["text"]
         }
     }
 

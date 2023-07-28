@@ -133,17 +133,13 @@ FocusScope {
         Behavior on y {
             SmoothedAnimation { velocity: animVel }
         }
-        Image {
-            id: homeUpArrow
-            visible: false
-            mipmap: true
-            anchors.fill: parent
-            source: "../assets/theme/up.svg"
-        }
-        ColorOverlay {
-            anchors.fill: homeUpArrow
-            source: homeUpArrow
-            color: colors["text"]
+        Text {
+            text: icons.touch_up
+            anchors.centerIn: parent
+            font {
+                family: icons.name;
+                pixelSize: parent.height * .6
+            }
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -154,6 +150,7 @@ FocusScope {
                     }
                 }
             }
+            color: colors["text"]
         }
     }
 
