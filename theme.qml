@@ -104,6 +104,69 @@ FocusScope {
         property string toggle_on: '\uf204';
         source: "./assets/font/library-icons.woff2";
     }
+    // Button schemes
+    property var btnScheme: {
+        "universal": {
+            A: icons.input_universal_a,
+            X: icons.input_universal_x,
+            L1: icons.input_universal_lb,
+            L2: icons.input_universal_lt,
+            B: icons.input_universal_b,
+            R1: icons.input_universal_rb,
+            R2:icons.input_universal_rt,
+            Y: icons.input_universal_y,
+            Start: icons.input_universal_start,
+            Select: icons.input_universal_select
+        },
+        "universal_jp": {
+            A: icons.input_universal_b,
+            X: icons.input_universal_y,
+            L1: icons.input_universal_lb,
+            L2: icons.input_universal_lt,
+            B: icons.input_universal_a,
+            R1: icons.input_universal_rb,
+            R2:icons.input_universal_rt,
+            Y: icons.input_universal_x,
+            Start: icons.input_universal_start,
+            Select: icons.input_universal_select
+        },
+        "xbox": {
+            A: icons.input_xbox_a,
+            X: icons.input_xbox_x,
+            L1: icons.input_xbox_lb,
+            L2: icons.input_xbox_lt,
+            B: icons.input_xbox_b,
+            R1: icons.input_xbox_rb,
+            R2:icons.input_xbox_rt,
+            Y: icons.input_xbox_y,
+            Start: icons.input_xbox_start,
+            Select: icons.input_xbox_select
+        },
+        "ps": {
+            A: icons.input_ps_a,
+            X: icons.input_ps_x,
+            L1: icons.input_ps_lb,
+            L2: icons.input_ps_lt,
+            B: icons.input_ps_b,
+            R1: icons.input_ps_rb,
+            R2:icons.input_ps_rt,
+            Y: icons.input_ps_y,
+            Start: icons.input_ps_start,
+            Select: icons.input_ps_select
+        },
+        "ps_jp": {
+            A: icons.input_ps_b,
+            X: icons.input_ps_y,
+            L1: icons.input_ps_lb,
+            L2: icons.input_ps_lt,
+            B: icons.input_ps_a,
+            R1: icons.input_ps_rb,
+            R2:icons.input_ps_rt,
+            Y: icons.input_ps_x,
+            Start: icons.input_ps_start,
+            Select: icons.input_ps_select
+        }
+    }
 
 	// Item Specific Variables
 
@@ -144,6 +207,7 @@ FocusScope {
         "light": api.memory.has("light") ? api.memory.get("light") : false,
         "plainBG": api.memory.has("plainBG") ? api.memory.get("plainBG") : false,
         "noBtns": api.memory.has("noBtns") ? api.memory.get("noBtns") : true,
+        "btnsScheme": api.memory.has("btnsScheme") ? api.memory.get("btnsScheme") : "universal",
         "roundedGames": api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false,
         "blurredCollections": api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true,
         "disableWideHeader": api.memory.has("disableWideHeader") ? api.memory.get("disableWideHeader") : false,

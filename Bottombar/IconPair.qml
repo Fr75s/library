@@ -11,7 +11,7 @@ Row {
 	 */
 
 	// Image Source
-	property url src: ""
+	property string src: ""
 
 	// Labels for each page, with each element corresponding to each page
 	property var label: ["0", "1", "2", "3"]
@@ -27,17 +27,17 @@ Row {
 		height: parent.height * .8
 		anchors.verticalCenter: parent.verticalCenter
 		// Icon
-		Image {
-			id: iconpicon
-			anchors.fill: parent
-			mipmap: true
-			source: src
-			visible: false
-		}
-		// Used to color the icon
-		ColorOverlay {
-            anchors.fill: iconpicon
-            source: iconpicon
+		Text {
+			text: src
+			anchors.centerIn: parent
+			font {
+				family: icons.name;
+				pixelSize: parent.height * .6
+			}
+			MouseArea {
+				anchors.fill: parent
+				onClicked: {menu = 0; if (!settings["nosfx"]) sTab.play();}
+			}
 			color: colors["bottomIcons"]
 		}
 	}

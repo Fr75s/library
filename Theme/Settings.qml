@@ -47,6 +47,12 @@ FocusScope {
                 setting: "noBtns"
             },
             {
+                id: "button_scheme",
+                behavior: "sp_change_btns",
+                name: loc.settings_button_scheme,
+                strprop: settings["btnsScheme"]
+            },
+            {
                 id: "rounded_corners",
                 behavior: "toggle",
                 name: loc.settings_rounded_corners,
@@ -602,6 +608,20 @@ FocusScope {
                     bgCheckImage.source = `../assets/backgrounds/dark-${bgCheckNumber}.jpg`;
                 }
 
+                break;
+            case "sp_change_btns":
+                if (settings["btnsScheme"] === "universal")
+                    settings["btnsScheme"] = "universal_jp";
+                else if (settings["btnsScheme"] === "universal_jp")
+                    settings["btnsScheme"] = "ps";
+                else if (settings["btnsScheme"] === "ps")
+                    settings["btnsScheme"] = "ps_jp";
+                else if (settings["btnsScheme"] === "ps_jp")
+                    settings["btnsScheme"] = "xbox";
+                else
+                    settings["btnsScheme"] = "universal";
+                api.memory.set("btnsScheme", settings["btnsScheme"]);
+                set.setProperty(i, "strprop", settings["btnsScheme"]);
                 break;
         }
     }
