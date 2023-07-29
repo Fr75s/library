@@ -47,8 +47,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/A.svg"
-                srcp: "../assets/buttons/A.png"
+                src: btnScheme[settings.btnsScheme].A
 
                 // Label for Home, Search, Collections & Settings respectively.
                 // Same pattern for each IconPair.
@@ -61,8 +60,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/B.svg"
-                srcp: "../assets/buttons/B.png"
+                src: btnScheme[settings.btnsScheme].B
 
                 label: ["", (isFeed ? "" : loc.bottomBar_bKeyboard), loc.bottomBar_bExit, ""]
 
@@ -73,8 +71,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/Y.svg"
-                srcp: "../assets/buttons/Y.png"
+                src: btnScheme[settings.btnsScheme].Y
 
                 label: [loc.bottomBar_yFavorite, (isFeed ? loc.bottomBar_yNext : loc.bottomBar_yKeyboard), loc.bottomBar_yFavorite, loc.bottomBar_yInfo]
 
@@ -110,8 +107,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/L1.svg"
-                srcp: "../assets/buttons/L1.png"
+                src: btnScheme[settings.btnsScheme].L1
 
 
                 label: [" ", " ", " ", " "]
@@ -123,8 +119,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/R1.svg"
-                srcp: "../assets/buttons/R1.png"
+                src: btnScheme[settings.btnsScheme].R1
 
                 label: [loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage]
 
@@ -134,9 +129,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/L2.svg"
-                srcp: "../assets/buttons/L2.png"
-
+                src: btnScheme[settings.btnsScheme].L2
 
                 label: ["", loc.all_feed, "", ""]
 
@@ -147,8 +140,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: "../assets/buttons/X.svg"
-                srcp: "../assets/buttons/X.png"
+                src: btnScheme[settings.btnsScheme].X
 
                 label: ["", (isFeed ? "" : loc.bottomBar_xKeyboard), "", loc.bottomBar_xNext]
 

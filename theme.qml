@@ -40,6 +40,133 @@ FocusScope {
 	FontLoader { id: gilroyLight; source: "./assets/font/Gilroy-Light.otf" }
 	FontLoader { id: ralewayExtraBold; source: "./assets/font/Raleway-ExtraBold.ttf"}
 	FontLoader { id: ralewayLight; source: "./assets/font/Raleway-Light.ttf" }
+    // Custom Font for icons
+    FontLoader {
+        id: icons;
+        property string allgames: '\ue800';
+        property string nav_collections: '\ue801';
+        property string nav_feed: '\ue802';
+        property string nav_home: '\ue803';
+        property string nav_search: '\ue804';
+        property string nav_settings: '\ue805';
+        property string touch_up: '\ue806';
+        property string input_universal_a: '\ue807';
+        property string input_universal_x: '\ue808';
+        property string input_universal_lb: '\ue809';
+        property string input_universal_lt: '\ue80a';
+        property string input_universal_b: '\ue80b';
+        property string input_universal_rb: '\ue80c';
+        property string input_universal_rt: '\ue80d';
+        property string input_universal_y: '\ue80e';
+        property string input_xbox_a: '\ue80f';
+        property string input_xbox_x: '\ue810';
+        property string input_xbox_lb: '\ue811';
+        property string input_xbox_lt: '\ue812';
+        property string input_xbox_b: '\ue813';
+        property string input_xbox_rb: '\ue814';
+        property string input_xbox_rt: '\ue815';
+        property string input_xbox_y: '\ue816';
+        property string input_ps_a: '\ue817';
+        property string input_ps_x: '\ue818';
+        property string input_ps_lb: '\ue819';
+        property string input_ps_lt: '\ue81a';
+        property string input_ps_b: '\ue81b';
+        property string input_ps_rb: '\ue81c';
+        property string input_universal_start: '\ue81d';
+        property string input_universal_select: '\ue81e';
+        property string input_xbox_start: '\ue81f';
+        property string input_xbox_select: '\ue820';
+        property string input_ps_rt: '\ue821';
+        property string input_ps_y: '\ue822';
+        property string input_ps_start: '\ue823';
+        property string input_ps_select: '\ue824';
+        property string star: '\ue825';
+        property string star_empty: '\ue826';
+        property string meta_date: '\ue827';
+        property string meta_dev: '\ue828';
+        property string meta_genre: '\ue829';
+        property string meta_publisher: '\ue82a';
+        property string meta_players: '\ue82b';
+        property string battery_0: '\ue82c';
+        property string battery_10: '\ue82d';
+        property string battery_20: '\ue82e';
+        property string battery_30: '\ue82f';
+        property string battery_40: '\ue830';
+        property string battery_50: '\ue831';
+        property string battery_60: '\ue832';
+        property string battery_70: '\ue833';
+        property string battery_80: '\ue834';
+        property string battery_90: '\ue835';
+        property string battery_100: '\ue836';
+        property string battery_charging: '\ue837';
+        property string star_half: '\uf123';
+        property string toggle_off: '\uf204';
+        property string toggle_on: '\uf204';
+        source: "./assets/font/library-icons.woff2";
+    }
+    // Button schemes
+    property var btnScheme: {
+        "universal": {
+            A: icons.input_universal_a,
+            X: icons.input_universal_x,
+            L1: icons.input_universal_lb,
+            L2: icons.input_universal_lt,
+            B: icons.input_universal_b,
+            R1: icons.input_universal_rb,
+            R2:icons.input_universal_rt,
+            Y: icons.input_universal_y,
+            Start: icons.input_universal_start,
+            Select: icons.input_universal_select
+        },
+        "universal_jp": {
+            A: icons.input_universal_b,
+            X: icons.input_universal_y,
+            L1: icons.input_universal_lb,
+            L2: icons.input_universal_lt,
+            B: icons.input_universal_a,
+            R1: icons.input_universal_rb,
+            R2:icons.input_universal_rt,
+            Y: icons.input_universal_x,
+            Start: icons.input_universal_start,
+            Select: icons.input_universal_select
+        },
+        "xbox": {
+            A: icons.input_xbox_a,
+            X: icons.input_xbox_x,
+            L1: icons.input_xbox_lb,
+            L2: icons.input_xbox_lt,
+            B: icons.input_xbox_b,
+            R1: icons.input_xbox_rb,
+            R2:icons.input_xbox_rt,
+            Y: icons.input_xbox_y,
+            Start: icons.input_xbox_start,
+            Select: icons.input_xbox_select
+        },
+        "ps": {
+            A: icons.input_ps_a,
+            X: icons.input_ps_x,
+            L1: icons.input_ps_lb,
+            L2: icons.input_ps_lt,
+            B: icons.input_ps_b,
+            R1: icons.input_ps_rb,
+            R2:icons.input_ps_rt,
+            Y: icons.input_ps_y,
+            Start: icons.input_ps_start,
+            Select: icons.input_ps_select
+        },
+        "ps_jp": {
+            A: icons.input_ps_b,
+            X: icons.input_ps_y,
+            L1: icons.input_ps_lb,
+            L2: icons.input_ps_lt,
+            B: icons.input_ps_a,
+            R1: icons.input_ps_rb,
+            R2:icons.input_ps_rt,
+            Y: icons.input_ps_x,
+            Start: icons.input_ps_start,
+            Select: icons.input_ps_select
+        }
+    }
 
 	// Item Specific Variables
 
@@ -80,10 +207,10 @@ FocusScope {
         "light": api.memory.has("light") ? api.memory.get("light") : false,
         "plainBG": api.memory.has("plainBG") ? api.memory.get("plainBG") : false,
         "noBtns": api.memory.has("noBtns") ? api.memory.get("noBtns") : true,
+        "btnsScheme": api.memory.has("btnsScheme") ? api.memory.get("btnsScheme") : "universal",
         "roundedGames": api.memory.has("roundedGames") ? api.memory.get("roundedGames") : false,
         "blurredCollections": api.memory.has("blurredCollections") ? api.memory.get("blurredCollections") : true,
         "disableWideHeader": api.memory.has("disableWideHeader") ? api.memory.get("disableWideHeader") : false,
-        "useSVG": api.memory.has("useSVG") ? api.memory.get("useSVG") : false,
         "classicColors": api.memory.has("classicColors") ? api.memory.get("classicColors") : false,
         "centerTitles": api.memory.has("centerTitles") ? api.memory.get("centerTitles") : false,
         "bgChoice": api.memory.has("bgChoice") ? api.memory.get("bgChoice") : 1,
@@ -240,63 +367,79 @@ FocusScope {
             anchors.centerIn: parent
 
             // Note: Each iamge contains a MouseArea that changes the page to the corresponding one when clicked.
-            Image { // Home
+            Item { // Home
                 id: bbHome
-                mipmap: true
-                source: settings["useSVG"] ? "./assets/theme/home.svg" : "./assets/theme/home.png"
-                fillMode: Image.PreserveAspectFit
-
                 height: iconSize
                 width: iconSize
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {menu = 0; if (!settings["nosfx"]) sTab.play();}
+                Text {
+                    text: icons.nav_home
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {menu = 0; if (!settings["nosfx"]) sTab.play();}
+                    }
+                    color: colors["bottomIcons"]
                 }
             }
 
-            Image { // All/Search
+            Item { // All/Search
                 id: bbAll
-                mipmap: true
-                source: isFeed ? (settings["useSVG"] ? "./assets/theme/feed.svg" : "./assets/theme/feed.png") : (settings["useSVG"] ? "./assets/theme/search.svg" : "./assets/theme/search.png")
-                fillMode: Image.PreserveAspectFit
-
                 height: iconSize
                 width: iconSize
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {menu = 1; if (!settings["nosfx"]) sTab.play();}
+                Text {
+                    text: isFeed ? icons.nav_feed : icons.nav_search
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {menu = 1; if (!settings["nosfx"]) sTab.play();}
+                    }
+                    color: colors["bottomIcons"]
                 }
             }
 
-            Image { // Collections
+            Item { // Collections
                 id: bbCollect
-                mipmap: true
-                source: settings["useSVG"] ? "./assets/theme/collections.svg" : "./assets/theme/collections.png"
-                fillMode: Image.PreserveAspectFit
-
                 height: iconSize
                 width: iconSize
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {menu = 2; if (!settings["nosfx"]) sTab.play();}
+                Text {
+                    text: icons.nav_collections
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {menu = 2; if (!settings["nosfx"]) sTab.play();}
+                    }
+                    color: colors["bottomIcons"]
                 }
             }
 
-            Image { // Settings
+            Item { // Settings
                 id: bbSet
-                mipmap: true
-                source: settings["useSVG"] ? "./assets/theme/settings.svg" : "./assets/theme/settings.png"
-                fillMode: Image.PreserveAspectFit
-
                 height: iconSize
                 width: iconSize
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {menu = 3; if (!settings["nosfx"]) sTab.play();}
+                Text {
+                    text: icons.nav_settings
+                    anchors.centerIn: parent
+                    font {
+                        family: icons.name;
+                        pixelSize: parent.height * .6
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {menu = 3; if (!settings["nosfx"]) sTab.play();}
+                    }
+                    color: colors["bottomIcons"]
                 }
             }
         }

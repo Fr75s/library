@@ -183,22 +183,28 @@ Item {
     }
 
     // Favorite Image
-    Image {
-        id: favImg
+    Item {
+        id: favImgItem
         width: height
         height: parent.height * .15
-
         anchors.top: parent.top
         anchors.topMargin: parent.height * .025
         anchors.right: parent.right
         anchors.rightMargin: parent.height * .025
         z: parent.z + 5
-
-        source: settings["useSVG"] ? "../assets/theme/favorite.svg" : "../assets/theme/favorite.png"
-        mipmap: true
-        //color: light ? "#242424" : "#EEEEEE"
-
         visible: currentGame.favorite
+        Behavior on y {
+            SmoothedAnimation { velocity: animVel }
+        }
+        Text {
+            text: icons.star
+            anchors.centerIn: parent
+            font {
+                family: icons.name;
+                pixelSize: parent.height * .6
+            }
+            color: colors["bottomIcons"]
+        }
     }
 
     // Drop shadow for the item
@@ -220,15 +226,15 @@ Item {
 
     // Drop shadow for the favorite star
     DropShadow {
-        source: favImg
-        anchors.fill: favImg
+        source: favImgItem
+        anchors.fill: favImgItem
 
-        visible: favImg.visible
+        visible: favImgItem.visible
         spread: 0.35
 
         radius: 16
         samples: 17
-        z: favImg.z - 1
+        z: favImgItem.z - 1
     }
 
 

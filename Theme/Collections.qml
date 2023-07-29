@@ -72,39 +72,34 @@ FocusScope {
     }
 
     // Clickable Mouse Navigation
-    Image {
-        id: collectionBackArrow
-
+    Item {
         height: parent.height * 0.075
-        width: height
-
-        mipmap: true
-
+        width: height    
         y: parent.height * 0.075
-
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
-
-        visible: false
-        source: settings["useSVG"] ? "../assets/theme/up.svg" : "../assets/theme/up.png"
-    }
-    // Used to color the icon
-	ColorOverlay {
-		anchors.fill: collectionBackArrow
-		source: collectionBackArrow
-		color: colors["text"]
-		visible: gameView && settings["mouseNav"]
-
-		MouseArea {
-            anchors.fill: parent
-
-            onClicked: {
-                if (!settings["nosfx"])
-                    sBack.play();
-                gameView = false;
-            }
+        visible: gameView && settings["mouseNav"]
+        Behavior on y {
+            SmoothedAnimation { velocity: animVel }
         }
-	}
+        Text {
+            text: icons.touch_up
+            anchors.centerIn: parent
+            font {
+                family: icons.name;
+                pixelSize: parent.height * .6
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (!settings["nosfx"])
+                        sBack.play();
+                    gameView = false;
+                }
+            }
+            color: colors["text"]
+        }
+    }
 
     /* collectionsView: Shows collections
      * Works just like a gameView, but has some key differences
