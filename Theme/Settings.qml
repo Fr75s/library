@@ -41,18 +41,6 @@ FocusScope {
                 setting: "plainBG"
             },
             {
-                id: "disable_buttons",
-                behavior: "toggle",
-                name: loc.settings_disable_buttons,
-                setting: "noBtns"
-            },
-            {
-                id: "button_scheme",
-                behavior: "sp_change_btns",
-                name: loc.settings_button_scheme,
-                strprop: settings["btnsScheme"]
-            },
-            {
                 id: "rounded_corners",
                 behavior: "toggle",
                 name: loc.settings_rounded_corners,
@@ -104,6 +92,22 @@ FocusScope {
                 is: false
             },
             {
+                id: "disable_buttons",
+                behavior: "toggle",
+                name: loc.settings_disable_buttons,
+                setting: "noBtns"
+            },
+            {
+                id: "button_scheme",
+                behavior: "list",
+                name: loc.settings_button_scheme,
+                setting: "btnsScheme",
+                order: icons.btnSchemeOrder,
+                displayConvert: icons.btnNameConvert,
+                strprop: icons.btnNameConvert[settings["btnsScheme"]],
+                capitalizationMode: Font.Capitalize
+            },
+            {
                 id: "games_rows",
                 behavior: "counter",
                 maxValue: 5,
@@ -121,11 +125,13 @@ FocusScope {
             },
             {
                 id: "enlarge_bar",
-                behavior: "toggle",
+                behavior: "list",
                 name: loc.settings_enlarge_bar,
-                setting: "enlargeBar",
-                info: loc.settings_enlarge_bar_info,
-                is: false
+                setting: "barSize",
+                order: bottomBarSizeOrder,
+                displayConvert: bottomBarSizeConvert,
+                strprop: bottomBarSizeConvert[settings["barSize"]],
+                capitalizationMode: Font.Capitalize
             },
             {
                 id: "enable_clockbar",
@@ -197,7 +203,8 @@ FocusScope {
                 id: "change_localization",
                 behavior: "sp_set_lang",
                 name: loc.settings_change_localization,
-                strprop: currentLanguage
+                strprop: currentLanguage,
+                capitalizationMode: Font.AllUppercase
             }
         ].forEach(function(e) { set.append(e); });
     }
@@ -433,7 +440,7 @@ FocusScope {
                             font.family: gilroyLight.name
                             font.bold: true
                             font.pixelSize: parent.height * 0.15
-                            font.capitalization: Font.AllUppercase
+                            font.capitalization: capitalizationMode ? capitalizationMode : Font.AllUppercase
                         }
 
                         // Click functionality
@@ -498,11 +505,15 @@ FocusScope {
 
             // Change the setting with a button press
             if (api.keys.isAccept(event)) {
-                if (!settings["nosfx"])
-                    sSwitch.play();
                 event.accepted = true;
 
                 var selectedSetting = set.get(setsView.currentIndex);
+
+                if (!settings["nosfx"])
+                    if (selectedSetting.behavior !== "toggle" || !settings[selectedSetting.setting])
+                        sSwitch.play();
+                    else
+                        sSwitchBack.play();
 
                 if (selectedSetting.behavior === "counter") {
                     changeSetting(selectedSetting.behavior, selectedSetting.setting, selectedSetting.maxValue);
@@ -576,6 +587,23 @@ FocusScope {
                 api.memory.set(setting, settings[setting]);
                 set.setProperty(i, "intprop", settings[setting]);
                 break;
+            case "list":
+                console.log("Changing", setting);
+                var settingConv = set.get(i).displayConvert;
+                var settingList = set.get(i).order;
+
+                var index = Object.values(settingList).indexOf(settings[setting]);
+                var newObj;
+                if (index >= Object.keys(settingList).length - 1) {
+                    newObj = settingList[0];
+                } else {
+                    newObj = settingList[index + 1];
+                }
+                console.log(setting, "is now", newObj);
+
+                api.memory.set(setting, newObj);
+                set.setProperty(i, "strprop", settingConv[newObj]);
+                break;
 
             // Special Behaviors
             case "sp_set_lang":
@@ -608,20 +636,6 @@ FocusScope {
                     bgCheckImage.source = `../assets/backgrounds/dark-${bgCheckNumber}.jpg`;
                 }
 
-                break;
-            case "sp_change_btns":
-                if (settings["btnsScheme"] === "universal")
-                    settings["btnsScheme"] = "universal_jp";
-                else if (settings["btnsScheme"] === "universal_jp")
-                    settings["btnsScheme"] = "ps";
-                else if (settings["btnsScheme"] === "ps")
-                    settings["btnsScheme"] = "ps_jp";
-                else if (settings["btnsScheme"] === "ps_jp")
-                    settings["btnsScheme"] = "xbox";
-                else
-                    settings["btnsScheme"] = "universal";
-                api.memory.set("btnsScheme", settings["btnsScheme"]);
-                set.setProperty(i, "strprop", settings["btnsScheme"]);
                 break;
         }
     }

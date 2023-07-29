@@ -40,132 +40,10 @@ FocusScope {
 	FontLoader { id: gilroyLight; source: "./assets/font/Gilroy-Light.otf" }
 	FontLoader { id: ralewayExtraBold; source: "./assets/font/Raleway-ExtraBold.ttf"}
 	FontLoader { id: ralewayLight; source: "./assets/font/Raleway-Light.ttf" }
+
     // Custom Font for icons
-    FontLoader {
-        id: icons;
-        property string allgames: '\ue800';
-        property string nav_collections: '\ue801';
-        property string nav_feed: '\ue802';
-        property string nav_home: '\ue803';
-        property string nav_search: '\ue804';
-        property string nav_settings: '\ue805';
-        property string touch_up: '\ue806';
-        property string input_universal_a: '\ue807';
-        property string input_universal_x: '\ue808';
-        property string input_universal_lb: '\ue809';
-        property string input_universal_lt: '\ue80a';
-        property string input_universal_b: '\ue80b';
-        property string input_universal_rb: '\ue80c';
-        property string input_universal_rt: '\ue80d';
-        property string input_universal_y: '\ue80e';
-        property string input_xbox_a: '\ue80f';
-        property string input_xbox_x: '\ue810';
-        property string input_xbox_lb: '\ue811';
-        property string input_xbox_lt: '\ue812';
-        property string input_xbox_b: '\ue813';
-        property string input_xbox_rb: '\ue814';
-        property string input_xbox_rt: '\ue815';
-        property string input_xbox_y: '\ue816';
-        property string input_ps_a: '\ue817';
-        property string input_ps_x: '\ue818';
-        property string input_ps_lb: '\ue819';
-        property string input_ps_lt: '\ue81a';
-        property string input_ps_b: '\ue81b';
-        property string input_ps_rb: '\ue81c';
-        property string input_universal_start: '\ue81d';
-        property string input_universal_select: '\ue81e';
-        property string input_xbox_start: '\ue81f';
-        property string input_xbox_select: '\ue820';
-        property string input_ps_rt: '\ue821';
-        property string input_ps_y: '\ue822';
-        property string input_ps_start: '\ue823';
-        property string input_ps_select: '\ue824';
-        property string star: '\ue825';
-        property string star_empty: '\ue826';
-        property string meta_date: '\ue827';
-        property string meta_dev: '\ue828';
-        property string meta_genre: '\ue829';
-        property string meta_publisher: '\ue82a';
-        property string meta_players: '\ue82b';
-        property string battery_0: '\ue82c';
-        property string battery_10: '\ue82d';
-        property string battery_20: '\ue82e';
-        property string battery_30: '\ue82f';
-        property string battery_40: '\ue830';
-        property string battery_50: '\ue831';
-        property string battery_60: '\ue832';
-        property string battery_70: '\ue833';
-        property string battery_80: '\ue834';
-        property string battery_90: '\ue835';
-        property string battery_100: '\ue836';
-        property string battery_charging: '\ue837';
-        property string star_half: '\uf123';
-        property string toggle_off: '\uf204';
-        property string toggle_on: '\uf204';
-        source: "./assets/font/library-icons.woff2";
-    }
-    // Button schemes
-    property var btnScheme: {
-        "universal": {
-            A: icons.input_universal_a,
-            X: icons.input_universal_x,
-            L1: icons.input_universal_lb,
-            L2: icons.input_universal_lt,
-            B: icons.input_universal_b,
-            R1: icons.input_universal_rb,
-            R2:icons.input_universal_rt,
-            Y: icons.input_universal_y,
-            Start: icons.input_universal_start,
-            Select: icons.input_universal_select
-        },
-        "universal_jp": {
-            A: icons.input_universal_b,
-            X: icons.input_universal_y,
-            L1: icons.input_universal_lb,
-            L2: icons.input_universal_lt,
-            B: icons.input_universal_a,
-            R1: icons.input_universal_rb,
-            R2:icons.input_universal_rt,
-            Y: icons.input_universal_x,
-            Start: icons.input_universal_start,
-            Select: icons.input_universal_select
-        },
-        "xbox": {
-            A: icons.input_xbox_a,
-            X: icons.input_xbox_x,
-            L1: icons.input_xbox_lb,
-            L2: icons.input_xbox_lt,
-            B: icons.input_xbox_b,
-            R1: icons.input_xbox_rb,
-            R2:icons.input_xbox_rt,
-            Y: icons.input_xbox_y,
-            Start: icons.input_xbox_start,
-            Select: icons.input_xbox_select
-        },
-        "ps": {
-            A: icons.input_ps_a,
-            X: icons.input_ps_x,
-            L1: icons.input_ps_lb,
-            L2: icons.input_ps_lt,
-            B: icons.input_ps_b,
-            R1: icons.input_ps_rb,
-            R2:icons.input_ps_rt,
-            Y: icons.input_ps_y,
-            Start: icons.input_ps_start,
-            Select: icons.input_ps_select
-        },
-        "ps_jp": {
-            A: icons.input_ps_b,
-            X: icons.input_ps_y,
-            L1: icons.input_ps_lb,
-            L2: icons.input_ps_lt,
-            B: icons.input_ps_a,
-            R1: icons.input_ps_rb,
-            R2:icons.input_ps_rt,
-            Y: icons.input_ps_x,
-            Start: icons.input_ps_start,
-            Select: icons.input_ps_select
-        }
+    IconFont {
+        id: icons
     }
 
 	// Item Specific Variables
@@ -230,6 +108,7 @@ FocusScope {
         "gamesRows": api.memory.has("gamesRows") ? api.memory.get("gamesRows") : 2,
         "collectionRows": api.memory.has("collectionRows") ? api.memory.get("collectionRows") : 2,         
         "enlargeBar": api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false,
+        "barSize": api.memory.has("barSize") ? api.memory.get("barSize") : "small",
         "useClockbar": api.memory.has("useClockbar") ? api.memory.get("useClockbar") : false, // Formerly sbsl
 
         // Localization + Language
@@ -351,9 +230,26 @@ FocusScope {
     /* The bottomBar, showing all the icons
      *
      */
+
+    property var bottomBarSizeOrder: {0: "tiny", 1: "small", 2: "medium", 3: "large"}
+    property var bottomBarSizeConvert: {
+        "tiny": loc.settings_bar_size_tiny,
+        "small": loc.settings_bar_size_small,
+        "medium": loc.settings_bar_size_medium,
+        "large": loc.settings_bar_size_large
+    }
+
+    property var bottomBarSizeIndexToSize: {
+        "tiny": parent.height * .03,
+        "small": parent.height * .05,
+        "medium": parent.height * .075,
+        "large": parent.height * .1
+    }
+
     Item {
         id: bottomBar
-        height: settings["enlargeBar"] ? parent.height * .1 : parent.height * .05
+
+        height: bottomBarSizeIndexToSize[settings["barSize"]] // settings["enlargeBar"] ? parent.height * .1 : parent.height * .05
         width: parent.width
 
         anchors.bottom: parent.bottom
@@ -478,7 +374,7 @@ FocusScope {
          *
          */
         x: (parent.width / 2) - (bbImages.spacing * 1.5 + iconSize * 2) + (menu * (iconSize + bbImages.spacing))
-        y: parent.height * .99
+        y: parent.height - bottomBar.height * 0.2
 
         // An animation for the movement of the indicator.
         Behavior on x {
@@ -566,6 +462,7 @@ FocusScope {
 
         z: -15
         anchors.fill: parent
+        fillMode: Image.PreserveAspectCrop
 
         // source: settings["light"] ? "./background-light.jpg" : "./background-dark.jpg"
         source: settings["light"] ? `./assets/backgrounds/light-${settings["bgChoice"]}.jpg` : `./assets/backgrounds/dark-${settings["bgChoice"]}.jpg`
@@ -649,6 +546,11 @@ FocusScope {
 	SoundEffect {
 		id: sSwitch
 		source: "./assets/audio/switchF.wav"
+		volume: settings["quiet"] ? 0.5 : 1.0
+	}
+	SoundEffect {
+		id: sSwitchBack
+		source: "./assets/audio/switchB.wav"
 		volume: settings["quiet"] ? 0.5 : 1.0
 	}
 
