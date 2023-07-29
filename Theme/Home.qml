@@ -130,9 +130,11 @@ FocusScope {
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
         visible: settings["mouseNav"]
+
         Behavior on y {
             SmoothedAnimation { velocity: animVel }
         }
+
         Text {
             text: icons.touch_up
             anchors.centerIn: parent
@@ -140,17 +142,18 @@ FocusScope {
                 family: icons.name;
                 pixelSize: parent.height * .6
             }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (focused == 1) {
-                        if (!nosfx)
-                            sNav.play();
-                        focused = 0;
-                    }
+            color: colors["text"]
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (focused == 1) {
+                    if (!settings["nosfx"])
+                        sNav.play();
+                    focused = 0;
                 }
             }
-            color: colors["text"]
         }
     }
 

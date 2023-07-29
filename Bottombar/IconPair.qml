@@ -34,10 +34,6 @@ Row {
 				family: icons.name;
 				pixelSize: parent.height * .6
 			}
-			MouseArea {
-				anchors.fill: parent
-				onClicked: {menu = 0; if (!settings["nosfx"]) sTab.play();}
-			}
 			color: colors["bottomIcons"]
 		}
 	}

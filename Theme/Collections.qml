@@ -89,15 +89,16 @@ FocusScope {
                 family: icons.name;
                 pixelSize: parent.height * .6
             }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (!settings["nosfx"])
-                        sBack.play();
-                    gameView = false;
-                }
-            }
             color: colors["text"]
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (!settings["nosfx"])
+                    sBack.play();
+                gameView = false;
+            }
         }
     }
 

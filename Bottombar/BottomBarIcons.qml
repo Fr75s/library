@@ -11,7 +11,9 @@ Item {
      */
 
     width: sw
-    height: settings["enlargeBar"] ? parent.height * .1 : parent.height * .05
+    height: bottomBarSizeIndexToSize[settings["barSize"]]
+
+    property bool limitHeight: (height > sh * 0.0525)
 
     anchors.bottom: parent.bottom
 
@@ -33,7 +35,7 @@ Item {
             id: rightRow
 
             width: parent.width
-            height: parent.height
+            height: limitHeight ? bottomBarSizeIndexToSize["small"] : parent.height
 
             spacing: parent.width * .01
 
@@ -47,7 +49,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: btnScheme[settings.btnsScheme].A
+                src: icons.btnScheme[settings.btnsScheme].A
 
                 // Label for Home, Search, Collections & Settings respectively.
                 // Same pattern for each IconPair.
@@ -60,7 +62,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: btnScheme[settings.btnsScheme].B
+                src: icons.btnScheme[settings.btnsScheme].B
 
                 label: ["", (isFeed ? "" : loc.bottomBar_bKeyboard), loc.bottomBar_bExit, ""]
 
@@ -71,7 +73,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: btnScheme[settings.btnsScheme].Y
+                src: icons.btnScheme[settings.btnsScheme].Y
 
                 label: [loc.bottomBar_yFavorite, (isFeed ? loc.bottomBar_yNext : loc.bottomBar_yKeyboard), loc.bottomBar_yFavorite, loc.bottomBar_yInfo]
 
@@ -93,7 +95,7 @@ Item {
             id: leftRow
 
             width: parent.width
-            height: parent.height
+            height: limitHeight ? bottomBarSizeIndexToSize["small"] : parent.height
 
             spacing: parent.width * .01
 
@@ -107,7 +109,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: btnScheme[settings.btnsScheme].L1
+                src: icons.btnScheme[settings.btnsScheme].L1
 
 
                 label: [" ", " ", " ", " "]
@@ -119,7 +121,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: btnScheme[settings.btnsScheme].R1
+                src: icons.btnScheme[settings.btnsScheme].R1
 
                 label: [loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage, loc.bottomBar_changePage]
 
@@ -129,7 +131,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: btnScheme[settings.btnsScheme].L2
+                src: icons.btnScheme[settings.btnsScheme].L2
 
                 label: ["", loc.all_feed, "", ""]
 
@@ -140,7 +142,7 @@ Item {
             IconPair {
                 height: parent.height * .8
 
-                src: btnScheme[settings.btnsScheme].X
+                src: icons.btnScheme[settings.btnsScheme].X
 
                 label: ["", (isFeed ? "" : loc.bottomBar_xKeyboard), "", loc.bottomBar_xNext]
 
