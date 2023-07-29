@@ -7,7 +7,7 @@
     - [Adding/Replacing Backgrounds (Updated for 1.4.0)](#replacing-the-backgrounds)
     - [Custom Color Schemes (1.2.0+)](#custom-color-schemes)
     - [Extra Collections](#extra-collections)
-3. [Translation](#translation)
+3. [Adding Translations](#translations)
 
 ## Some Information
 
@@ -129,7 +129,7 @@ This is good if Pico-8 is installed portably on your system; if not, simply use 
 Tic-80 comes as a libretro core, making it easy to use with retroarch. While retroarch may differ per system, using a metadata.pegasus.txt which links to the tic-80 core would allow you to run tic-80 games in retroarch.
 
 
-## Translation
+## Adding Translations
 
 Translating this theme is done through the Localization.qml file.
 
