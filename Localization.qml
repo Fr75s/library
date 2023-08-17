@@ -48,6 +48,7 @@ Item {
 			settings_enable_clockbar: "Enable Clock",
 			settings_wide_games: "Wide Games View",
 			settings_wide_games_info: "Increases the width of each game, changing to art that fits closer to the wider ratio.",
+			settings_show_wide_times: "Show Playtime (Wide View)",
 			settings_games_grid_rows: "Number of Rows per Screen for Games",
 			settings_collection_grid_rows: "Number of Rows per Screen for Collections",
 			settings_enable_touchnav: "Enable Touch Navigation Icons",
@@ -77,6 +78,11 @@ Item {
 			settings_header_av: "Audio & Video",
 			settings_header_interface: "Interface",
 			settings_header_localization: "Localization",
+
+			playtime_never: "Never",
+			playtime_seconds: "s",
+			playtime_minutes: "m",
+			playtime_hours: "h",
 
 			bottomBar_changePage: "Change Page",
 			bottomBar_aSelect: "Select",
@@ -109,6 +115,7 @@ Item {
             settings_enable_clockbar: "Uhr anzeigen",
             settings_wide_games: "Breite Spiele-Ansicht",
             settings_wide_games_info: "Erhöht die Breite jedes Spiels und wechselt zu Grafiken, die besser in das breitere Verhältnis passen.",
+			settings_show_wide_times: "[]",
 			settings_games_grid_rows: "Anzahl der Reihen für Spielelisten",
 			settings_collection_grid_rows: "Anzahl der Reihen für die Sammlungen-Übersicht",
             settings_enable_touchnav: "Touch-Navigationssymbole aktivieren",
@@ -138,6 +145,11 @@ Item {
 			settings_header_av: "Audio & Video",
 			settings_header_interface: "Oberfläche",
 			settings_header_localization: "Lokalisierung",
+
+			playtime_never: "[]",
+			playtime_seconds: "s",
+			playtime_minutes: "m",
+			playtime_hours: "h",
 
 			bottomBar_changePage: "Seite wechseln",
 			bottomBar_aSelect: "Auswählen",

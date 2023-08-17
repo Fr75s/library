@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'library-icons-font';
-  src: url('../font/library-icons-font.eot?12601941');
-  src: url('../font/library-icons-font.eot?12601941#iefix') format('embedded-opentype'),
-       url('../font/library-icons-font.woff2?12601941') format('woff2'),
-       url('../font/library-icons-font.woff?12601941') format('woff'),
-       url('../font/library-icons-font.ttf?12601941') format('truetype'),
-       url('../font/library-icons-font.svg?12601941#library-icons-font') format('svg');
+  src: url('../font/library-icons-font.eot?17129830');
+  src: url('../font/library-icons-font.eot?17129830#iefix') format('embedded-opentype'),
+       url('../font/library-icons-font.woff2?17129830') format('woff2'),
+       url('../font/library-icons-font.woff?17129830') format('woff'),
+       url('../font/library-icons-font.ttf?17129830') format('truetype'),
+       url('../font/library-icons-font.svg?17129830#library-icons-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'library-icons-font';
-    src: url('../font/library-icons-font.svg?12601941#library-icons-font') format('svg');
+    src: url('../font/library-icons-font.svg?17129830#library-icons-font') format('svg');
   }
 }
 */
@@ -110,6 +110,7 @@
 .icon-battery_9:before { content: '\e835'; } /* '' */
 .icon-battery_10:before { content: '\e836'; } /* '' */
 .icon-battery_charging:before { content: '\e837'; } /* '' */
+.icon-clock:before { content: '\e838'; } /* '' */
 .icon-input_nintendo_lt:before { content: '\e83b'; } /* '' */
 .icon-input_nintendo_rt:before { content: '\e83c'; } /* '' */
 .icon-input_sd_lt:before { content: '\e83d'; } /* '' */

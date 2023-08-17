@@ -124,6 +124,12 @@ FocusScope {
                 intprop: settings["collectionRows"]
             },
             {
+                id: "show_wide_times",
+                behavior: "toggle",
+                name: loc.settings_show_wide_times,
+                setting: "showWideTimes"
+            },
+            {
                 id: "enlarge_bar",
                 behavior: "list",
                 name: loc.settings_enlarge_bar,

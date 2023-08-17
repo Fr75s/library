@@ -60,6 +60,7 @@ FontLoader {
 	property string battery_90: '\ue835';
 	property string battery_100: '\ue836';
 	property string battery_charging: '\ue837';
+	property string clock: '\ue838';
 	property string input_nintendo_zl: '\ue83b';
 	property string input_nintendo_zr: '\ue83c';
 	property string input_sd_l2: '\ue83d';

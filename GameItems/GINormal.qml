@@ -160,17 +160,21 @@ Item {
     // Wide header text
     Text {
         id: wideViewText
-        anchors.centerIn: wideViewTextAnchor
-        width: parent.width * .9
+
+        visible: (settings["wide"] || (wideHead && index == 0)) && !settings["disableWideHeader"]
+
+        anchors.verticalCenter: wideViewTextAnchor.verticalCenter
+        anchors.left: wideViewTextAnchor.left
+        anchors.leftMargin: parent.width * 0.05
+
+        width: settings["showWideTimes"] ? parent.width * .75 : parent.width * .9
         height: parent.height * .2
 
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
 
         text: currentGame.title
-        wrapMode: Text.WordWrap
-
-        visible: (settings["wide"] || (wideHead && index == 0)) && !settings["disableWideHeader"]
+        elide: Text.ElideRight
 
         // The wide header is always present in the home screen at the same size;
         // to accomodate smaller wide games, scale based on height.
@@ -181,6 +185,44 @@ Item {
         color: "white"
         z: wideHeadBG.z + 1
     }
+
+    Text {
+        id: gameTimeText
+
+        visible: (settings["wide"] || (wideHead && index == 0)) && !settings["disableWideHeader"] && settings["showWideTimes"]
+
+        anchors.verticalCenter: wideViewTextAnchor.verticalCenter
+        anchors.right: wideViewTextAnchor.right
+        anchors.rightMargin: parent.width * 0.05
+
+        width: parent.width * .15
+        height: parent.height * .2
+
+        horizontalAlignment: Text.AlignRight
+        verticalAlignment: Text.AlignVCenter
+
+        text: '<small>' + icons.clock + '</small> <b>' + formattedPlaytime(playTime) + '</b>'
+
+        font.pixelSize: height / 3.5
+        font.family: gilroyLight.name
+
+        color: "white"
+        z: wideHeadBG.z + 1
+
+        function formattedPlaytime(playtime) {
+            if (playtime === 0) {
+                return loc.playtime_never
+            } else if (playtime < 60) {
+                return playtime + loc.playtime_seconds
+            } else if (playtime < 3600) {
+                return Math.floor(playtime / 60) + loc.playtime_minutes
+            } else {
+                return Math.floor(playtime / 3600) + loc.playtime_hours
+            }
+        }
+    }
+
+
 
     // Favorite Image
     Item {
