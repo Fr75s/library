@@ -180,5 +180,5 @@ FontLoader {
 		"steam_deck": "steam deck"
 	}
 
-	source: "../assets/font/library-icons.woff2";
+	source: "../assets/font/library-icons-font.ttf";
 }
