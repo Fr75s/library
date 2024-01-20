@@ -64,20 +64,8 @@ FocusScope {
 	property bool isFeed: false
 
 	/* OPTIONS
-     * There are many options for this theme, all used in several places, but defined here for convenience.
-     * These options go as follows:
-     * light: Light Mode
-     * plainBG: Plain (flat) Background
-     * noBtns: No button indicators in the bottom bar
-     * sbsl: Shows the clock bar
-     * nosfx: Mutes all sound effects
-     * videoPlayback: Enables playback of video for the currently selected game or collection
-     * wide: Widens all the games in GridViews
-     * quiet: Quiets all sound effects
-     * moreRecent: Adds more games to the recents page
-     * mouseNav: Enables clickable mouse navigation icons
-     * enlargeBar: Enlarges the bottom bar to touch size
-     * limSearch: Limits searches so that results start with what's searched rather than containing what's searched.
+     * All options for this theme are defined here.
+     * Components can refer to these options by using settings["{OPTION}"].
      */
 
     property var settings: {
@@ -123,7 +111,6 @@ FocusScope {
      * Each color scheme is an object with properties containing each color
      * Use the properties for both color schemes here to make your own, or just see how these ones work.
      */
-
 
     property var colorschemes: {
         "planet": {

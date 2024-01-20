@@ -25,6 +25,34 @@ FocusScope {
     }
 
     // This readds all settings, with each property updated.
+
+    /*
+     * SETTING OBJECT FIELDS:
+     *
+     * id: The ID of the setting (currently unused).
+     * behavior: The Behavior of the setting, which can be one of the following:
+     *     GENERIC
+     *     "toggle": The setting is a simple toggle, used for boolean settings.
+     *     "list": The setting goes through one of several items in a predefined list, used for
+     *             settings with more than two options.
+     *     "counter": The setting can be set to any value from 1 to maxValue, used
+     *                for numerical settings.
+     *     SPECIAL
+     *     "sp_change_bg": Goes through the filesystem to change the background.
+     *     "sp_change_lang": Changes language, but also refreshes the UI.
+     * name: The displayed Name of the setting.
+     * setting: The actual setting identifier, defined in the settings object in theme.qml and
+     *          referred to by other Components.
+     * header: Marks this setting as the header of a section with the name given by the
+     *         value of header, used for the first setting in each section.
+     * info: Additional information for a setting. Requires `is` to be defined.
+     * is: The state to determine whether or not additional information is shown for a setting.
+     *     Will always be defined as false.
+     * intprop: The displayed number value for a "counter" setting
+     * strprop: The displayed value for a "list" setting
+     * capitalizationMode: The capitalization of the value in strprop
+     */
+
     function refresh_settings() {
         [
             {
