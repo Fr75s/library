@@ -344,4 +344,9 @@ Item {
         }
         return "";
     }
+
+
+    Component.onCompleted: {
+        console.log(wideHead);
+    }
 }

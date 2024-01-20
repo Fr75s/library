@@ -176,7 +176,9 @@ FocusScope {
             // doubleFocus property only selects game when the view and item is this one
             readonly property bool doubleFocus: recentView.focus && isCurrentItem
 
-            width: (index == 0 || settings["wide"]) ? ListView.view.height * (92/43) : ListView.view.height * (2/3)
+            // Set this game to be wide if wide mode is enabled,
+            // OR if it is the first game and the override is disabled.
+            width: settings["wide"] || (index == 0 && !settings["forceRecentNarrow"]) ? ListView.view.height * (92/43) : ListView.view.height * (2/3)
             height: ListView.view.height
 
             Item {
@@ -191,7 +193,9 @@ FocusScope {
                     SmoothedAnimation { velocity: marginAnimVel }
                 }
 
-                GINormal { wideHead: true }
+                // wideHead is set based on forceRecentNarrow, changing art and visual
+                // properties of the game
+                GINormal { wideHead: !settings["forceRecentNarrow"] }
 
                 /*
                 Loader {

@@ -110,6 +110,7 @@ FocusScope {
         "enlargeBar": api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false,
         "barSize": api.memory.has("barSize") ? api.memory.get("barSize") : "small",
         "showWideTimes": api.memory.has("showWideTimes") ? api.memory.get("showWideTimes") : false,
+        "forceRecentNarrow": api.memory.has("forceRecentNarrow") ? api.memory.get("forceRecentNarrow") : false,
         "useClockbar": api.memory.has("useClockbar") ? api.memory.get("useClockbar") : false, // Formerly sbsl
 
         // Localization + Language

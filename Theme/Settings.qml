@@ -130,6 +130,14 @@ FocusScope {
                 setting: "showWideTimes"
             },
             {
+                id: "force_recent_narrow",
+                behavior: "toggle",
+                name: loc.settings_force_recent_narrow,
+                setting: "forceRecentNarrow",
+                info: loc.settings_force_recent_narrow_info,
+                is: false
+            },
+            {
                 id: "enlarge_bar",
                 behavior: "list",
                 name: loc.settings_enlarge_bar,
