@@ -34,3 +34,14 @@ I would also like to thank [TigraTT-Driver](https://github.com/TigraTT-Driver/),
 If you find any issues or want to let me know of anything, feel free to open up an issue in this project. You may also want to check out the [Modifications Guide](https://github.com/Fr75s/library/blob/main/MODIFICATIONS.md) and see if I have placed a fix there. If not, then, once again, feel free to open up an issue, and I will fix it.
 
 If you know a language other than English, I encourage you to translate this theme. All relevant info is in the [Translation Section](https://github.com/Fr75s/library/blob/main/MODIFICATIONS.md) of the modifications guide and in Localization.qml.
+
+***
+
+## Screenshots
+
+The following shows some screenshots of the theme. All screenshots can be found on [The Pegasus Theme Gallery](https://pegasus-frontend.org/tools/themes/), or in [The SAFELY_REMOVABLE Directory.](https://github.com/Fr75s/library/tree/main/assets/SAFELY_REMOVABLE)
+
+![The Home Screen (Default Theme)](./assets/SAFELY_REMOVABLE/screenshot_1.png)
+![The Collections Screen (Modified Background)](./assets/SAFELY_REMOVABLE/screenshot_8.png)
+![The Search Screen (Modified number of rows, games are in wide)](./assets/SAFELY_REMOVABLE/screenshot_7.png)
+![The Settings Screen](./assets/SAFELY_REMOVABLE/screenshot_5.png)
