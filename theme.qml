@@ -38,8 +38,9 @@ FocusScope {
     // Just a few fonts, needs [id].name to work in font.family
     FontLoader { id: gilroyExtraBold; source: "./assets/font/Gilroy-ExtraBold.otf" }
 	FontLoader { id: gilroyLight; source: "./assets/font/Gilroy-Light.otf" }
-	FontLoader { id: ralewayExtraBold; source: "./assets/font/Raleway-ExtraBold.ttf"}
-	FontLoader { id: ralewayLight; source: "./assets/font/Raleway-Light.ttf" }
+
+    FontLoader { id: notoJPBold; source: "./assets/font/NotoSansJP-ExtraBold.ttf" }
+	FontLoader { id: notoJPLight; source: "./assets/font/NotoSansJP-Light.ttf" }
 
     // Custom Font for icons
     IconFont {
@@ -194,8 +195,6 @@ FocusScope {
     // Which colors to use right now
     // MODIFICATION TIP: Replace everything after "colors:" with the address of your colorscheme to use a custom color scheme, like so: colorschemes["mycolorscheme"]["dark"]
     property var colors: settings["classicColors"] ? (settings["light"] ? colorschemes["classic"]["light"] : colorschemes["classic"]["dark"]) : (settings["light"] ? colorschemes["planet"]["light"] : colorschemes["planet"]["dark"])
-
-
 
     // Localization
     // Provides different languages to Library

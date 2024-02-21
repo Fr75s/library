@@ -649,17 +649,20 @@ FocusScope {
 
             // Special Behaviors
             case "sp_set_lang":
+                // Get the next language
                 if (langs.indexOf(currentLanguage) + 1 >= langs.length)
                     currentLanguage = langs[0];
                 else
                     currentLanguage = langs[langs.indexOf(currentLanguage) + 1];
+                // Set the localization data
                 loc = localizationData.getLocalization(currentLanguage);
 
                 console.log("Setting Language to", currentLanguage);
 
+                // Set the current language property
                 api.memory.set("currentLanguage", currentLanguage);
                 set.setProperty(i, "strprop", currentLanguage);
-
+                // Refresh the settings page to immediately apply language
                 set.clear();
                 refresh_settings();
                 setsView.currentIndex = i;
