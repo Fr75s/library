@@ -204,7 +204,7 @@ Item {
 			settings_classic_colors: "古いカラースキームを使用する",
 			settings_classic_colors_info: "UI 配色をバージョン 1.2.0 以前の Library で使用されていたものに戻します。",
 			settings_disable_wide_header: "ワイドビューでタイトルを表示しない",
-			settings_quiet_sounds: "サウンド効果の音量を下げる",
+			settings_quiet_sounds: "効果音の音量を下げる",
 			settings_mute_sounds: "オーディオを消音",
 			settings_video_playback: "ビデオを再生する",
 			settings_blur_collects: "コレクション画像をぼかす",
