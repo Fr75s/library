@@ -94,6 +94,7 @@ FocusScope {
 
         // Interface Settings
         "wide": api.memory.has("wide") ? api.memory.get("wide") : false,
+        "diffAspect": api.memory.has("diffAspect") ? api.memory.get("diffAspect") : false,
         "gamesRows": api.memory.has("gamesRows") ? api.memory.get("gamesRows") : 2,
         "collectionRows": api.memory.has("collectionRows") ? api.memory.get("collectionRows") : 2,         
         "enlargeBar": api.memory.has("enlargeBar") ? api.memory.get("enlargeBar") : false,
@@ -587,5 +588,18 @@ FocusScope {
             sGame.play();
 		game.launch();
 	}
+
+	// Get cell width based on aspect ratio
+	function getCellWidth(cellHeight, enableWide) {
+        if (enableWide) {
+            if (settings["diffAspect"]) {
+                return settings["wide"] ? (cellHeight * (16/9)) : (cellHeight * (3/4));
+            } else {
+                return settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3));
+            }
+        } else {
+            return settings["diffAspect"] ? (cellHeight * (3/4)) : (cellHeight * (2/3))
+        }
+    }
 
 }

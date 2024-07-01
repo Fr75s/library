@@ -178,7 +178,7 @@ FocusScope {
 
             // Set this game to be wide if wide mode is enabled,
             // OR if it is the first game and the override is disabled.
-            width: settings["wide"] || (index == 0 && !settings["forceRecentNarrow"]) ? ListView.view.height * (92/43) : ListView.view.height * (2/3)
+            width: settings["wide"] || (index == 0 && !settings["forceRecentNarrow"]) ? ListView.view.height * (settings["diffAspect"] ? 16/9 : 92/43) : ListView.view.height * (settings["diffAspect"] ? 3/4 : 2/3)
             height: ListView.view.height
 
             Item {
@@ -287,7 +287,7 @@ FocusScope {
         y: uiY + parent.height * 0.575
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
+        cellWidth: getCellWidth(cellHeight, true) //settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
         cellHeight: height / settings["gamesRows"] /// (Math.ceil(favorites.count / 6))
 
         //currentIndex: 0

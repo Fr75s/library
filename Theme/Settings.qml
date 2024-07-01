@@ -120,6 +120,14 @@ FocusScope {
                 is: false
             },
             {
+                id: "diff_aspect",
+                behavior: "toggle",
+                name: loc.settings_diff_aspect,
+                setting: "diffAspect",
+                info: loc.settings_diff_aspect_info,
+                is: false
+            },
+            {
                 id: "disable_buttons",
                 behavior: "toggle",
                 name: loc.settings_disable_buttons,

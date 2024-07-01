@@ -230,7 +230,7 @@ FocusScope {
         anchors.topMargin: parent.height * .15
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
+        cellWidth: getCellWidth(cellHeight, true)//settings["wide"] ? (cellHeight * (92/43)) : (cellHeight * (2/3))
         cellHeight: height / settings["gamesRows"]
 
         // Games in the current collection is the model
