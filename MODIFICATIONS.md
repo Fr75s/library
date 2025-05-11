@@ -4,7 +4,6 @@
 
 1. [Necessary Information](#some-information)
 2. [Quick Modifications](#quick-modifications)
-    - [Adding/Replacing Backgrounds (Updated for 1.4.0)](#replacing-the-backgrounds)
     - [Custom Color Schemes (1.2.0+)](#custom-color-schemes)
     - [Extra Collections](#extra-collections)
 3. [Adding Translations](#translations)
@@ -16,14 +15,6 @@ You may want to refer to the QML documentation for common types. QML has many di
 ## Quick Modifications
 
 Here are some quick modifications you can do on Library. These don't teach you much, but they add functionality that isn't included by default or in the settings.
-
-### Replacing the Backgrounds
-
-You can easily add/change the backgrounds shown in Library.
-
-To do this, go to `assets/backgrounds` in the theme's root directory (`[LIBRARY FOLDER]/assets/backgrounds`). Then, add your desired backgrounds, but be sure to add one for light mode and one for dark mode. Rename the backgrounds to `light-[number].jpg` and `dark-[number].jpg`, where `[number]` is the next number from the last backgrounds (which would be 3 if no backgrounds have been added, as Library comes with 2 sets of backgrounds.). Now, you can change to your background by finding the "Change Background" option.
-
-You can also set the color of the plain background by setting the color for `plainBG`. To learn more about changing colors, see [Custom Color Schemes](#custom-color-schemes).
 
 ### Center Titles
 

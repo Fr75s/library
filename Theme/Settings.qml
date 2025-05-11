@@ -209,12 +209,26 @@ FocusScope {
                 info: loc.settings_more_recents_info,
                 is: false
             },
+            /* Limited Search has been DEPRECATED in favor of Search Mode
             {
                 id: "limit_search_info",
                 behavior: "toggle",
                 name: loc.settings_limit_search,
                 setting: "limSearch",
                 info: loc.settings_limit_search_info,
+                is: false
+            },
+            */
+            {
+                id: "search_mode",
+                behavior: "list",
+                name: loc.settings_search_mode,
+                setting: "searchMode",
+                order: searchModeOrder,
+                displayConvert: searchModeConvert,
+                strprop: searchModeConvert[settings["searchMode"]],
+                capitalizationMode: Font.Capitalize,
+                info: loc.settings_search_mode_info,
                 is: false
             },
 

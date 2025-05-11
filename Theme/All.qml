@@ -1,4 +1,4 @@
-import QtQuick 2.8
+import QtQuick 2.15
 import QtMultimedia 5.15
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
@@ -22,6 +22,53 @@ FocusScope {
     property bool feed: false
     property bool searching: false
 
+    // Converts the text in searchInput to a regex pattern
+    function searchInputConvert(inputText) {
+        if (settings["searchMode"] === "raw") {
+            return inputText;
+        } else {
+            const specialSymbols = ["^", "$", "\\", ".", "*", "+", "?", "(", ")", "[", "]", "{", "}", "|", "/"];
+            const capitals = /[A-Z]/g;
+
+            if (settings["searchMode"] === "fuzzy") {
+                let outputStr = "";
+                for (let i = 0; i < inputText.length; i++) {
+                    if (inputText[i].match(capitals)) {
+                        // Make next letter match require to start at next word
+                        outputStr += "\\b" + inputText[i];
+                    } else if (specialSymbols.includes(inputText[i])) {
+                        // Escape special character
+                        outputStr += "\\" + inputText[i];
+                    } else {
+                        outputStr += inputText[i];
+                    }
+                    // Loose Matching
+                    outputStr += ".*";
+                }
+                console.log(JSON.stringify(outputStr));
+                return outputStr;
+            } else {
+                // Escape special symbols
+                let regexCleanText = inputText.split("");
+                for (let i = regexCleanText.length - 1; i >= 0; i--) {
+                    if (specialSymbols.includes(regexCleanText[i])) {
+                        regexCleanText.splice(i, 0, "\\");
+                    }
+                }
+                let outputStr = "";
+                for (let i = 0; i < regexCleanText.length; i++) {
+                    outputStr += regexCleanText[i];
+                }
+
+                // Add ^ to beginning of pattern if limited search
+                if (settings["searchMode"] === "lim") {
+                    outputStr = "^" + outputStr;
+                }
+                return outputStr;
+            }
+        }
+    }
+
     // Define Current Game
     SortFilterProxyModel {
         id: searchSort
@@ -31,7 +78,7 @@ FocusScope {
         filters: RegExpFilter {
             roleName: "title";
             // Limited search matches ^[term] rather than [term]
-            pattern: settings["limSearch"] ? "^" + searchInput.text : searchInput.text;
+            pattern: searchInputConvert(searchInput.text);
             enabled: searchInput.text != "";
             caseSensitivity: Qt.CaseInsensitive;
         }
@@ -90,7 +137,12 @@ FocusScope {
 
         radius: height * .25
         visible: !feed
-        color: colors["plainSetting"]
+
+        gradient: Gradient {
+            orientation: Gradient.Horizontal
+            GradientStop { position: 0.0; color: colors["plainSetting"] }
+            GradientStop { position: 1.0; color: colors["plainBG"] }
+        }
 
         // Highlight when searching
         Rectangle {
@@ -119,9 +171,10 @@ FocusScope {
 
     // Search text input, used for searching
     // Its text property is what is used for searching
-    Text {
+    TextInput {
         id: searchInput
         width: parent.width * .6
+        height: parent.height * .06
 
         visible: !feed
 
@@ -131,9 +184,12 @@ FocusScope {
 
         // Alignment
         horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
 
         font.family: gilroyLight.name
         font.pixelSize: parent.height * .05
+
+        selectByMouse: true;
 
         anchors.right: parent.right
         anchors.rightMargin: parent.width * 0.05
@@ -153,7 +209,26 @@ FocusScope {
         MouseArea {
             anchors.fill: parent
 
-            onClicked: keys.invoke()
+            onClicked: {
+                keys.invokeNoFocus();
+                parent.focus = true;
+                searching = true;
+            }
+        }
+
+        Keys.onEscapePressed: {
+            keys.hide();
+        }
+
+        Keys.onPressed: {
+            if (event.isAutoRepeat) {
+                return
+            }
+
+            if (api.keys.isAccept(event)) {
+                event.accepted = true;
+                keys.hide();
+            }
         }
     }
 

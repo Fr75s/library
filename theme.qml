@@ -85,7 +85,8 @@ FocusScope {
         // Behavior Settings
         "mouseNav": api.memory.has("mouseNav") ? api.memory.get("mouseNav") : true,
         "moreRecent": api.memory.has("moreRecent") ? api.memory.get("moreRecent") : false,
-        "limSearch": api.memory.has("limSearch") ? api.memory.get("limSearch") : false,
+        "limSearch": api.memory.has("limSearch") ? api.memory.get("limSearch") : false, // DEPRECATED
+        "searchMode": api.memory.has("searchMode") ? api.memory.get("searchMode") : "reg",
 
         // Audio/Video Settings
         "nosfx": api.memory.has("nosfx") ? api.memory.get("nosfx") : false,
@@ -106,6 +107,39 @@ FocusScope {
         // Localization + Language
         "24hClock": api.memory.has("24hClock") ? api.memory.get("24hClock") : false,
     }
+
+    /**
+     * Option Lists
+     * Used for "list" type options
+     */
+
+    // BottomBar Size
+
+    property var bottomBarSizeOrder: {0: "tiny", 1: "small", 2: "medium", 3: "large"}
+    property var bottomBarSizeConvert: {
+        "tiny": loc.settings_bar_size_tiny,
+        "small": loc.settings_bar_size_small,
+        "medium": loc.settings_bar_size_medium,
+        "large": loc.settings_bar_size_large
+    }
+
+    property var bottomBarSizeIndexToSize: {
+        "tiny": parent.height * .03,
+        "small": parent.height * .05,
+        "medium": parent.height * .075,
+        "large": parent.height * .1
+    }
+
+    // Search Mode
+    property var searchModeOrder: {0: "reg", 1: "lim", 2: "fuzzy", 3: "raw"}
+    property var searchModeConvert: {
+        "reg": loc.settings_search_mode_regular,
+        "lim": loc.settings_search_mode_limited,
+        "fuzzy": loc.settings_search_mode_fuzzy,
+        "raw": loc.settings_search_mode_raw
+    }
+
+
 
     /* COLORS
      * These are the lists of colors used by this theme.
@@ -215,25 +249,6 @@ FocusScope {
     //
     // Layout
     //
-
-    /* The bottomBar, showing all the icons
-     *
-     */
-
-    property var bottomBarSizeOrder: {0: "tiny", 1: "small", 2: "medium", 3: "large"}
-    property var bottomBarSizeConvert: {
-        "tiny": loc.settings_bar_size_tiny,
-        "small": loc.settings_bar_size_small,
-        "medium": loc.settings_bar_size_medium,
-        "large": loc.settings_bar_size_large
-    }
-
-    property var bottomBarSizeIndexToSize: {
-        "tiny": parent.height * .03,
-        "small": parent.height * .05,
-        "medium": parent.height * .075,
-        "large": parent.height * .1
-    }
 
     Item {
         id: bottomBar

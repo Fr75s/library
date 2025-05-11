@@ -45,10 +45,20 @@ Item {
 
 	// Invokes the keyboard (shows it)
 	function invoke() {
-		keyboard.visible = true
-		keyboard.focus = true
+		keyboard.visible = true;
+		keyboard.focus = true;
 		// This allows the keyboard to immediately accept presses vs waiting to move the cursor
-		keyboard.focusEnableKB()
+		keyboard.focusEnableKB();
+	}
+
+	function invokeNoFocus() {
+		keyboard.visible = true;
+	}
+
+	function hide() {
+		kcreator.done();
+		keyboard.focus = false;
+		keyboard.visible = false;
 	}
 
 	// The actual Keyboard Object Keyboard.qml shows
@@ -90,9 +100,7 @@ Item {
 
 		// Hides keyboard once done
 		onDone: {
-			kcreator.done()
-			focus = false
-			visible = false
+			hide();
 		}
 	}
 
