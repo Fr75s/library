@@ -33,7 +33,7 @@ FocusScope {
      * 2: collections
      * 3: settings
      */
-    property int menu: 0 // 0: home; 1: all; 2: collections (submenus); 3: settings
+    property int menu: 0
 
     // Just a few fonts, needs [id].name to work in font.family
     FontLoader { id: gilroyExtraBold; source: "./assets/font/Gilroy-ExtraBold.otf" }
@@ -85,6 +85,7 @@ FocusScope {
         // Behavior Settings
         "mouseNav": api.memory.has("mouseNav") ? api.memory.get("mouseNav") : true,
         "moreRecent": api.memory.has("moreRecent") ? api.memory.get("moreRecent") : false,
+        "forceHome": api.memory.has("forceHome") ? api.memory.get("forceHome") : false,
         "limSearch": api.memory.has("limSearch") ? api.memory.get("limSearch") : false, // DEPRECATED
         "searchMode": api.memory.has("searchMode") ? api.memory.get("searchMode") : "reg",
 
@@ -601,6 +602,9 @@ FocusScope {
     function launchGame(game) {
         if (!settings["nosfx"])
             sGame.play();
+        // Save which menu we were on
+        api.memory.set("tempSavedMenu", menu);
+        // Launch the game
 		game.launch();
 	}
 
@@ -614,6 +618,33 @@ FocusScope {
             }
         } else {
             return settings["diffAspect"] ? (cellHeight * (3/4)) : (cellHeight * (2/3))
+        }
+    }
+
+
+
+    // On Load
+    Component.onCompleted: {
+        console.log("Welcome to Library!");
+        if (api.memory.has("tempSavedMenu")) {
+            if (!settings["forceHome"]) {
+                backToTimer.start();
+            } else {
+                api.memory.unset("tempSavedMenu");
+            }
+        }
+    }
+
+    Timer {
+        id: backToTimer
+
+        interval: 100
+		repeat: false
+		running: false
+
+		onTriggered: {
+            menu = api.memory.get("tempSavedMenu");
+            api.memory.unset("tempSavedMenu");
         }
     }
 

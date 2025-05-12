@@ -209,6 +209,14 @@ FocusScope {
                 info: loc.settings_more_recents_info,
                 is: false
             },
+            {
+                id: "force_home",
+                behavior: "toggle",
+                name: loc.settings_force_home,
+                setting: "forceHome",
+                info: loc.settings_force_home_info,
+                is: false
+            },
             /* Limited Search has been DEPRECATED in favor of Search Mode
             {
                 id: "limit_search_info",

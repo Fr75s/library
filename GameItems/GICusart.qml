@@ -77,6 +77,12 @@ Item {
         source: ".././assets/logo/banner/" + cc.clearShortname(currentItem.shortName) + ".jpg"
         visible: false
 
+        onStatusChanged: {
+            if (status == Image.Error) {
+                gameItemImage.source = ".././assets/logo/banner/generic.png";
+            }
+        }
+
         VideoPlayer {
             game: currentItem
 

@@ -218,6 +218,10 @@ FocusScope {
                 gameView = true
             }
         }
+
+        Component.onCompleted: {
+            positionViewAtIndex(currentIndex, GridView.Center);
+        }
     }
 
     // Actual Games in a collection
@@ -271,6 +275,8 @@ FocusScope {
                     anchors.fill: parent
                     onClicked: {
                         if (isCurrentItem) {
+                            api.memory.set("tempSavedCollection", collectionsView.currentIndex);
+                            api.memory.set("tempSavedCollectionGame", index);
                             launchGame(modelData);
                         }
                         else {
@@ -322,6 +328,8 @@ FocusScope {
             if (api.keys.isAccept(event)) {
                 if (interact) {
                     event.accepted = true;
+                    api.memory.set("tempSavedCollection", collectionsView.currentIndex);
+                    api.memory.set("tempSavedCollectionGame", collectionGamesView.currentIndex);
                     launchGame(collection.games.get(collectionGamesView.currentIndex))
                 }
             }
@@ -341,6 +349,29 @@ FocusScope {
                 event.accepted = true;
                 collection.games.get(collectionGamesView.currentIndex).favorite = !collection.games.get(collectionGamesView.currentIndex).favorite;
             }
+        }
+
+        Component.onCompleted: {
+            positionViewAtIndex(currentIndex, GridView.Center);
+        }
+    }
+
+    Component.onCompleted: {
+        if (api.memory.has("tempSavedCollection")) {
+            if (!settings["forceHome"]) {
+                if (api.memory.get("tempSavedCollection") >= 0 &&
+                        api.memory.get("tempSavedCollection") < api.collections.count) {
+                    collectionsView.currentIndex = api.memory.get("tempSavedCollection");
+
+                    collection = api.collections.get(collectionsView.currentIndex);
+                    gameView = true;
+
+                    collectionGamesView.currentIndex = api.memory.get("tempSavedCollectionGame");
+                }
+            }
+
+            api.memory.unset("tempSavedCollection")
+            api.memory.unset("tempSavedCollectionGame")
         }
     }
 

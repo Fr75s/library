@@ -92,11 +92,14 @@ FocusScope {
      */
 
     // The current game
-    property var current: {
+    property var currentGameIndex: {
         if (searchSort.count == 0 || searchSort.count == api.allGames.count)
-            return api.allGames.get(allView.currentIndex)
+            return allView.currentIndex;
         else
-            return api.allGames.get(searchSort.mapToSource(allView.currentIndex))
+            return searchSort.mapToSource(allView.currentIndex);
+    }
+    property var current: {
+        return api.allGames.get(currentGameIndex);
     }
     property var feedCurrent
 
@@ -177,6 +180,7 @@ FocusScope {
         height: parent.height * .06
 
         visible: !feed
+        focus: false
 
         y: parent.height * 0.075
 
@@ -401,6 +405,7 @@ FocusScope {
             if (api.keys.isAccept(event)) {
                 event.accepted = true;
                 if (!feed) {
+                    api.memory.set("tempSavedAllGame", currentGameIndex);
                     launchGame(current);
                 } else {
                     launchGame(feedCurrent);
@@ -426,6 +431,10 @@ FocusScope {
                     keys.invoke()
                 }
             }
+        }
+
+        Component.onCompleted: {
+            positionViewAtIndex(currentIndex, GridView.Center);
         }
     }
 
@@ -568,6 +577,12 @@ FocusScope {
     }
 
     Component.onCompleted: {
+        if (api.memory.has("tempSavedAllGame")) {
+            if (!settings["forceHome"]) {
+                allView.currentIndex = Math.min(api.memory.get("tempSavedAllGame"), searchSort.count === 0 ? api.allGames.count : searchSort.count);
+            }
+            api.memory.unset("tempSavedAllGame");
+        }
         feedPlayer.stop();
     }
 
